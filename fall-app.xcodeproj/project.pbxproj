@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */; };
+		FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5A729DF5FD700C0015B /* ContentView.swift */; };
+		FEEBA5AA29DF5FD800C0015B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEEBA5A929DF5FD800C0015B /* Assets.xcassets */; };
+		FEEBA5AD29DF5FD800C0015B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEEBA5AC29DF5FD800C0015B /* Preview Assets.xcassets */; };
+		FEEBA5B729DF5FD800C0015B /* fall_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5B629DF5FD800C0015B /* fall_appTests.swift */; };
+		FEEBA5C129DF5FD800C0015B /* fall_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5C029DF5FD800C0015B /* fall_appUITests.swift */; };
+		FEEBA5C329DF5FD800C0015B /* fall_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5C229DF5FD800C0015B /* fall_appUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FEEBA5B329DF5FD800C0015B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FEEBA59A29DF5FD700C0015B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FEEBA5A129DF5FD700C0015B;
+			remoteInfo = "fall-app";
+		};
+		FEEBA5BD29DF5FD800C0015B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FEEBA59A29DF5FD700C0015B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FEEBA5A129DF5FD700C0015B;
+			remoteInfo = "fall-app";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FEEBA5A229DF5FD700C0015B /* fall-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fall-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appApp.swift; sourceTree = "<group>"; };
+		FEEBA5A729DF5FD700C0015B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FEEBA5A929DF5FD800C0015B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FEEBA5AC29DF5FD800C0015B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FEEBA5B229DF5FD800C0015B /* fall-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "fall-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEEBA5B629DF5FD800C0015B /* fall_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appTests.swift; sourceTree = "<group>"; };
+		FEEBA5BC29DF5FD800C0015B /* fall-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "fall-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEEBA5C029DF5FD800C0015B /* fall_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appUITests.swift; sourceTree = "<group>"; };
+		FEEBA5C229DF5FD800C0015B /* fall_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FEEBA59F29DF5FD700C0015B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEEBA5AF29DF5FD800C0015B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEEBA5B929DF5FD800C0015B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FEEBA59929DF5FD700C0015B = {
+			isa = PBXGroup;
+			children = (
+				FEEBA5A429DF5FD700C0015B /* fall-app */,
+				FEEBA5B529DF5FD800C0015B /* fall-appTests */,
+				FEEBA5BF29DF5FD800C0015B /* fall-appUITests */,
+				FEEBA5A329DF5FD700C0015B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FEEBA5A329DF5FD700C0015B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FEEBA5A229DF5FD700C0015B /* fall-app.app */,
+				FEEBA5B229DF5FD800C0015B /* fall-appTests.xctest */,
+				FEEBA5BC29DF5FD800C0015B /* fall-appUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FEEBA5A429DF5FD700C0015B /* fall-app */ = {
+			isa = PBXGroup;
+			children = (
+				FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */,
+				FEEBA5A729DF5FD700C0015B /* ContentView.swift */,
+				FEEBA5A929DF5FD800C0015B /* Assets.xcassets */,
+				FEEBA5AB29DF5FD800C0015B /* Preview Content */,
+			);
+			path = "fall-app";
+			sourceTree = "<group>";
+		};
+		FEEBA5AB29DF5FD800C0015B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FEEBA5AC29DF5FD800C0015B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FEEBA5B529DF5FD800C0015B /* fall-appTests */ = {
+			isa = PBXGroup;
+			children = (
+				FEEBA5B629DF5FD800C0015B /* fall_appTests.swift */,
+			);
+			path = "fall-appTests";
+			sourceTree = "<group>";
+		};
+		FEEBA5BF29DF5FD800C0015B /* fall-appUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FEEBA5C029DF5FD800C0015B /* fall_appUITests.swift */,
+				FEEBA5C229DF5FD800C0015B /* fall_appUITestsLaunchTests.swift */,
+			);
+			path = "fall-appUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FEEBA5A129DF5FD700C0015B /* fall-app */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEEBA5C629DF5FD800C0015B /* Build configuration list for PBXNativeTarget "fall-app" */;
+			buildPhases = (
+				FEEBA59E29DF5FD700C0015B /* Sources */,
+				FEEBA59F29DF5FD700C0015B /* Frameworks */,
+				FEEBA5A029DF5FD700C0015B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "fall-app";
+			productName = "fall-app";
+			productReference = FEEBA5A229DF5FD700C0015B /* fall-app.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FEEBA5B129DF5FD800C0015B /* fall-appTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEEBA5C929DF5FD800C0015B /* Build configuration list for PBXNativeTarget "fall-appTests" */;
+			buildPhases = (
+				FEEBA5AE29DF5FD800C0015B /* Sources */,
+				FEEBA5AF29DF5FD800C0015B /* Frameworks */,
+				FEEBA5B029DF5FD800C0015B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FEEBA5B429DF5FD800C0015B /* PBXTargetDependency */,
+			);
+			name = "fall-appTests";
+			productName = "fall-appTests";
+			productReference = FEEBA5B229DF5FD800C0015B /* fall-appTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FEEBA5BB29DF5FD800C0015B /* fall-appUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEEBA5CC29DF5FD800C0015B /* Build configuration list for PBXNativeTarget "fall-appUITests" */;
+			buildPhases = (
+				FEEBA5B829DF5FD800C0015B /* Sources */,
+				FEEBA5B929DF5FD800C0015B /* Frameworks */,
+				FEEBA5BA29DF5FD800C0015B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FEEBA5BE29DF5FD800C0015B /* PBXTargetDependency */,
+			);
+			name = "fall-appUITests";
+			productName = "fall-appUITests";
+			productReference = FEEBA5BC29DF5FD800C0015B /* fall-appUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FEEBA59A29DF5FD700C0015B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					FEEBA5A129DF5FD700C0015B = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					FEEBA5B129DF5FD800C0015B = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = FEEBA5A129DF5FD700C0015B;
+					};
+					FEEBA5BB29DF5FD800C0015B = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = FEEBA5A129DF5FD700C0015B;
+					};
+				};
+			};
+			buildConfigurationList = FEEBA59D29DF5FD700C0015B /* Build configuration list for PBXProject "fall-app" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FEEBA59929DF5FD700C0015B;
+			productRefGroup = FEEBA5A329DF5FD700C0015B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FEEBA5A129DF5FD700C0015B /* fall-app */,
+				FEEBA5B129DF5FD800C0015B /* fall-appTests */,
+				FEEBA5BB29DF5FD800C0015B /* fall-appUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FEEBA5A029DF5FD700C0015B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEEBA5AD29DF5FD800C0015B /* Preview Assets.xcassets in Resources */,
+				FEEBA5AA29DF5FD800C0015B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEEBA5B029DF5FD800C0015B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEEBA5BA29DF5FD800C0015B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FEEBA59E29DF5FD700C0015B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */,
+				FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEEBA5AE29DF5FD800C0015B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEEBA5B729DF5FD800C0015B /* fall_appTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEEBA5B829DF5FD800C0015B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEEBA5C329DF5FD800C0015B /* fall_appUITestsLaunchTests.swift in Sources */,
+				FEEBA5C129DF5FD800C0015B /* fall_appUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FEEBA5B429DF5FD800C0015B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FEEBA5A129DF5FD700C0015B /* fall-app */;
+			targetProxy = FEEBA5B329DF5FD800C0015B /* PBXContainerItemProxy */;
+		};
+		FEEBA5BE29DF5FD800C0015B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FEEBA5A129DF5FD700C0015B /* fall-app */;
+			targetProxy = FEEBA5BD29DF5FD800C0015B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FEEBA5C429DF5FD800C0015B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FEEBA5C529DF5FD800C0015B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FEEBA5C729DF5FD800C0015B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"fall-app/Preview Content\"";
+				DEVELOPMENT_TEAM = F965F5ZKX8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dpm.fall-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FEEBA5C829DF5FD800C0015B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"fall-app/Preview Content\"";
+				DEVELOPMENT_TEAM = F965F5ZKX8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dpm.fall-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FEEBA5CA29DF5FD800C0015B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F965F5ZKX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dpm.fall-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fall-app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/fall-app";
+			};
+			name = Debug;
+		};
+		FEEBA5CB29DF5FD800C0015B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F965F5ZKX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dpm.fall-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fall-app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/fall-app";
+			};
+			name = Release;
+		};
+		FEEBA5CD29DF5FD800C0015B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F965F5ZKX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dpm.fall-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "fall-app";
+			};
+			name = Debug;
+		};
+		FEEBA5CE29DF5FD800C0015B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F965F5ZKX8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dpm.fall-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "fall-app";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FEEBA59D29DF5FD700C0015B /* Build configuration list for PBXProject "fall-app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEEBA5C429DF5FD800C0015B /* Debug */,
+				FEEBA5C529DF5FD800C0015B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEEBA5C629DF5FD800C0015B /* Build configuration list for PBXNativeTarget "fall-app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEEBA5C729DF5FD800C0015B /* Debug */,
+				FEEBA5C829DF5FD800C0015B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEEBA5C929DF5FD800C0015B /* Build configuration list for PBXNativeTarget "fall-appTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEEBA5CA29DF5FD800C0015B /* Debug */,
+				FEEBA5CB29DF5FD800C0015B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEEBA5CC29DF5FD800C0015B /* Build configuration list for PBXNativeTarget "fall-appUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEEBA5CD29DF5FD800C0015B /* Debug */,
+				FEEBA5CE29DF5FD800C0015B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FEEBA59A29DF5FD700C0015B /* Project object */;
+}
