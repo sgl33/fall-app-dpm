@@ -8,7 +8,14 @@
 import SwiftUI
 
 
-
+/// Default View for the application.
+///
+/// ### Elements
+/// - Recording Button (`RecordingButton`)
+///
+/// ### Author & Version
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 7, 2023
+///
 struct ContentView: View {
     @State var isRecording: Bool = false
     @State var showPopup1: Bool = false
@@ -49,7 +56,7 @@ struct RecordingButton: View
                 .imageScale(.large)
             Text(isRecording ? "Stop Recording" : "Start Recording")
         }
-        .frame(width: 240, height: 50)
+        .frame(width: 280, height: 50)
         .foregroundColor(isRecording ? .yellow : .white)
         .background(Color(red: 0.2, green: 0.2, blue: 0.2))
         .cornerRadius(16)
