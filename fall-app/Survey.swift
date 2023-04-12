@@ -61,6 +61,7 @@ struct Survey2: View {
     @Binding var showPopup2: Bool
     
     @State private var intensity: Int = 1;
+    @State private var hazardTypes: [Bool] = [false, false, false];
     
     var body: some View {
         VStack {
@@ -90,6 +91,10 @@ struct Survey2: View {
                                optionTexts: ["Low (1)", "Medium (2)", "High (3)"],
                                optionValues: [1, 2, 3],
                                 value: $intensity)
+                
+                SurveyMultiCheckbox(question: "Please select all SFT hazards you experienced.",
+                                    optionTexts: ["Slippery", "Option 2", "Option 3"],
+                                    value: $hazardTypes)
                 
                 Text("This form is not monitored. If you need medical assistance,\nplease call 911 or your local healthcare provider.")
                     .font(.system(size: 10))
