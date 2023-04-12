@@ -12,7 +12,7 @@ import SwiftUI
 /// Simple implementation for single-line text only. May not work on long text.
 ///
 /// ### Example
-/// Display for the default duration of 1.5 seconds:
+/// Display for the default duration of 2.0 seconds:
 /// ```
 /// Toast.showToast("Message")
 /// ```
@@ -28,7 +28,7 @@ import SwiftUI
 /// Modified by Seung-Gu Lee, last modified Apr 9, 2023
 ///
 class Toast {
-    static let DELAY_SHORT = 1.5
+    static let DELAY_SHORT = 2.0
     static let DELAY_LONG = 3.0
 
     static func showToast(_ text: String, delay: TimeInterval = DELAY_SHORT) {
@@ -37,7 +37,7 @@ class Toast {
         }
 
         let label = UILabel()
-        label.backgroundColor = UIColor(white: 0.2, alpha: 0.7)
+        label.backgroundColor = UIColor(white: 0.2, alpha: 0.9)
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14)
@@ -47,7 +47,7 @@ class Toast {
 
         var vertical: CGFloat = 0
         var size = label.intrinsicContentSize
-        var width = min(size.width, window.frame.width - 60) + 30
+        var width = min(size.width, window.frame.width - 60) + 32
         if width != size.width {
             vertical = 10
 //            label.textAlignment = .justified

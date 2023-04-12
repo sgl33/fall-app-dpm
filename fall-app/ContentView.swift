@@ -44,6 +44,9 @@ struct RecordingButton: View
     @Binding var isRecording: Bool
     @Binding var showPopup: Bool
     
+    let width: CGFloat = 280
+    let height: CGFloat = 50
+    
     var body: some View {
         Button(action: {
             if(isRecording) {
@@ -52,11 +55,15 @@ struct RecordingButton: View
             isRecording.toggle();
             
         }) {
-            Image(systemName: isRecording ? "stop.circle" : "record.circle")
-                .imageScale(.large)
-            Text(isRecording ? "Stop Recording" : "Start Recording")
+            HStack
+            {
+                Image(systemName: isRecording ? "stop.circle" : "record.circle")
+                    .imageScale(.large)
+                Text(isRecording ? "Stop Walking" : "Start Walking")
+            }
+            .frame(width: width, height: height)
         }
-        .frame(width: 280, height: 50)
+        .frame(width: width, height: height)
         .foregroundColor(isRecording ? .yellow : .white)
         .background(Color(red: 0.2, green: 0.2, blue: 0.2))
         .cornerRadius(16)
