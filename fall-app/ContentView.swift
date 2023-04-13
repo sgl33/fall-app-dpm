@@ -1,9 +1,3 @@
-//
-//  ContentView.swift
-//  fall-app
-//
-//  Created by Seung-Gu Lee on 4/6/23.
-//
 
 import SwiftUI
 
