@@ -14,6 +14,12 @@
 		FE5B713129E0BE9D002D92F3 /* SurveyNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B713029E0BE9D002D92F3 /* SurveyNumberField.swift */; };
 		FE5B713329E202F3002D92F3 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B713229E202F3002D92F3 /* Toast.swift */; };
 		FE5B713529E7384F002D92F3 /* SurveyMultiCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B713429E7384F002D92F3 /* SurveyMultiCheckbox.swift */; };
+		FE5B713C29E88B10002D92F3 /* test-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5B713B29E88B10002D92F3 /* test-icon.png */; };
+		FE5B713F29E88DC5002D92F3 /* slippery-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5B713E29E88DC5002D92F3 /* slippery-icon.png */; };
+		FE5B714229E89038002D92F3 /* cafe-g47ee2568d_1920.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE5B714129E89038002D92F3 /* cafe-g47ee2568d_1920.jpg */; };
+		FE5B714529E89369002D92F3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B714429E89369002D92F3 /* MainView.swift */; };
+		FE5B714729E893E9002D92F3 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B714629E893E9002D92F3 /* HistoryView.swift */; };
+		FE5B714929E89417002D92F3 /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B714829E89417002D92F3 /* DummyView.swift */; };
 		FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */; };
 		FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5A729DF5FD700C0015B /* ContentView.swift */; };
 		FEEBA5AA29DF5FD800C0015B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEEBA5A929DF5FD800C0015B /* Assets.xcassets */; };
@@ -50,6 +56,13 @@
 		FE5B713029E0BE9D002D92F3 /* SurveyNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyNumberField.swift; sourceTree = "<group>"; };
 		FE5B713229E202F3002D92F3 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		FE5B713429E7384F002D92F3 /* SurveyMultiCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyMultiCheckbox.swift; sourceTree = "<group>"; };
+		FE5B713B29E88B10002D92F3 /* test-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test-icon.png"; sourceTree = "<group>"; };
+		FE5B713D29E88D45002D92F3 /* attributions.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = attributions.md; sourceTree = "<group>"; };
+		FE5B713E29E88DC5002D92F3 /* slippery-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slippery-icon.png"; sourceTree = "<group>"; };
+		FE5B714129E89038002D92F3 /* cafe-g47ee2568d_1920.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cafe-g47ee2568d_1920.jpg"; sourceTree = "<group>"; };
+		FE5B714429E89369002D92F3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		FE5B714629E893E9002D92F3 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		FE5B714829E89417002D92F3 /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
 		FEEBA5A229DF5FD700C0015B /* fall-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fall-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appApp.swift; sourceTree = "<group>"; };
 		FEEBA5A729DF5FD700C0015B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,6 +116,33 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		FE5B713629E88944002D92F3 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				FE5B713E29E88DC5002D92F3 /* slippery-icon.png */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		FE5B714029E8902B002D92F3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FE5B714129E89038002D92F3 /* cafe-g47ee2568d_1920.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		FE5B714329E8933B002D92F3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FEEBA5CF29DF8C9A00C0015B /* Survey.swift */,
+				FE5B714429E89369002D92F3 /* MainView.swift */,
+				FE5B714629E893E9002D92F3 /* HistoryView.swift */,
+				FE5B714829E89417002D92F3 /* DummyView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FEEBA59929DF5FD700C0015B = {
 			isa = PBXGroup;
 			children = (
@@ -127,13 +167,17 @@
 		FEEBA5A429DF5FD700C0015B /* fall-app */ = {
 			isa = PBXGroup;
 			children = (
+				FE5B714329E8933B002D92F3 /* Views */,
+				FE5B714029E8902B002D92F3 /* Images */,
+				FE5B713629E88944002D92F3 /* Icons */,
 				FE5B712729E0B01C002D92F3 /* UI */,
 				FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */,
 				FEEBA5A729DF5FD700C0015B /* ContentView.swift */,
 				FEEBA5A929DF5FD800C0015B /* Assets.xcassets */,
+				FE5B713B29E88B10002D92F3 /* test-icon.png */,
 				FEEBA5AB29DF5FD800C0015B /* Preview Content */,
-				FEEBA5CF29DF8C9A00C0015B /* Survey.swift */,
 				FEEBA5D129DF8D4C00C0015B /* Storyboard.storyboard */,
+				FE5B713D29E88D45002D92F3 /* attributions.md */,
 			);
 			path = "fall-app";
 			sourceTree = "<group>";
@@ -275,8 +319,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEEBA5AD29DF5FD800C0015B /* Preview Assets.xcassets in Resources */,
+				FE5B713F29E88DC5002D92F3 /* slippery-icon.png in Resources */,
 				FEEBA5AA29DF5FD800C0015B /* Assets.xcassets in Resources */,
+				FE5B713C29E88B10002D92F3 /* test-icon.png in Resources */,
 				FEEBA5D229DF8D4C00C0015B /* Storyboard.storyboard in Resources */,
+				FE5B714229E89038002D92F3 /* cafe-g47ee2568d_1920.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,13 +348,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE5B714929E89417002D92F3 /* DummyView.swift in Sources */,
 				FEEBA5D029DF8C9A00C0015B /* Survey.swift in Sources */,
+				FE5B714729E893E9002D92F3 /* HistoryView.swift in Sources */,
 				FE5B712B29E0B085002D92F3 /* IconButtonStyle.swift in Sources */,
 				FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */,
 				FE5B712F29E0BAEA002D92F3 /* SurveyDropdown.swift in Sources */,
 				FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */,
 				FE5B713129E0BE9D002D92F3 /* SurveyNumberField.swift in Sources */,
 				FE5B712929E0B049002D92F3 /* IconButtonInner.swift in Sources */,
+				FE5B714529E89369002D92F3 /* MainView.swift in Sources */,
 				FE5B713329E202F3002D92F3 /* Toast.swift in Sources */,
 				FE5B713529E7384F002D92F3 /* SurveyMultiCheckbox.swift in Sources */,
 				FE5B712D29E0B61D002D92F3 /* SurveyTextField.swift in Sources */,

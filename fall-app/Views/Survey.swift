@@ -54,14 +54,23 @@ struct Survey1: View {
 /// to the first view.
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 12, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 13, 2023
 ///
 struct Survey2: View {
     @Binding var showPopup1: Bool
     @Binding var showPopup2: Bool
+ 
+    /// MODIFY ME!! Types of hazards to be shown
+    let hazards: [String] = ["Slippery", "Option 2", "Option 3"]
     
-    @State private var intensity: Int = 1;
-    @State private var hazardTypes: [Bool] = [false, false, false];
+    let hazardIcons: [String] = ["slippery-icon", "test-icon", "test-icon"]
+    
+    /// MODIFY ME!! Length must match the length of hazards
+    @State private var intensity: [Int] = [0, 0, 0];
+    
+    /// Levels of intensity
+    let optionTexts: [String] = ["None (0)", "Low (1)", "Medium (2)", "High (3)"]
+    let optionValues: [Int] = [0, 1, 2, 3]
     
     var body: some View {
         VStack {
@@ -78,24 +87,33 @@ struct Survey2: View {
             
             ScrollView(.vertical, showsIndicators: false)
             {
+                // Header
                 Text("Report Fall Risk")
                     .fontWeight(.bold)
                     .font(.system(size: 28))
                     .padding(.top, 8)
                     .padding(.bottom, 0)
                 
-                Text("Lorem ipsum dolor sit amet:")
-                    .padding(.bottom, 8)
-
-                SurveyDropdown(question: "Please select the intensity:",
-                               optionTexts: ["Low (1)", "Medium (2)", "High (3)"],
-                               optionValues: [1, 2, 3],
-                                value: $intensity)
+                HStack {
+                    Spacer().frame(width: 36)
+                    
+                    Text("Please report all hazards you experienced and their intensities:")
+                        .padding(.bottom, 20)
+                        .multilineTextAlignment(.center)
+                    
+                    Spacer().frame(width: 36)
+                }
                 
-                SurveyMultiCheckbox(question: "Please select all SFT hazards you experienced.",
-                                    optionTexts: ["Slippery", "Option 2", "Option 3"],
-                                    value: $hazardTypes)
+                // Hazards form
+                ForEach(hazards.indices) { index in
+                    SurveyDropdown(label: hazards[index],
+                                   icon: hazardIcons[index],
+                                   optionTexts: optionTexts,
+                                   optionValues: optionValues,
+                                    value: $intensity[index])
+                }
                 
+                // Disclaimer text
                 Text("This form is not monitored. If you need medical assistance,\nplease call 911 or your local healthcare provider.")
                     .font(.system(size: 10))
                     .padding(.top, 12)

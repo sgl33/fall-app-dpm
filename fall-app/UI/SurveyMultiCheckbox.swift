@@ -4,7 +4,10 @@ import SwiftUI
 ///
 /// ### Example
 /// ```
-///
+/// @State private var hazardTypes: [Bool] = [false, false, false];
+/// SurveyMultiCheckbox(question: "Please select all SFT hazards you experienced.",
+///         optionTexts: ["Slippery", "Option 2", "Option 3"],
+///         value: $hazardTypes)
 /// ```
 ///
 /// ### Author & Version
@@ -71,7 +74,7 @@ struct Checkbox: View {
                 selected.toggle()
             }
         }) {
-            Image(systemName: selected ? "checkmark.square" : "square")
+            Image(systemName: selected ? "checkmark.square.fill" : "square")
                 .imageScale(.large)
                 .frame(width: width, height: height)
         }

@@ -1,23 +1,27 @@
 import SwiftUI
 
-/// Single-select dropdown with prompt text of width 320.
+/// Single-select dropdown with in-line prompt text of width 320.
 ///
 /// ### Example
 /// ```
 /// @State private var ddValue: Int = 1
-/// SurveyDropdown(question: "Please select an item",
+/// SurveyDropdown(label: "Item 1",
+///                 icon: "my-image",
 ///                 optionTexts: ["No", "Yes"],
 ///                 optionValues: [0, 1],
 ///                 value: $ddValue)
 /// ```
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 9, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 13, 2023
 ///
 struct SurveyDropdown: View {
 
-    /// Question text to be shown on top of the dropdown menu.
-    var question: String
+    /// Label text to be shown on top of the dropdown menu.
+    var label: String
+    
+    /// Name of the icon file to be displayed next to the label
+    var icon: String
     
     /// Array of strings to be shown in the dropdown menu.
     var optionTexts: [String]
@@ -32,31 +36,41 @@ struct SurveyDropdown: View {
     /// Width of dropdown menu box. Default: 320
     let width: CGFloat = 320
     
-    /// Height of dropdown menu box. Default: 36
-    let height: CGFloat = 36
+    /// Height of dropdown menu box. Default: 80
+    let height: CGFloat = 80
+    
+    /// Height of hazard icons. Default: 40
+    let iconHeight: CGFloat = 40
     
     var body: some View {
-        VStack {
-            HStack {
-                Text(question)
-                    .padding(.top, 4)
-                    .frame(width: width - 25, alignment: .leading)
-                Spacer()
-            }
-            .padding(.bottom, 0)
+        HStack {
+            Image(icon)
+                .resizable()
+                .frame(width: iconHeight, height: iconHeight)
             
-            Picker(question, selection: $value) {
+            Spacer()
+                .frame(width: 20)
+            
+            Text(label)
+                .frame(alignment: .leading)
+                .foregroundColor(.black)
+            
+            Spacer()
+                .frame(width: 12)
+            
+            Picker(label, selection: $value) {
                 ForEach(optionTexts.indices) { index in
                     Text(optionTexts[index]).tag(optionValues[index])
                 }
             }
-            .frame(width: width, height: height)
-            .background(Color(white: 0.93))
-            .cornerRadius(12)
-            .padding(.top, -4)
-            .padding(.bottom, 4)
+            .frame(alignment: .trailing)
+            
         }
-        .frame(width: width)
+        .frame(width: width, height: height)
+        .background(Color(white: 0.93))
+        .cornerRadius(12)
+        .padding(.top, -4)
+        .padding(.bottom, 4)
         
     }
 }
