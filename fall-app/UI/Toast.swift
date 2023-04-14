@@ -57,7 +57,7 @@ class Toast {
         size = label.intrinsicContentSize
         width = min(size.width, window.frame.width - 60) + 30
 
-        label.frame = CGRect(x: 20, y: window.frame.height - 133, width: width, height: size.height + 20)
+        label.frame = CGRect(x: 20, y: window.frame.height - 90, width: width, height: size.height + 20)
         label.center.x = window.center.x
         label.layer.cornerRadius = min(label.frame.height/2, 25)
         label.layer.masksToBounds = true
