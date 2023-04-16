@@ -40,30 +40,34 @@ struct SurveyDropdown: View {
     let height: CGFloat = 80
     
     /// Height of hazard icons. Default: 40
-    let iconHeight: CGFloat = 40
+    let iconHeight: CGFloat = 48
     
     var body: some View {
         HStack {
+            Spacer()
+                .frame(width: 22)
+            
             Image(icon)
                 .resizable()
                 .frame(width: iconHeight, height: iconHeight)
             
             Spacer()
-                .frame(width: 20)
+                .frame(width: 10)
             
             Text(label)
-                .frame(alignment: .leading)
+                .frame(width: 100, alignment: .leading)
                 .foregroundColor(.black)
             
-            Spacer()
-                .frame(width: 12)
             
             Picker(label, selection: $value) {
                 ForEach(optionTexts.indices) { index in
                     Text(optionTexts[index]).tag(optionValues[index])
                 }
             }
-            .frame(alignment: .trailing)
+            .frame(width: 130, alignment: .trailing)
+            
+            Spacer()
+                .frame(width: 10)
             
         }
         .frame(width: width, height: height)

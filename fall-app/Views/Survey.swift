@@ -3,7 +3,7 @@ import SwiftUI
 /// Popup view that asks users if they experienced fall risk.
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 14, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 15, 2023
 ///
 struct Survey1: View {
     
@@ -11,9 +11,13 @@ struct Survey1: View {
     @State var showPopup2: Bool = false
     
     /// MODIFY ME!! Types of hazards to be shown
-    let hazards: [String] = ["Slippery", "Option 2", "Option 3"]
-    let hazardIcons: [String] = ["slippery-icon", "test-icon", "test-icon"]
-    @State private var intensity: [Int] = [0, 0, 0];
+    let hazards: [String] = ["Change in Floor Levels", "Debris or Obstacles", "Poor Lighting", "Slippery", "Slope", "Uneven Surface"]
+    
+    /// Icons of hazards to be shown. Size must match that of `hazards`.
+    let hazardIcons: [String] = ["changes_in_floor_levels", "debris_obstacles", "poor_lighting", "slippery", "test-icon", "uneven_surface"]
+    
+    /// Intensity for each hazards. Default value = 0. Size must match that of `hazards`.
+    @State private var intensity: [Int] = [0, 0, 0, 0, 0, 0];
     
     
     var body: some View {

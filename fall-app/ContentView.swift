@@ -27,10 +27,16 @@ struct ContentView: View {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
+                .background(Color(UIColor.systemBackground))
+                
         }
     }
     
-    
+    init() {
+        // Initializes UI tab bar appearance
+        let appearance: UITabBarAppearance = UITabBarAppearance()
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
 }
 
 
