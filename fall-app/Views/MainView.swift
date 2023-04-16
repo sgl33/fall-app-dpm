@@ -15,9 +15,10 @@ struct MainView: View
         VStack {
             // Image
             GeometryReader { metrics in
-                Image("test-background")
+                Image("umich-logo")
                     .resizable()
-                    .frame(width: metrics.size.width * 1.2, height: metrics.size.width * 1.2 * 1271 / 1920)
+                    .frame(width: metrics.size.width, height: metrics.size.width * 671 / 800,
+                           alignment: .center)
             }
             
             RecordingButton(isRecording: $isRecording,

@@ -34,9 +34,9 @@ struct HistoryView: View
                 }
                 
             }
-            .refreshable {
-                getRecords()
-            }
+//            .refreshable {
+//                getRecords()
+//            }
             .frame(alignment: .center)
             
         }

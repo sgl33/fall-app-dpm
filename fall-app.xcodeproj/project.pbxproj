@@ -14,8 +14,6 @@
 		FE5B713129E0BE9D002D92F3 /* SurveyNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B713029E0BE9D002D92F3 /* SurveyNumberField.swift */; };
 		FE5B713329E202F3002D92F3 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B713229E202F3002D92F3 /* Toast.swift */; };
 		FE5B713529E7384F002D92F3 /* SurveyMultiCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B713429E7384F002D92F3 /* SurveyMultiCheckbox.swift */; };
-		FE5B713C29E88B10002D92F3 /* test-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5B713B29E88B10002D92F3 /* test-icon.png */; };
-		FE5B713F29E88DC5002D92F3 /* slippery-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5B713E29E88DC5002D92F3 /* slippery-icon.png */; };
 		FE5B714229E89038002D92F3 /* cafe-g47ee2568d_1920.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE5B714129E89038002D92F3 /* cafe-g47ee2568d_1920.jpg */; };
 		FE5B714529E89369002D92F3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B714429E89369002D92F3 /* MainView.swift */; };
 		FE5B714729E893E9002D92F3 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B714629E893E9002D92F3 /* HistoryView.swift */; };
@@ -56,6 +54,8 @@
 		FE9761C329EBA0B500C1ADDE /* uneven_surface.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761C029EBA0B500C1ADDE /* uneven_surface.png */; };
 		FE9761C629EBA21300C1ADDE /* changes_in_floor_levels.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761C429EBA21300C1ADDE /* changes_in_floor_levels.png */; };
 		FE9761C729EBA21300C1ADDE /* poor_lighting.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761C529EBA21300C1ADDE /* poor_lighting.png */; };
+		FE9761CC29EC983100C1ADDE /* slope.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761CB29EC983100C1ADDE /* slope.png */; };
+		FE9761CE29EC98F400C1ADDE /* umich-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761CD29EC98F400C1ADDE /* umich-logo.png */; };
 		FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */; };
 		FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5A729DF5FD700C0015B /* ContentView.swift */; };
 		FEEBA5AA29DF5FD800C0015B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEEBA5A929DF5FD800C0015B /* Assets.xcassets */; };
@@ -92,9 +92,6 @@
 		FE5B713029E0BE9D002D92F3 /* SurveyNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyNumberField.swift; sourceTree = "<group>"; };
 		FE5B713229E202F3002D92F3 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		FE5B713429E7384F002D92F3 /* SurveyMultiCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyMultiCheckbox.swift; sourceTree = "<group>"; };
-		FE5B713B29E88B10002D92F3 /* test-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test-icon.png"; sourceTree = "<group>"; };
-		FE5B713D29E88D45002D92F3 /* attributions.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = attributions.md; sourceTree = "<group>"; };
-		FE5B713E29E88DC5002D92F3 /* slippery-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slippery-icon.png"; sourceTree = "<group>"; };
 		FE5B714129E89038002D92F3 /* cafe-g47ee2568d_1920.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cafe-g47ee2568d_1920.jpg"; sourceTree = "<group>"; };
 		FE5B714429E89369002D92F3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		FE5B714629E893E9002D92F3 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -110,6 +107,9 @@
 		FE9761C529EBA21300C1ADDE /* poor_lighting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poor_lighting.png; sourceTree = "<group>"; };
 		FE9761C929EBA9F600C1ADDE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FE9761CA29EBAA2C00C1ADDE /* Firebase.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Firebase.md; sourceTree = "<group>"; };
+		FE9761CB29EC983100C1ADDE /* slope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slope.png; sourceTree = "<group>"; };
+		FE9761CD29EC98F400C1ADDE /* umich-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umich-logo.png"; sourceTree = "<group>"; };
+		FE9761CF29EC9A4500C1ADDE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FEEBA5A229DF5FD700C0015B /* fall-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fall-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appApp.swift; sourceTree = "<group>"; };
 		FEEBA5A729DF5FD700C0015B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -194,9 +194,9 @@
 		FE5B713629E88944002D92F3 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				FE9761CB29EC983100C1ADDE /* slope.png */,
 				FE9761C429EBA21300C1ADDE /* changes_in_floor_levels.png */,
 				FE9761C529EBA21300C1ADDE /* poor_lighting.png */,
-				FE5B713E29E88DC5002D92F3 /* slippery-icon.png */,
 				FE9761BE29EBA0B500C1ADDE /* slippery.png */,
 				FE9761C029EBA0B500C1ADDE /* uneven_surface.png */,
 				FE9761BF29EBA0B500C1ADDE /* debris_obstacles.png */,
@@ -207,6 +207,7 @@
 		FE5B714029E8902B002D92F3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FE9761CD29EC98F400C1ADDE /* umich-logo.png */,
 				FE5B714129E89038002D92F3 /* cafe-g47ee2568d_1920.jpg */,
 			);
 			path = Images;
@@ -265,12 +266,11 @@
 				FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */,
 				FEEBA5A729DF5FD700C0015B /* ContentView.swift */,
 				FEEBA5A929DF5FD800C0015B /* Assets.xcassets */,
-				FE5B713B29E88B10002D92F3 /* test-icon.png */,
 				FEEBA5AB29DF5FD800C0015B /* Preview Content */,
 				FEEBA5D129DF8D4C00C0015B /* Storyboard.storyboard */,
-				FE5B713D29E88D45002D92F3 /* attributions.md */,
 				FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */,
 				FE5B718729E9FD21002D92F3 /* WalkingRecord.swift */,
+				FE9761CF29EC9A4500C1ADDE /* README.md */,
 			);
 			path = "fall-app";
 			sourceTree = "<group>";
@@ -444,12 +444,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE9761C329EBA0B500C1ADDE /* uneven_surface.png in Resources */,
+				FE9761CE29EC98F400C1ADDE /* umich-logo.png in Resources */,
 				FE9761C729EBA21300C1ADDE /* poor_lighting.png in Resources */,
 				FEEBA5AD29DF5FD800C0015B /* Preview Assets.xcassets in Resources */,
-				FE5B713F29E88DC5002D92F3 /* slippery-icon.png in Resources */,
 				FE9761C629EBA21300C1ADDE /* changes_in_floor_levels.png in Resources */,
 				FEEBA5AA29DF5FD800C0015B /* Assets.xcassets in Resources */,
-				FE5B713C29E88B10002D92F3 /* test-icon.png in Resources */,
+				FE9761CC29EC983100C1ADDE /* slope.png in Resources */,
 				FEEBA5D229DF8D4C00C0015B /* Storyboard.storyboard in Resources */,
 				FE5B714229E89038002D92F3 /* cafe-g47ee2568d_1920.jpg in Resources */,
 				FE9761C229EBA0B500C1ADDE /* debris_obstacles.png in Resources */,

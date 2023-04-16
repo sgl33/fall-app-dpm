@@ -14,7 +14,7 @@ struct Survey1: View {
     let hazards: [String] = ["Change in Floor Levels", "Debris or Obstacles", "Poor Lighting", "Slippery", "Slope", "Uneven Surface"]
     
     /// Icons of hazards to be shown. Size must match that of `hazards`.
-    let hazardIcons: [String] = ["changes_in_floor_levels", "debris_obstacles", "poor_lighting", "slippery", "test-icon", "uneven_surface"]
+    let hazardIcons: [String] = ["changes_in_floor_levels", "debris_obstacles", "poor_lighting", "slippery", "slope", "uneven_surface"]
     
     /// Intensity for each hazards. Default value = 0. Size must match that of `hazards`.
     @State private var intensity: [Int] = [0, 0, 0, 0, 0, 0];
