@@ -17,7 +17,7 @@ struct RecordItem: View {
     var body: some View {
         HStack {
             Spacer()
-                .frame(width: 12);
+                .frame(width: 24);
             
             VStack {
                 Spacer()
@@ -41,7 +41,7 @@ struct RecordItem: View {
             .padding(.bottom, 8)
             
             Spacer()
-                .frame(width: 12);
+                .frame(width: 24);
         }
         
     }

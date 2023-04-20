@@ -10,6 +10,7 @@ struct MainView: View
     @State var isRecording: Bool = false
     @State var showPopup1: Bool = false
     @State var showPopup2: Bool = false
+    @Binding var tabSelection: Int;
     
     var body: some View {
         VStack {
@@ -23,15 +24,17 @@ struct MainView: View
             
             RecordingButton(isRecording: $isRecording,
                             showPopup: $showPopup1)
-            Text("00 hr 00 min 00 sec")
+//            Text("00 hr 00 min 00 sec")
             
             Spacer().frame(height: 80)
         }
+        .background(Color(red: 0, green: 39/255, blue: 76/255))
         
         .sheet(isPresented: $showPopup1) {
-            Survey1(showPopup1: $showPopup1)
-                .presentationDetents([.fraction(0.35)])
+            Survey1(showPopup1: $showPopup1, tabSelection: $tabSelection)
+                .presentationDetents([.fraction(0.38)])
         }
+        
     }
     
 }
@@ -59,15 +62,15 @@ struct RecordingButton: View
         }) {
             HStack
             {
-                Image(systemName: isRecording ? "stop.circle" : "record.circle")
+                Image(systemName: isRecording ? "hand.raised.fill" : "figure.walk")
                     .imageScale(.large)
                 Text(isRecording ? "Stop Walking" : "Start Walking")
             }
             .frame(width: width, height: height)
         }
         .frame(width: width, height: height)
-        .foregroundColor(isRecording ? .yellow : .white)
-        .background(Color(red: 0.2, green: 0.2, blue: 0.2))
+        .foregroundColor(isRecording ? Color(red: 218/255, green: 33/255, blue: 2/255) : .black)
+        .background(Color(white: 0.95))
         .cornerRadius(16)
     }
     

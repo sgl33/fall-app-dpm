@@ -9,24 +9,29 @@ import SwiftUI
 ///
 struct ContentView: View {
     
+    @State private var tabSelection: Int = 1
+    
     var body: some View {
         
-        TabView {
-            MainView()
+        TabView(selection: $tabSelection) {
+            MainView(tabSelection: $tabSelection)
                 .tabItem {
                     Image(systemName: "house")
                     Text("Home")
                 }
+                .tag(1)
             HistoryView()
                 .tabItem {
                     Image(systemName: "scroll")
                     Text("History")
                 }
+                .tag(2)
             DummyView()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
+                .tag(3)
                 .background(Color(UIColor.systemBackground))
                 
         }

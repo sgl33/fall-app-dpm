@@ -9,12 +9,13 @@ struct Survey1: View {
     
     @Binding var showPopup1: Bool
     @State var showPopup2: Bool = false
+    @Binding var tabSelection: Int
     
     /// MODIFY ME!! Types of hazards to be shown
-    let hazards: [String] = ["Change in Floor Levels", "Debris or Obstacles", "Poor Lighting", "Slippery", "Slope", "Uneven Surface"]
+    let hazards: [String] = ["Change in Floor Levels", "Uneven Surface", "Debris or Obstacles", "Slippery", "Slope", "Poor Lighting"]
     
     /// Icons of hazards to be shown. Size must match that of `hazards`.
-    let hazardIcons: [String] = ["changes_in_floor_levels", "debris_obstacles", "poor_lighting", "slippery", "slope", "uneven_surface"]
+    let hazardIcons: [String] = ["changes_in_floor_levels", "uneven_surface", "debris_obstacles", "slippery", "slope", "poor_lighting"]
     
     /// Intensity for each hazards. Default value = 0. Size must match that of `hazards`.
     @State private var intensity: [Int] = [0, 0, 0, 0, 0, 0];
@@ -26,8 +27,9 @@ struct Survey1: View {
             Text("Recording Complete!")
                 .fontWeight(.bold)
                 .font(.system(size: 24))
-                .padding(.bottom, -4)
+                .padding(.bottom, -6)
             Text("Did you experience fall risk?")
+                .font(.system(size: 20))
             
             // Report Hazard
             Button(action: {
@@ -51,7 +53,7 @@ struct Survey1: View {
         .sheet(isPresented: $showPopup2) {
             Survey2(showPopup1: $showPopup1, showPopup2: $showPopup2,
                     hazards: hazards, hazardIcons: hazardIcons,
-                    intensity: $intensity)
+                    intensity: $intensity, tabSelection: $tabSelection)
                 .presentationDetents([.large])
         }
         
@@ -64,7 +66,10 @@ struct Survey1: View {
         FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity))
         
         showPopup1 = false;
+        tabSelection = 2; // switch to HistoryView
         Toast.showToast("Submitted. Thank you!")
+        
+        
     }
 }
 
@@ -84,6 +89,9 @@ struct Survey2: View {
     
     @Binding var intensity: [Int]
     
+    @State var showAlert: Bool = false;
+    @Binding var tabSelection: Int
+    
     /// Levels of intensity
     let optionTexts: [String] = ["None (0)", "Low (1)", "Medium (2)", "High (3)"]
     let optionValues: [Int] = [0, 1, 2, 3]
@@ -91,8 +99,10 @@ struct Survey2: View {
     var body: some View {
         VStack {
             HStack {
-                Button(action: {
-                    showPopup2 = false
+                Button(action: { // back
+                    showPopup2 = false;
+                    clearIntensities();
+                    
                 }) {
                     Spacer().frame(width: 16)
                     Text("Back")
@@ -114,6 +124,7 @@ struct Survey2: View {
                     Spacer().frame(width: 36)
                     
                     Text("Please report all hazards you experienced and their intensities:")
+                        .font(.system(size: 20))
                         .padding(.bottom, 20)
                         .multilineTextAlignment(.center)
                     
@@ -144,17 +155,49 @@ struct Survey2: View {
             }.buttonStyle(IconButtonStyle(backgroundColor: .yellow, foregroundColor: .black))
             .padding(.top, 4)
             .padding(.bottom, 16)
+            // Alert
+            .alert("No Hazard Selected", isPresented: $showAlert, actions: {
+                Button("Close",  role: .cancel, action: { showAlert = false; })
+            }, message: {
+                Text("You have not selected any hazards to report. Please press \"Back\" if you have none to report.")
+            })
         }
     }
+                      
     
-    /// Sends hazard report to Firebase and closes the popup.
+    /// Sends hazard report to Firebase and closes the survey.
     func sendHazardReport() {
+        // Check valid
+        if(noHazardSelected()) {
+            showAlert = true;
+            return;
+        }
+        
         FirestoreHandler.connect()
         FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity))
 
         showPopup1 = false;
         showPopup2 = false;
         Toast.showToast("Submitted. Thank you!")
+        tabSelection = 2; // switch to HistoryView
+        
+    }
+    
+    /// Returns true if user did not select any hazard to report, false otherwise.
+    func noHazardSelected() -> Bool {
+        for i in intensity {
+            if(i != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /// Clears intensities to 0 when pressing "Back".
+    func clearIntensities() {
+        for index in intensity.indices {
+            intensity[index] = 0;
+        }
     }
 }
 

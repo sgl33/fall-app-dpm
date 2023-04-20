@@ -16,7 +16,7 @@ struct HistoryView: View
             Text("Records History")
                 .fontWeight(.bold)
                 .font(.system(size: 28))
-                .padding(.top, 12).padding(.bottom, 2)
+                .padding(.top, 16).padding(.bottom, 2)
             
             // Print records
             ScrollView(.vertical) {

@@ -57,7 +57,8 @@ class FirestoreHandler {
     /// ```
     static func addRecord(rec: WalkingRecord) {
         var ref: DocumentReference? = nil;
-        ref = db.collection(records_table).addDocument(data: [
+        let docName: String = String(rec.user_id ?? "invalid-id") + "__" + String(rec.timestamp);
+        db.collection(records_table).document(docName).setData([
             "user_id": rec.user_id,
             "timestamp": rec.timestamp,
             "hazards": rec.hazards()
@@ -65,7 +66,7 @@ class FirestoreHandler {
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(ref!.documentID)")
+                print("Document \(docName) successfully written!")
             }
         }
     }
