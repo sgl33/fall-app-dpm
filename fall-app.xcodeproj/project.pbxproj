@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		746D402A6CCF760677C71C88 /* Pods_fall_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08330BF678E50607484AD5FE /* Pods_fall_app.framework */; };
 		FE5B712929E0B049002D92F3 /* IconButtonInner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B712829E0B049002D92F3 /* IconButtonInner.swift */; };
 		FE5B712B29E0B085002D92F3 /* IconButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B712A29E0B085002D92F3 /* IconButtonStyle.swift */; };
 		FE5B712D29E0B61D002D92F3 /* SurveyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */; };
@@ -85,6 +86,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08330BF678E50607484AD5FE /* Pods_fall_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fall_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		397F8D1E91AF2093EB506942 /* Pods-fall-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fall-app.debug.xcconfig"; path = "Target Support Files/Pods-fall-app/Pods-fall-app.debug.xcconfig"; sourceTree = "<group>"; };
+		C77252FD3EFC01778CE4B886 /* Pods-fall-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fall-app.release.xcconfig"; path = "Target Support Files/Pods-fall-app/Pods-fall-app.release.xcconfig"; sourceTree = "<group>"; };
 		FE5B712829E0B049002D92F3 /* IconButtonInner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonInner.swift; sourceTree = "<group>"; };
 		FE5B712A29E0B085002D92F3 /* IconButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonStyle.swift; sourceTree = "<group>"; };
 		FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyTextField.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 				FE5B716829E9F206002D92F3 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				FE5B717829E9F206002D92F3 /* FirebaseMessaging in Frameworks */,
 				FE5B717429E9F206002D92F3 /* FirebaseInstallations in Frameworks */,
+				746D402A6CCF760677C71C88 /* Pods_fall_app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +181,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34BB42898D5D1B7A9990CBD3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				397F8D1E91AF2093EB506942 /* Pods-fall-app.debug.xcconfig */,
+				C77252FD3EFC01778CE4B886 /* Pods-fall-app.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8CA77608ABA569F4C87984CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08330BF678E50607484AD5FE /* Pods_fall_app.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FE5B712729E0B01C002D92F3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +263,8 @@
 				FEEBA5B529DF5FD800C0015B /* fall-appTests */,
 				FEEBA5BF29DF5FD800C0015B /* fall-appUITests */,
 				FEEBA5A329DF5FD700C0015B /* Products */,
+				34BB42898D5D1B7A9990CBD3 /* Pods */,
+				8CA77608ABA569F4C87984CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -314,9 +338,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FEEBA5C629DF5FD800C0015B /* Build configuration list for PBXNativeTarget "fall-app" */;
 			buildPhases = (
+				5BECE0DC2EA3488816DD2F6A /* [CP] Check Pods Manifest.lock */,
 				FEEBA59E29DF5FD700C0015B /* Sources */,
 				FEEBA59F29DF5FD700C0015B /* Frameworks */,
 				FEEBA5A029DF5FD700C0015B /* Resources */,
+				011381B13D1FA3DA4C3F337F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -473,6 +499,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		011381B13D1FA3DA4C3F337F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-fall-app/Pods-fall-app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-fall-app/Pods-fall-app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-fall-app/Pods-fall-app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5BECE0DC2EA3488816DD2F6A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-fall-app-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FEEBA59E29DF5FD700C0015B /* Sources */ = {
@@ -647,6 +715,7 @@
 		};
 		FEEBA5C729DF5FD800C0015B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 397F8D1E91AF2093EB506942 /* Pods-fall-app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -655,6 +724,13 @@
 				DEVELOPMENT_ASSET_PATHS = "\"fall-app/Preview Content\"";
 				DEVELOPMENT_TEAM = F965F5ZKX8;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts-Swift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MetaWear\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/iOSDFULibrary\"",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "DPM Fall App";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -679,6 +755,7 @@
 		};
 		FEEBA5C829DF5FD800C0015B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C77252FD3EFC01778CE4B886 /* Pods-fall-app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
