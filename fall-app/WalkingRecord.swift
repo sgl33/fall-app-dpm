@@ -89,6 +89,7 @@ struct WalkingRecord {
 ///
 class ArrayOfWalkingRecords: ObservableObject {
     @Published var arr: [WalkingRecord] = [];
+    @Published var done: Bool = false;
     
     /// Add item to `arr`.
     func append(item: WalkingRecord) {
@@ -103,5 +104,24 @@ class ArrayOfWalkingRecords: ObservableObject {
     /// Clear `arr`
     func clearArr() {
         arr = [];
+    }
+    
+    /// Call this when starting to fetch data from database.
+    /// Used to display loading skeleton UI.
+    func startFetching() {
+        done = false;
+        print("Started fetching data from database")
+    }
+    
+    /// Call this when data fetching is complete.
+    /// Used to stop displaying skeleton UI.
+    func doneFetching() {
+        done = true;
+        print("Done fetching data from database")
+    }
+    
+    /// Return `done`, i.e. whether database access has been complete
+    func isDoneFetching() -> Bool {
+        return done;
     }
 }

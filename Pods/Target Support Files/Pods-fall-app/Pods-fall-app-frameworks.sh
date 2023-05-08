@@ -178,12 +178,14 @@ code_sign_if_enabled() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Bolts-Swift/BoltsSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MetaWear/MetaWear.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SkeletonUI/SkeletonUI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ZIPFoundation/ZIPFoundation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/iOSDFULibrary/iOSDFULibrary.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Bolts-Swift/BoltsSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MetaWear/MetaWear.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SkeletonUI/SkeletonUI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ZIPFoundation/ZIPFoundation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/iOSDFULibrary/iOSDFULibrary.framework"
 fi

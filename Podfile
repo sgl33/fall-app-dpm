@@ -8,6 +8,8 @@ target 'fall-app' do
     # COCOA POD RELEASE SPECIFIC
     # pod "MetaWear", '~> '4.0.2'
 
+    pod 'SkeletonUI'
+
 end
 
 post_install do |installer|

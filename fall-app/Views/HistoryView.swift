@@ -1,4 +1,5 @@
 import SwiftUI
+import SkeletonUI
 
 /// History view of the application, showing past survey responses
 ///
@@ -20,18 +21,40 @@ struct HistoryView: View
             
             // Print records
             ScrollView(.vertical) {
-                VStack {
-                    let numRecs = records.arr.count;
-                    Text(String(numRecs) + " record(s) found.")
-                        .padding(.bottom, 10)
-                        .padding(.top, 8)
-                    
-                    if(numRecs != 0) {
-                        ForEach(records.arr.indices) { index in
-                            RecordItem(record: records.arr[numRecs - index - 1])
+                if records.isDoneFetching() {
+                    // Content
+                    VStack {
+                        let numRecs = records.arr.count;
+                        Text(String(numRecs) + " record(s) found.")
+                            .padding(.bottom, 10)
+                            .padding(.top, 8)
+                            .frame(width: 320)
+
+                        if(numRecs != 0) {
+                            ForEach(records.arr.indices) { index in
+                                RecordItem(record: records.arr[numRecs - index - 1])
+                            }
                         }
                     }
                 }
+                else {
+                    // Skeleton UI
+                    VStack {
+                        Text("Loading...")
+                            .padding(.bottom, 10)
+                            .padding(.top, 8)
+                            .frame(width: 320)
+                            .skeleton(with: !records.isDoneFetching(),
+                                      size: CGSize(width: 240, height: 30))
+                        
+                        ForEach(1..<12) { index in
+                            Text("")
+                                .skeleton(with: !records.isDoneFetching(),
+                                          size: CGSize(width: 320, height: 56))
+                        }
+                    }
+                }
+                
                 
             }
 //            .refreshable {

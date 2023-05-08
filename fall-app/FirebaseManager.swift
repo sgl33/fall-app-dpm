@@ -82,7 +82,7 @@ class FirestoreHandler {
     /// FirestoreHandler.getRecords(arr: arr)
     /// ```
     static func getRecords(arr: ArrayOfWalkingRecords) {
-        
+        arr.startFetching()
         db.collection(records_table)
             .whereField("user_id", isEqualTo: UIDevice.current.identifierForVendor?.uuidString)
             .order(by: "timestamp")
@@ -107,9 +107,8 @@ class FirestoreHandler {
                                                        hazards_intensity: hazards_intensity,
                                                        timestamp: timestamp ?? 0));
                     }
-                    
+                    arr.doneFetching()
                 }
-
             }
     }
 }

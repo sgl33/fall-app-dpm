@@ -49,6 +49,7 @@
 		FE5B718229E9F206002D92F3 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = FE5B718129E9F206002D92F3 /* FirebaseStorageCombine-Community */; };
 		FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */; };
 		FE5B718829E9FD21002D92F3 /* WalkingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718729E9FD21002D92F3 /* WalkingRecord.swift */; };
+		FE620E922A0995FA0073B8F0 /* MetaWearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */; };
 		FE9761BD29EB938B00C1ADDE /* RecordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9761BC29EB938B00C1ADDE /* RecordItem.swift */; };
 		FE9761C129EBA0B500C1ADDE /* slippery.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761BE29EBA0B500C1ADDE /* slippery.png */; };
 		FE9761C229EBA0B500C1ADDE /* debris_obstacles.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761BF29EBA0B500C1ADDE /* debris_obstacles.png */; };
@@ -103,6 +104,8 @@
 		FE5B714A29E9F177002D92F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FE5B718729E9FD21002D92F3 /* WalkingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingRecord.swift; sourceTree = "<group>"; };
+		FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaWearManager.swift; sourceTree = "<group>"; };
+		FE620E932A099C5F0073B8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FE9761BC29EB938B00C1ADDE /* RecordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordItem.swift; sourceTree = "<group>"; };
 		FE9761BE29EBA0B500C1ADDE /* slippery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slippery.png; path = "fall-app/Icons/slippery.png"; sourceTree = SOURCE_ROOT; };
 		FE9761BF29EBA0B500C1ADDE /* debris_obstacles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = debris_obstacles.png; path = "fall-app/Icons/debris_obstacles.png"; sourceTree = SOURCE_ROOT; };
@@ -258,6 +261,7 @@
 		FEEBA59929DF5FD700C0015B = {
 			isa = PBXGroup;
 			children = (
+				FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */,
 				FEEBA5D329DFC45700C0015B /* Packages */,
 				FEEBA5A429DF5FD700C0015B /* fall-app */,
 				FEEBA5B529DF5FD800C0015B /* fall-appTests */,
@@ -281,6 +285,7 @@
 		FEEBA5A429DF5FD700C0015B /* fall-app */ = {
 			isa = PBXGroup;
 			children = (
+				FE620E932A099C5F0073B8F0 /* Info.plist */,
 				FE9761C829EBA9E900C1ADDE /* Documentation */,
 				FE5B714A29E9F177002D92F3 /* GoogleService-Info.plist */,
 				FE5B713629E88944002D92F3 /* Icons */,
@@ -560,6 +565,7 @@
 				FE5B713129E0BE9D002D92F3 /* SurveyNumberField.swift in Sources */,
 				FE5B712929E0B049002D92F3 /* IconButtonInner.swift in Sources */,
 				FE5B714529E89369002D92F3 /* MainView.swift in Sources */,
+				FE620E922A0995FA0073B8F0 /* MetaWearManager.swift in Sources */,
 				FE5B713329E202F3002D92F3 /* Toast.swift in Sources */,
 				FE5B713529E7384F002D92F3 /* SurveyMultiCheckbox.swift in Sources */,
 				FE5B712D29E0B61D002D92F3 /* SurveyTextField.swift in Sources */,
@@ -732,7 +738,9 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/iOSDFULibrary\"",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "fall-app/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "DPM Fall App";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Connects with MetaWear sensors to detect walking.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -765,7 +773,9 @@
 				DEVELOPMENT_TEAM = F965F5ZKX8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "fall-app/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "DPM Fall App";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Connects with MetaWear sensors to detect walking.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
