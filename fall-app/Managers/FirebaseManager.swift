@@ -53,15 +53,18 @@ class FirestoreHandler {
     ///
     /// ### Example
     /// ```
-    /// FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity))
+    /// FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity),
+    ///                             gscope: &MetaWearManager.walkingData)
     /// ```
-    static func addRecord(rec: WalkingRecord) {
+    static func addRecord(rec: WalkingRecord,
+                          gscope: GyroscopeDataArr) { // passed by reference
         var ref: DocumentReference? = nil;
         let docName: String = String(rec.user_id ?? "invalid-id") + "__" + String(rec.timestamp);
         db.collection(records_table).document(docName).setData([
             "user_id": rec.user_id,
             "timestamp": rec.timestamp,
-            "hazards": rec.hazards()
+            "hazards": rec.hazards(),
+            "gscope_data": gscope.toArrDict()
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")

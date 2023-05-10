@@ -7,7 +7,7 @@ import SwiftUI
 /// ### Example
 /// ```
 /// Button(action: { /* TODO */ }) {
-/// IconButtonInner(iconName: "paperplane.fill", buttonText: "Submit")
+///     IconButtonInner(iconName: "paperplane.fill", buttonText: "Submit")
 /// }.buttonStyle(IconButtonStyle(backgroundColor: Color(red: 0, green: 146/255, blue: 12/255),
 ///                         foregroundColor: .white))
 /// ```

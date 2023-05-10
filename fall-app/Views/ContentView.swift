@@ -20,6 +20,12 @@ struct ContentView: View {
                     Text("Home")
                 }
                 .tag(1)
+            DeviceView()
+                .tabItem {
+                    Image(systemName: "sensor.tag.radiowaves.forward.fill")
+                    Text("Sensor")
+                }
+                .tag(3)
             HistoryView()
                 .tabItem {
                     Image(systemName: "scroll")
@@ -31,7 +37,7 @@ struct ContentView: View {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
-                .tag(3)
+                .tag(4)
                 .background(Color(UIColor.systemBackground))
                 
         }

@@ -3,7 +3,7 @@ import SwiftUI
 /// Popup view that asks users if they experienced fall risk.
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 15, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
 ///
 struct Survey1: View {
     
@@ -63,13 +63,11 @@ struct Survey1: View {
     func sendReport() {
         // Firebase
         FirestoreHandler.connect()
-        FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity))
-        
+        FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity),
+                                   gscope: MetaWearManager.gscopeData)
         showPopup1 = false;
         tabSelection = 2; // switch to HistoryView
         Toast.showToast("Submitted. Thank you!")
-        
-        
     }
 }
 
@@ -77,7 +75,7 @@ struct Survey1: View {
 /// to the first view.
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 14, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
 ///
 struct Survey2: View {
     @Binding var showPopup1: Bool
@@ -98,6 +96,7 @@ struct Survey2: View {
     
     var body: some View {
         VStack {
+            // Back button (at the top)
             HStack {
                 Button(action: { // back
                     showPopup2 = false;
@@ -110,7 +109,7 @@ struct Survey2: View {
                 }
             }.padding(.top, 14)
             
-            
+            // Scroll view
             ScrollView(.vertical, showsIndicators: false)
             {
                 // Header
@@ -147,14 +146,13 @@ struct Survey2: View {
                     .multilineTextAlignment(.center)
             }
             
-                
-
             // Submit Button
             Button(action: sendHazardReport) {
                 IconButtonInner(iconName: "paperplane.fill", buttonText: "Submit")
             }.buttonStyle(IconButtonStyle(backgroundColor: .yellow, foregroundColor: .black))
             .padding(.top, 4)
             .padding(.bottom, 16)
+            
             // Alert
             .alert("No Hazard Selected", isPresented: $showAlert, actions: {
                 Button("Close",  role: .cancel, action: { showAlert = false; })
@@ -167,15 +165,15 @@ struct Survey2: View {
     
     /// Sends hazard report to Firebase and closes the survey.
     func sendHazardReport() {
-        // Check valid
+        // Hazard not selected?
         if(noHazardSelected()) {
             showAlert = true;
             return;
         }
         
         FirestoreHandler.connect()
-        FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity))
-
+        FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity),
+                                   gscope: MetaWearManager.gscopeData)
         showPopup1 = false;
         showPopup2 = false;
         Toast.showToast("Submitted. Thank you!")

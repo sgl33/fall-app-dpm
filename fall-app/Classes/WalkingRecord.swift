@@ -1,3 +1,7 @@
+/// struct WalkingRecord
+/// class ArrayOfWalkingRecords: ObservableObject
+/// 
+
 import Foundation
 import UIKit
 import FirebaseCore

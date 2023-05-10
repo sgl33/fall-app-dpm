@@ -50,6 +50,14 @@
 		FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */; };
 		FE5B718829E9FD21002D92F3 /* WalkingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718729E9FD21002D92F3 /* WalkingRecord.swift */; };
 		FE620E922A0995FA0073B8F0 /* MetaWearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */; };
+		FE620E952A0AEC420073B8F0 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E942A0AEC420073B8F0 /* DeviceView.swift */; };
+		FE620E972A0B13250073B8F0 /* metamotions.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E962A0B13250073B8F0 /* metamotions.png */; };
+		FE620E992A0B16E50073B8F0 /* metamotions_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E982A0B16E50073B8F0 /* metamotions_gray.png */; };
+		FE620E9C2A0B19340073B8F0 /* checkmark_green.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E9A2A0B19340073B8F0 /* checkmark_green.png */; };
+		FE620E9D2A0B19340073B8F0 /* xmark_red.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E9B2A0B19340073B8F0 /* xmark_red.png */; };
+		FE620E9F2A0C1FC90073B8F0 /* GyroscopeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E9E2A0C1FC90073B8F0 /* GyroscopeData.swift */; };
+		FE620EA12A0C27280073B8F0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EA02A0C27280073B8F0 /* LocationManager.swift */; };
+		FE620EA32A0C4E3D0073B8F0 /* StatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EA22A0C4E3D0073B8F0 /* StatusItem.swift */; };
 		FE9761BD29EB938B00C1ADDE /* RecordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9761BC29EB938B00C1ADDE /* RecordItem.swift */; };
 		FE9761C129EBA0B500C1ADDE /* slippery.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761BE29EBA0B500C1ADDE /* slippery.png */; };
 		FE9761C229EBA0B500C1ADDE /* debris_obstacles.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761BF29EBA0B500C1ADDE /* debris_obstacles.png */; };
@@ -66,7 +74,6 @@
 		FEEBA5C129DF5FD800C0015B /* fall_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5C029DF5FD800C0015B /* fall_appUITests.swift */; };
 		FEEBA5C329DF5FD800C0015B /* fall_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5C229DF5FD800C0015B /* fall_appUITestsLaunchTests.swift */; };
 		FEEBA5D029DF8C9A00C0015B /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5CF29DF8C9A00C0015B /* Survey.swift */; };
-		FEEBA5D229DF8D4C00C0015B /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEEBA5D129DF8D4C00C0015B /* Storyboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +113,14 @@
 		FE5B718729E9FD21002D92F3 /* WalkingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingRecord.swift; sourceTree = "<group>"; };
 		FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaWearManager.swift; sourceTree = "<group>"; };
 		FE620E932A099C5F0073B8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FE620E942A0AEC420073B8F0 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
+		FE620E962A0B13250073B8F0 /* metamotions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metamotions.png; sourceTree = "<group>"; };
+		FE620E982A0B16E50073B8F0 /* metamotions_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metamotions_gray.png; sourceTree = "<group>"; };
+		FE620E9A2A0B19340073B8F0 /* checkmark_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark_green.png; sourceTree = "<group>"; };
+		FE620E9B2A0B19340073B8F0 /* xmark_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmark_red.png; sourceTree = "<group>"; };
+		FE620E9E2A0C1FC90073B8F0 /* GyroscopeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroscopeData.swift; sourceTree = "<group>"; };
+		FE620EA02A0C27280073B8F0 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		FE620EA22A0C4E3D0073B8F0 /* StatusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItem.swift; sourceTree = "<group>"; };
 		FE9761BC29EB938B00C1ADDE /* RecordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordItem.swift; sourceTree = "<group>"; };
 		FE9761BE29EBA0B500C1ADDE /* slippery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slippery.png; path = "fall-app/Icons/slippery.png"; sourceTree = SOURCE_ROOT; };
 		FE9761BF29EBA0B500C1ADDE /* debris_obstacles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = debris_obstacles.png; path = "fall-app/Icons/debris_obstacles.png"; sourceTree = SOURCE_ROOT; };
@@ -128,7 +143,6 @@
 		FEEBA5C029DF5FD800C0015B /* fall_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appUITests.swift; sourceTree = "<group>"; };
 		FEEBA5C229DF5FD800C0015B /* fall_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FEEBA5CF29DF8C9A00C0015B /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
-		FEEBA5D129DF8D4C00C0015B /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +226,7 @@
 				FE5B713029E0BE9D002D92F3 /* SurveyNumberField.swift */,
 				FE5B713229E202F3002D92F3 /* Toast.swift */,
 				FE9761BC29EB938B00C1ADDE /* RecordItem.swift */,
+				FE620EA22A0C4E3D0073B8F0 /* StatusItem.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -219,6 +234,8 @@
 		FE5B713629E88944002D92F3 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				FE620E9A2A0B19340073B8F0 /* checkmark_green.png */,
+				FE620E9B2A0B19340073B8F0 /* xmark_red.png */,
 				FE9761CB29EC983100C1ADDE /* slope.png */,
 				FE9761C429EBA21300C1ADDE /* changes_in_floor_levels.png */,
 				FE9761C529EBA21300C1ADDE /* poor_lighting.png */,
@@ -232,6 +249,8 @@
 		FE5B714029E8902B002D92F3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FE620E982A0B16E50073B8F0 /* metamotions_gray.png */,
+				FE620E962A0B13250073B8F0 /* metamotions.png */,
 				FE9761CD29EC98F400C1ADDE /* umich-logo.png */,
 				FE5B714129E89038002D92F3 /* cafe-g47ee2568d_1920.jpg */,
 			);
@@ -241,12 +260,33 @@
 		FE5B714329E8933B002D92F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FEEBA5A729DF5FD700C0015B /* ContentView.swift */,
 				FEEBA5CF29DF8C9A00C0015B /* Survey.swift */,
 				FE5B714429E89369002D92F3 /* MainView.swift */,
 				FE5B714629E893E9002D92F3 /* HistoryView.swift */,
 				FE5B714829E89417002D92F3 /* DummyView.swift */,
+				FE620E942A0AEC420073B8F0 /* DeviceView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		FE620EA42A0C53F20073B8F0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FE5B718729E9FD21002D92F3 /* WalkingRecord.swift */,
+				FE620E9E2A0C1FC90073B8F0 /* GyroscopeData.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		FE620EA52A0C54110073B8F0 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FE620EA02A0C27280073B8F0 /* LocationManager.swift */,
+				FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */,
+				FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		FE9761C829EBA9E900C1ADDE /* Documentation */ = {
@@ -261,7 +301,6 @@
 		FEEBA59929DF5FD700C0015B = {
 			isa = PBXGroup;
 			children = (
-				FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */,
 				FEEBA5D329DFC45700C0015B /* Packages */,
 				FEEBA5A429DF5FD700C0015B /* fall-app */,
 				FEEBA5B529DF5FD800C0015B /* fall-appTests */,
@@ -285,20 +324,18 @@
 		FEEBA5A429DF5FD700C0015B /* fall-app */ = {
 			isa = PBXGroup;
 			children = (
+				FEEBA5A929DF5FD800C0015B /* Assets.xcassets */,
+				FE5B714029E8902B002D92F3 /* Images */,
+				FE5B713629E88944002D92F3 /* Icons */,
+				FE620EA52A0C54110073B8F0 /* Managers */,
+				FE620EA42A0C53F20073B8F0 /* Classes */,
 				FE620E932A099C5F0073B8F0 /* Info.plist */,
 				FE9761C829EBA9E900C1ADDE /* Documentation */,
 				FE5B714A29E9F177002D92F3 /* GoogleService-Info.plist */,
-				FE5B713629E88944002D92F3 /* Icons */,
 				FE5B714329E8933B002D92F3 /* Views */,
-				FE5B714029E8902B002D92F3 /* Images */,
 				FE5B712729E0B01C002D92F3 /* UI */,
 				FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */,
-				FEEBA5A729DF5FD700C0015B /* ContentView.swift */,
-				FEEBA5A929DF5FD800C0015B /* Assets.xcassets */,
 				FEEBA5AB29DF5FD800C0015B /* Preview Content */,
-				FEEBA5D129DF8D4C00C0015B /* Storyboard.storyboard */,
-				FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */,
-				FE5B718729E9FD21002D92F3 /* WalkingRecord.swift */,
 				FE9761CF29EC9A4500C1ADDE /* README.md */,
 			);
 			path = "fall-app";
@@ -475,17 +512,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE9761C329EBA0B500C1ADDE /* uneven_surface.png in Resources */,
+				FE620E9C2A0B19340073B8F0 /* checkmark_green.png in Resources */,
 				FE9761CE29EC98F400C1ADDE /* umich-logo.png in Resources */,
 				FE9761C729EBA21300C1ADDE /* poor_lighting.png in Resources */,
+				FE620E992A0B16E50073B8F0 /* metamotions_gray.png in Resources */,
 				FEEBA5AD29DF5FD800C0015B /* Preview Assets.xcassets in Resources */,
 				FE9761C629EBA21300C1ADDE /* changes_in_floor_levels.png in Resources */,
 				FEEBA5AA29DF5FD800C0015B /* Assets.xcassets in Resources */,
 				FE9761CC29EC983100C1ADDE /* slope.png in Resources */,
-				FEEBA5D229DF8D4C00C0015B /* Storyboard.storyboard in Resources */,
 				FE5B714229E89038002D92F3 /* cafe-g47ee2568d_1920.jpg in Resources */,
 				FE9761C229EBA0B500C1ADDE /* debris_obstacles.png in Resources */,
 				FE5B714B29E9F177002D92F3 /* GoogleService-Info.plist in Resources */,
+				FE620E9D2A0B19340073B8F0 /* xmark_red.png in Resources */,
 				FE9761C129EBA0B500C1ADDE /* slippery.png in Resources */,
+				FE620E972A0B13250073B8F0 /* metamotions.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,6 +594,9 @@
 			files = (
 				FE5B714929E89417002D92F3 /* DummyView.swift in Sources */,
 				FEEBA5D029DF8C9A00C0015B /* Survey.swift in Sources */,
+				FE620EA32A0C4E3D0073B8F0 /* StatusItem.swift in Sources */,
+				FE620E952A0AEC420073B8F0 /* DeviceView.swift in Sources */,
+				FE620E9F2A0C1FC90073B8F0 /* GyroscopeData.swift in Sources */,
 				FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */,
 				FE5B718829E9FD21002D92F3 /* WalkingRecord.swift in Sources */,
 				FE5B714729E893E9002D92F3 /* HistoryView.swift in Sources */,
@@ -562,6 +605,7 @@
 				FE5B712F29E0BAEA002D92F3 /* SurveyDropdown.swift in Sources */,
 				FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */,
 				FE9761BD29EB938B00C1ADDE /* RecordItem.swift in Sources */,
+				FE620EA12A0C27280073B8F0 /* LocationManager.swift in Sources */,
 				FE5B713129E0BE9D002D92F3 /* SurveyNumberField.swift in Sources */,
 				FE5B712929E0B049002D92F3 /* IconButtonInner.swift in Sources */,
 				FE5B714529E89369002D92F3 /* MainView.swift in Sources */,
@@ -740,7 +784,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "fall-app/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "DPM Fall App";
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Connects with MetaWear sensors to detect walking.";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Your location will be used to keep track of fall risks encountered during your walking sessions. Please select \"Allow While Using App\".";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to keep track of fall risks encountered during your walking sessions. Please select \"Allow While Using App\".";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location will be used to keep track of fall risks encountered during your walking sessions. Please select \"Allow While Using App\".";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to keep track of fall risks encountered during your walking sessions. Please select \"Allow While Using App\".";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -775,7 +822,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "fall-app/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "DPM Fall App";
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Connects with MetaWear sensors to detect walking.";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Your location will be used to keep track of fall risks encountered during your walking sessions. Please select \"Allow While Using App\".";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to keep track of fall risks encountered during your walking sessions. Please select \"Allow While Using App\".";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location will be used to keep track of fall risks encountered during your walking sessions. Please select \"Allow While Using App\".";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to keep track of fall risks encountered during your walking sessions. Please select \"Allow While Using App\".";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

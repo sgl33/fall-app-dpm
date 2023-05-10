@@ -13,23 +13,8 @@ struct DummyView: View {
     
     var body: some View {
         VStack {
-            Text("Please place the sensor within 6 inches of the device and press connect")
-            HStack {
-                Button(action: mwm.scanBoard) {
-                    Text("Connect")
-                }
-                Button(action: mwm.disconnectBoard) {
-                    Text("Disconnect")
-                }
-            }
-            HStack {
-                Button(action: mwm.testStart) {
-                    Text("Start")
-                }
-                Button(action: mwm.testStop) {
-                    Text("Stop")
-                }
-            }
+            Text("Hello world!")
+            
             
         }
         

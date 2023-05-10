@@ -4,7 +4,7 @@ import SkeletonUI
 /// History view of the application, showing past survey responses
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 15, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
 ///
 struct HistoryView: View
 {
@@ -21,7 +21,7 @@ struct HistoryView: View
             
             // Print records
             ScrollView(.vertical) {
-                if records.isDoneFetching() {
+                if records.isDoneFetching() { // done loading
                     // Content
                     VStack {
                         let numRecs = records.arr.count;
@@ -37,9 +37,10 @@ struct HistoryView: View
                         }
                     }
                 }
-                else {
+                else { // still loading
                     // Skeleton UI
                     VStack {
+                        
                         Text("Loading...")
                             .padding(.bottom, 10)
                             .padding(.top, 8)
@@ -54,12 +55,7 @@ struct HistoryView: View
                         }
                     }
                 }
-                
-                
             }
-//            .refreshable {
-//                getRecords()
-//            }
             .frame(alignment: .center)
             
         }
