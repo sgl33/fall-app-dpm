@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:fells_loop.gpx">
+   </FileRef>
+   <FileRef
       location = "group:fall-app.xcodeproj">
    </FileRef>
    <FileRef

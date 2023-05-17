@@ -48,16 +48,20 @@
 		FE5B718029E9F206002D92F3 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FE5B717F29E9F206002D92F3 /* FirebaseStorage */; };
 		FE5B718229E9F206002D92F3 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = FE5B718129E9F206002D92F3 /* FirebaseStorageCombine-Community */; };
 		FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */; };
-		FE5B718829E9FD21002D92F3 /* WalkingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718729E9FD21002D92F3 /* WalkingRecord.swift */; };
+		FE5B718829E9FD21002D92F3 /* GeneralWalkingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718729E9FD21002D92F3 /* GeneralWalkingData.swift */; };
 		FE620E922A0995FA0073B8F0 /* MetaWearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */; };
 		FE620E952A0AEC420073B8F0 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E942A0AEC420073B8F0 /* DeviceView.swift */; };
 		FE620E972A0B13250073B8F0 /* metamotions.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E962A0B13250073B8F0 /* metamotions.png */; };
 		FE620E992A0B16E50073B8F0 /* metamotions_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E982A0B16E50073B8F0 /* metamotions_gray.png */; };
 		FE620E9C2A0B19340073B8F0 /* checkmark_green.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E9A2A0B19340073B8F0 /* checkmark_green.png */; };
 		FE620E9D2A0B19340073B8F0 /* xmark_red.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E9B2A0B19340073B8F0 /* xmark_red.png */; };
-		FE620E9F2A0C1FC90073B8F0 /* GyroscopeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E9E2A0C1FC90073B8F0 /* GyroscopeData.swift */; };
+		FE620E9F2A0C1FC90073B8F0 /* RealtimeWalkingDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E9E2A0C1FC90073B8F0 /* RealtimeWalkingDataPoint.swift */; };
 		FE620EA12A0C27280073B8F0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EA02A0C27280073B8F0 /* LocationManager.swift */; };
 		FE620EA32A0C4E3D0073B8F0 /* StatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EA22A0C4E3D0073B8F0 /* StatusItem.swift */; };
+		FE620EA82A12AB080073B8F0 /* WalkingRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EA72A12AB080073B8F0 /* WalkingRecordView.swift */; };
+		FE620EAA2A12AD740073B8F0 /* WalkingRecordsArr.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EA92A12AD740073B8F0 /* WalkingRecordsArr.swift */; };
+		FE620EAC2A12B9830073B8F0 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EAB2A12B9830073B8F0 /* MapView.swift */; };
+		FE620EAE2A12DD5E0073B8F0 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EAD2A12DD5E0073B8F0 /* DarkMode.swift */; };
 		FE9761BD29EB938B00C1ADDE /* RecordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9761BC29EB938B00C1ADDE /* RecordItem.swift */; };
 		FE9761C129EBA0B500C1ADDE /* slippery.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761BE29EBA0B500C1ADDE /* slippery.png */; };
 		FE9761C229EBA0B500C1ADDE /* debris_obstacles.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761BF29EBA0B500C1ADDE /* debris_obstacles.png */; };
@@ -110,7 +114,7 @@
 		FE5B714829E89417002D92F3 /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
 		FE5B714A29E9F177002D92F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		FE5B718729E9FD21002D92F3 /* WalkingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingRecord.swift; sourceTree = "<group>"; };
+		FE5B718729E9FD21002D92F3 /* GeneralWalkingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralWalkingData.swift; sourceTree = "<group>"; };
 		FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaWearManager.swift; sourceTree = "<group>"; };
 		FE620E932A099C5F0073B8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FE620E942A0AEC420073B8F0 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
@@ -118,9 +122,13 @@
 		FE620E982A0B16E50073B8F0 /* metamotions_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metamotions_gray.png; sourceTree = "<group>"; };
 		FE620E9A2A0B19340073B8F0 /* checkmark_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark_green.png; sourceTree = "<group>"; };
 		FE620E9B2A0B19340073B8F0 /* xmark_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmark_red.png; sourceTree = "<group>"; };
-		FE620E9E2A0C1FC90073B8F0 /* GyroscopeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroscopeData.swift; sourceTree = "<group>"; };
+		FE620E9E2A0C1FC90073B8F0 /* RealtimeWalkingDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeWalkingDataPoint.swift; sourceTree = "<group>"; };
 		FE620EA02A0C27280073B8F0 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FE620EA22A0C4E3D0073B8F0 /* StatusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItem.swift; sourceTree = "<group>"; };
+		FE620EA72A12AB080073B8F0 /* WalkingRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingRecordView.swift; sourceTree = "<group>"; };
+		FE620EA92A12AD740073B8F0 /* WalkingRecordsArr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingRecordsArr.swift; sourceTree = "<group>"; };
+		FE620EAB2A12B9830073B8F0 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		FE620EAD2A12DD5E0073B8F0 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		FE9761BC29EB938B00C1ADDE /* RecordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordItem.swift; sourceTree = "<group>"; };
 		FE9761BE29EBA0B500C1ADDE /* slippery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slippery.png; path = "fall-app/Icons/slippery.png"; sourceTree = SOURCE_ROOT; };
 		FE9761BF29EBA0B500C1ADDE /* debris_obstacles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = debris_obstacles.png; path = "fall-app/Icons/debris_obstacles.png"; sourceTree = SOURCE_ROOT; };
@@ -227,6 +235,7 @@
 				FE5B713229E202F3002D92F3 /* Toast.swift */,
 				FE9761BC29EB938B00C1ADDE /* RecordItem.swift */,
 				FE620EA22A0C4E3D0073B8F0 /* StatusItem.swift */,
+				FE620EAB2A12B9830073B8F0 /* MapView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -266,6 +275,7 @@
 				FE5B714629E893E9002D92F3 /* HistoryView.swift */,
 				FE5B714829E89417002D92F3 /* DummyView.swift */,
 				FE620E942A0AEC420073B8F0 /* DeviceView.swift */,
+				FE620EA72A12AB080073B8F0 /* WalkingRecordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -273,8 +283,9 @@
 		FE620EA42A0C53F20073B8F0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FE5B718729E9FD21002D92F3 /* WalkingRecord.swift */,
-				FE620E9E2A0C1FC90073B8F0 /* GyroscopeData.swift */,
+				FE5B718729E9FD21002D92F3 /* GeneralWalkingData.swift */,
+				FE620E9E2A0C1FC90073B8F0 /* RealtimeWalkingDataPoint.swift */,
+				FE620EA92A12AD740073B8F0 /* WalkingRecordsArr.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -285,6 +296,7 @@
 				FE620EA02A0C27280073B8F0 /* LocationManager.swift */,
 				FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */,
 				FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */,
+				FE620EAD2A12DD5E0073B8F0 /* DarkMode.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -301,6 +313,7 @@
 		FEEBA59929DF5FD700C0015B = {
 			isa = PBXGroup;
 			children = (
+				FE9761CF29EC9A4500C1ADDE /* README.md */,
 				FEEBA5D329DFC45700C0015B /* Packages */,
 				FEEBA5A429DF5FD700C0015B /* fall-app */,
 				FEEBA5B529DF5FD800C0015B /* fall-appTests */,
@@ -336,7 +349,6 @@
 				FE5B712729E0B01C002D92F3 /* UI */,
 				FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */,
 				FEEBA5AB29DF5FD800C0015B /* Preview Content */,
-				FE9761CF29EC9A4500C1ADDE /* README.md */,
 			);
 			path = "fall-app";
 			sourceTree = "<group>";
@@ -593,18 +605,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE5B714929E89417002D92F3 /* DummyView.swift in Sources */,
+				FE620EAC2A12B9830073B8F0 /* MapView.swift in Sources */,
+				FE620EA82A12AB080073B8F0 /* WalkingRecordView.swift in Sources */,
 				FEEBA5D029DF8C9A00C0015B /* Survey.swift in Sources */,
 				FE620EA32A0C4E3D0073B8F0 /* StatusItem.swift in Sources */,
 				FE620E952A0AEC420073B8F0 /* DeviceView.swift in Sources */,
-				FE620E9F2A0C1FC90073B8F0 /* GyroscopeData.swift in Sources */,
+				FE620EAE2A12DD5E0073B8F0 /* DarkMode.swift in Sources */,
+				FE620E9F2A0C1FC90073B8F0 /* RealtimeWalkingDataPoint.swift in Sources */,
 				FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */,
-				FE5B718829E9FD21002D92F3 /* WalkingRecord.swift in Sources */,
+				FE5B718829E9FD21002D92F3 /* GeneralWalkingData.swift in Sources */,
 				FE5B714729E893E9002D92F3 /* HistoryView.swift in Sources */,
 				FE5B712B29E0B085002D92F3 /* IconButtonStyle.swift in Sources */,
 				FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */,
 				FE5B712F29E0BAEA002D92F3 /* SurveyDropdown.swift in Sources */,
 				FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */,
 				FE9761BD29EB938B00C1ADDE /* RecordItem.swift in Sources */,
+				FE620EAA2A12AD740073B8F0 /* WalkingRecordsArr.swift in Sources */,
 				FE620EA12A0C27280073B8F0 /* LocationManager.swift in Sources */,
 				FE5B713129E0BE9D002D92F3 /* SurveyNumberField.swift in Sources */,
 				FE5B712929E0B049002D92F3 /* IconButtonInner.swift in Sources */,

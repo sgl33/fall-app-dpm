@@ -63,8 +63,8 @@ struct Survey1: View {
     func sendReport() {
         // Firebase
         FirestoreHandler.connect()
-        FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity),
-                                   gscope: MetaWearManager.gscopeData)
+        FirestoreHandler.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
+                                   gscope: MetaWearManager.realtimeData)
         showPopup1 = false;
         tabSelection = 2; // switch to HistoryView
         Toast.showToast("Submitted. Thank you!")
@@ -172,8 +172,8 @@ struct Survey2: View {
         }
         
         FirestoreHandler.connect()
-        FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity),
-                                   gscope: MetaWearManager.gscopeData)
+        FirestoreHandler.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
+                                   gscope: MetaWearManager.realtimeData)
         showPopup1 = false;
         showPopup2 = false;
         Toast.showToast("Submitted. Thank you!")

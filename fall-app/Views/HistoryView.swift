@@ -1,38 +1,43 @@
 import SwiftUI
 import SkeletonUI
 
-/// History view of the application, showing past survey responses
+/// History view of the application, showing past walking records
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified May 15, 2023
 ///
 struct HistoryView: View
 {
-    @StateObject var records = ArrayOfWalkingRecords();
+    @StateObject var records = WalkingRecordsArr();
     
     var body: some View {
         
-        VStack {
-            // Header
-            Text("Records History")
+        NavigationStack {
+            let numRecs = records.generalDataArr.count;
+//            // Header
+            Text("Walking History")
                 .fontWeight(.bold)
-                .font(.system(size: 28))
-                .padding(.top, 16).padding(.bottom, 2)
+                .font(.system(size: 32))
+                .padding(.top, 32).padding(.bottom, 4)
             
-            // Print records
+                                        
+            
+            //  Print records
             ScrollView(.vertical) {
                 if records.isDoneFetching() { // done loading
                     // Content
                     VStack {
-                        let numRecs = records.arr.count;
+                        let numRecs = records.generalDataArr.count;
                         Text(String(numRecs) + " record(s) found.")
                             .padding(.bottom, 10)
                             .padding(.top, 8)
                             .frame(width: 320)
 
                         if(numRecs != 0) {
-                            ForEach(records.arr.indices) { index in
-                                RecordItem(record: records.arr[numRecs - index - 1])
+                            ForEach(records.generalDataArr.indices) { index in
+                                RecordItem(generalData: records.generalDataArr[numRecs - index - 1],
+                                           realtimeData: records.realtimeDataArr[numRecs - index - 1])
+                                
                             }
                         }
                     }
@@ -40,14 +45,14 @@ struct HistoryView: View
                 else { // still loading
                     // Skeleton UI
                     VStack {
-                        
+
                         Text("Loading...")
                             .padding(.bottom, 10)
                             .padding(.top, 8)
                             .frame(width: 320)
                             .skeleton(with: !records.isDoneFetching(),
                                       size: CGSize(width: 240, height: 30))
-                        
+
                         ForEach(1..<12) { index in
                             Text("")
                                 .skeleton(with: !records.isDoneFetching(),
@@ -57,7 +62,7 @@ struct HistoryView: View
                 }
             }
             .frame(alignment: .center)
-            
+    
         }
         .onAppear {
             getRecords()

@@ -19,9 +19,10 @@ class MetaWearManager
     /// MetaWear device variable
     static var device: MetaWear!
     
-    /// GyroscopeDataArr object
-    static var gscopeData: GyroscopeDataArr = GyroscopeDataArr()
+    /// RealtimeWalkingData object
+    static var realtimeData: RealtimeWalkingData = RealtimeWalkingData()
     
+    /// LocationManager object
     static var locationManager = LocationManager()
     
     /// Scans the board and updates the status on`cso`.
@@ -61,6 +62,10 @@ class MetaWearManager
         }
     }
     
+    static func pingBoard() {
+        MetaWearManager.device.flashLED(color: .blue, intensity: 1.0, _repeat: 3)
+    }
+    
     /// Stops scanning for the board and updates the status on `cso`.
     /// Called when user cancels scanning.
     static func stopScan(cso: ConnectionStatusObject) {
@@ -88,7 +93,6 @@ class MetaWearManager
         
     }
     
-
     /// Disconnects (and resets) the board.
     static func disconnectBoard(cso: ConnectionStatusObject,
                                 bso: BatteryStatusObject) {
@@ -108,9 +112,7 @@ class MetaWearManager
     /// Non-static function. Usage: `MetaWearManager().startRecording()`
     ///
     func startRecording() {
-        // Initialization
-        MetaWearManager.gscopeData.resetData()
-        
+        MetaWearManager.realtimeData.resetData()
         MetaWearManager.locationManager.startRecording()
         
         let board = MetaWearManager.device.board
@@ -122,8 +124,9 @@ class MetaWearManager
         mbl_mw_datasignal_subscribe(signal, bridge(obj: self)) { (context, data) in
             let gyroscope: MblMwCartesianFloat = data!.pointee.valueAs()
             let location = MetaWearManager.locationManager.getLocation()
-            MetaWearManager.gscopeData.addData(GyroscopeData(gyroscope: gyroscope,
+            MetaWearManager.realtimeData.addData(RealtimeWalkingDataPoint(gyroscope: gyroscope,
                                                              location: location))
+//            print("gyroscope received")
         }
         mbl_mw_gyro_bmi160_enable_rotation_sampling(MetaWearManager.device.board)
         mbl_mw_gyro_bmi160_start(board)

@@ -77,6 +77,14 @@ struct DeviceView: View {
                         IconButtonInner(iconName: "xmark.square", buttonText: "Disconnect")
                     }.buttonStyle(IconButtonStyle(backgroundColor: Color(white: 0.15),
                                                   foregroundColor: .white))
+                    
+                    // Ping
+                    Button(action: {
+                        MetaWearManager.pingBoard()
+                    }) {
+                        IconButtonInner(iconName: "wave.3.right", buttonText: "Ping")
+                    }.buttonStyle(IconButtonStyle(backgroundColor: Color(red: 69/255, green: 104/255, blue: 218/255),
+                                                  foregroundColor: .white))
                 }
                 else {
                     // Connect

@@ -1,14 +1,10 @@
-/// struct WalkingRecord
-/// class ArrayOfWalkingRecords: ObservableObject
-/// 
-
 import Foundation
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
-/// A struct that stores data about a record.
-struct WalkingRecord {
+/// A struct that stores general data of a walking record.
+struct GeneralWalkingData {
     
     /// Array of hazard types.
     var hazards_type: [String];
@@ -37,19 +33,48 @@ struct WalkingRecord {
     ///
     /// ### Format
     /// `h:mm a, MMM. d, yyyy`
-    /// Example: `11:34 AM, Jan. 15, 2023`
+    /// Example: `11:34 PM, Jan. 15, 2023`
     ///
     func timestampToString() -> String {
         let date = Date(timeIntervalSince1970: timestamp)
         let dateFormatter = DateFormatter()
         
-        dateFormatter.dateFormat = "h:mm a, MMM. d, yyyy"
+        dateFormatter.dateFormat = "h:mm a, MMM d, yyyy"
         return dateFormatter.string(from: date)
+    }
+    
+    /// Retrieves the timestamp as a user-friendly string of date.
+    ///
+    /// ### Format
+    /// `E, MMM d, yyyy`
+    /// Example: `Mon, May 15, 2023`
+    ///
+    func getDate() -> String {
+        let date = Date(timeIntervalSince1970: timestamp)
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "E, MMM d, yyyy"
+        return dateFormatter.string(from: date)
+    }
+    
+    /// Retrieves the timestamp as a sorting-friendly integer.
+    ///
+    /// ### Format
+    /// `yyyyMMddHHmmss`
+    /// Example: `20230115233405
+    ///
+    func timestampToDateInt() -> Int {
+        let date = Date(timeIntervalSince1970: timestamp)
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+        return Int(dateFormatter.string(from: date)) ?? 0
     }
     
     /// Retrieves the reported hazards in array of strings.
     ///
     /// ### Example
+    /// Returns
     /// ```
     /// ["Slippery (low)", "Poor Lighting (high)"]
     /// ```
@@ -81,51 +106,12 @@ struct WalkingRecord {
         }
     }
     
+    func hazardEncountered() -> Bool {
+        return hazards_intensity.reduce(0, +) != 0
+    }
+    
     /// Creates and returns a WalkingRecord object given two arrays.
-    static func toRecord(type: [String], intensity: [Int]) -> WalkingRecord {
-        return WalkingRecord(hazards_type: type, hazards_intensity: intensity);
-    }
-}
-
-/// A class that contains an array of `WalkingRecord` objects.
-///
-/// Create a `@StateObject` of this type, and pass it by reference to the `FirestoreHandler`.
-///
-class ArrayOfWalkingRecords: ObservableObject {
-    @Published var arr: [WalkingRecord] = [];
-    @Published var done: Bool = false;
-    
-    /// Add item to `arr`.
-    func append(item: WalkingRecord) {
-        arr.append(item);
-    }
-    
-    /// Return `arr`
-    func getArr() -> [WalkingRecord] {
-        return arr;
-    }
-    
-    /// Clear `arr`
-    func clearArr() {
-        arr = [];
-    }
-    
-    /// Call this when starting to fetch data from database.
-    /// Used to display loading skeleton UI.
-    func startFetching() {
-        done = false;
-        print("Started fetching data from database")
-    }
-    
-    /// Call this when data fetching is complete.
-    /// Used to stop displaying skeleton UI.
-    func doneFetching() {
-        done = true;
-        print("Done fetching data from database")
-    }
-    
-    /// Return `done`, i.e. whether database access has been complete
-    func isDoneFetching() -> Bool {
-        return done;
+    static func toRecord(type: [String], intensity: [Int]) -> GeneralWalkingData {
+        return GeneralWalkingData(hazards_type: type, hazards_intensity: intensity);
     }
 }

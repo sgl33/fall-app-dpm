@@ -56,10 +56,10 @@ class FirestoreHandler {
     /// FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity),
     ///                             gscope: &MetaWearManager.walkingData)
     /// ```
-    static func addRecord(rec: WalkingRecord,
-                          gscope: GyroscopeDataArr) { // passed by reference
+    static func addRecord(rec: GeneralWalkingData,
+                          gscope: RealtimeWalkingData) { // passed by reference
         var ref: DocumentReference? = nil;
-        let docName: String = String(rec.user_id ?? "invalid-id") + "__" + String(rec.timestamp);
+        let docName: String = String(rec.user_id ?? "invalid-id") + "___" + String(rec.timestampToDateInt());
         db.collection(records_table).document(docName).setData([
             "user_id": rec.user_id,
             "timestamp": rec.timestamp,
@@ -84,7 +84,7 @@ class FirestoreHandler {
     /// // ...
     /// FirestoreHandler.getRecords(arr: arr)
     /// ```
-    static func getRecords(arr: ArrayOfWalkingRecords) {
+    static func getRecords(arr: WalkingRecordsArr) {
         arr.startFetching()
         db.collection(records_table)
             .whereField("user_id", isEqualTo: UIDevice.current.identifierForVendor?.uuidString)
@@ -97,6 +97,7 @@ class FirestoreHandler {
                     for document in querySnapshot!.documents {
                         let hazards = document.get("hazards") as? [String: Int];
                         let timestamp = document.get("timestamp") as? Double;
+                        let realtime = document.get("gscope_data") as? [[String: Double]]
                         
                         // Map -> 2 arrays
                         var hazards_type: [String] = [];
@@ -106,9 +107,10 @@ class FirestoreHandler {
                             hazards_intensity.append(intensity);
                         }
                         
-                        arr.append(item: WalkingRecord(hazards_type: hazards_type,
+                        arr.append(item: GeneralWalkingData(hazards_type: hazards_type,
                                                        hazards_intensity: hazards_intensity,
                                                        timestamp: timestamp ?? 0));
+                        arr.append(item: RealtimeWalkingData(arr: realtime ?? [[:]]))
                     }
                     arr.doneFetching()
                 }
