@@ -62,9 +62,8 @@ struct Survey1: View {
     /// Sends hazard report (with no hazards) to Firebase and closes the popup.
     func sendReport() {
         // Firebase
-        FirestoreHandler.connect()
-        FirestoreHandler.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
-                                   gscope: MetaWearManager.realtimeData)
+        MetaWearManager.sendHazardReport(hazards: hazards,
+                                         intensity: intensity)
         showPopup1 = false;
         tabSelection = 2; // switch to HistoryView
         Toast.showToast("Submitted. Thank you!")
@@ -171,9 +170,8 @@ struct Survey2: View {
             return;
         }
         
-        FirestoreHandler.connect()
-        FirestoreHandler.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
-                                   gscope: MetaWearManager.realtimeData)
+        MetaWearManager.sendHazardReport(hazards: hazards,
+                                         intensity: intensity)
         showPopup1 = false;
         showPopup2 = false;
         Toast.showToast("Submitted. Thank you!")

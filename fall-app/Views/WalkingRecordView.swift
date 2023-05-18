@@ -9,69 +9,80 @@ import MapKit
 struct WalkingRecordView: View {
     
     var generalData: GeneralWalkingData
-    var realtimeData: RealtimeWalkingData
+    @ObservedObject var realtimeData: RealtimeWalkingDataLoader = RealtimeWalkingDataLoader()
     
     var body: some View {
 
-        VStack {
-            MapView(realtimeData.getEncodedPolyline(),
-                    hazardEncountered: generalData.hazardEncountered(),
-                    hazardLocation: realtimeData.getFinalLocation())
-            
+        ZStack {
             VStack {
-                Spacer()
-                    .frame(height: 16)
+                MapView(realtimeData.data.getEncodedPolyline(),
+                        hazardEncountered: generalData.hazardEncountered(),
+                        hazardLocation: realtimeData.data.getFinalLocation())
                 
-                // General data
-                HStack {
+                VStack {
                     Spacer()
-                        .frame(width: 16)
+                        .frame(height: 16)
                     
-                    Image(systemName: "figure.walk.circle")
-                        .resizable()
-                        .frame(width:56, height: 56)
-                    
-                    Spacer()
-                        .frame(width: 24)
-                    
-                    VStack {
+                    // General data
+                    HStack {
                         Spacer()
-                            .frame(height: 10)
-                        Text(generalData.getDate())
-                            .frame(width: 180, alignment: .leading)
-                        Text(realtimeData.getStartTime() + " - " + realtimeData.getEndTime())
-                            .frame(width: 180, alignment: .leading)
-                        Text(String(format: "%.2f mi", realtimeData.getDistanceTravelled()/5280))
-                            .frame(width: 180, alignment: .leading)
+                            .frame(width: 16)
+                        
+                        Image(systemName: "figure.walk.circle")
+                            .resizable()
+                            .frame(width:56, height: 56)
+                        
                         Spacer()
-                            .frame(height: 10)
+                            .frame(width: 24)
+                        
+                        VStack {
+                            Spacer()
+                                .frame(height: 10)
+                            Text(generalData.getDate())
+                                .frame(width: 180, alignment: .leading)
+                            Text(realtimeData.data.getStartTime() + " - " + realtimeData.data.getEndTime())
+                                .frame(width: 180, alignment: .leading)
+                            Text(String(format: "%.2f mi", realtimeData.data.getDistanceTravelled()/5280))
+                                .frame(width: 180, alignment: .leading)
+                            Spacer()
+                                .frame(height: 10)
+                        }
+                        
+                        Spacer()
+                            .frame(width: 16)
                     }
+                    .background(DarkMode.isDarkMode() ? Color(white: 0.1) : Color(white: 0.9))
+                    .cornerRadius(12)
                     
                     Spacer()
-                        .frame(width: 16)
-                }
-                .background(DarkMode.isDarkMode() ? Color(white: 0.1) : Color(white: 0.9))
-                .cornerRadius(12)
-                
-                Spacer()
-                    .frame(height: 20)
-                
-                Text("Reported Hazards")
-                    .font(.system(size: 16))
-                
-                ScrollView(.vertical) {
-                    let hazardsArr = generalData.hazardsToStringArr()
-                    ForEach(hazardsArr.indices) { index in
-                        Text("• " + hazardsArr[index])
-                            .frame(width: 240, alignment: .leading)
+                        .frame(height: 20)
+                    
+                    Text("Reported Hazards")
+                        .font(.system(size: 16))
+                    
+                    ScrollView(.vertical) {
+                        let hazardsArr = generalData.hazardsToStringArr()
+                        ForEach(hazardsArr.indices) { index in
+                            Text("• " + hazardsArr[index])
+                                .frame(width: 240, alignment: .leading)
+                        }
                     }
+                    .frame(height: 160)
                 }
-                .frame(height: 160)
+                .frame(height: 300, alignment: .center)
+                
+                    
             }
-            .frame(height: 300, alignment: .center)
+            .onAppear {
+                FirestoreHandler.loadRealtimeData(loader: realtimeData,
+                                                  docNames: generalData.realtimeDocNames)
+            }
             
-                
+            if realtimeData.isLoading {
+                Text("Loading...")
+            }
         }
+        
         
         
 //        ForEach(realtimeData.data.indices) { index in

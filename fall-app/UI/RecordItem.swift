@@ -13,11 +13,9 @@ import SwiftUI
 struct RecordItem: View {
     
     var generalData: GeneralWalkingData
-    var realtimeData: RealtimeWalkingData
     
     var body: some View {
-        NavigationLink(destination: WalkingRecordView(generalData: generalData,
-                                                      realtimeData: realtimeData)) {
+        NavigationLink(destination: WalkingRecordView(generalData: generalData)) {
             HStack {
                 Spacer()
                     .frame(width: 24);

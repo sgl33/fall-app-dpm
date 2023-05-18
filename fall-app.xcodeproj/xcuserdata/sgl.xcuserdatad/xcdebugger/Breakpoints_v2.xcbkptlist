@@ -14,8 +14,8 @@
             filePath = "fall-app/Views/HistoryView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "getRecords()"
             landmarkType = "7">
             <Locations>
@@ -107,8 +107,8 @@
             filePath = "fall-app/UI/RecordItem.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -123,8 +123,8 @@
             filePath = "fall-app/UI/RecordItem.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "RecordItem"
             landmarkType = "14">
          </BreakpointContent>

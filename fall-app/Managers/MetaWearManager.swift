@@ -25,12 +25,15 @@ class MetaWearManager
     /// LocationManager object
     static var locationManager = LocationManager()
     
+    /// List of document names of realtime (gyroscope and location) data
+    static var realtimeDataDocNames: [String] = []
+    
     /// Scans the board and updates the status on`cso`.
     static func scanBoard(cso: ConnectionStatusObject) {
         print("Scanning...")
         cso.setStatus(status: ConnectionStatus.scanning)
         
-        let signalThreshold = -63
+        let signalThreshold = -65
         MetaWearScanner.shared.startScan(allowDuplicates: true) { (d) in
             // Close sensor found?
             if d.rssi > signalThreshold {
@@ -112,8 +115,12 @@ class MetaWearManager
     /// Non-static function. Usage: `MetaWearManager().startRecording()`
     ///
     func startRecording() {
+        // Reset
         MetaWearManager.realtimeData.resetData()
         MetaWearManager.locationManager.startRecording()
+        MetaWearManager.realtimeDataDocNames = []
+        
+        FirestoreHandler.connect()
         
         let board = MetaWearManager.device.board
         let signal = mbl_mw_gyro_bmi160_get_rotation_data_signal(board)!
@@ -126,10 +133,33 @@ class MetaWearManager
             let location = MetaWearManager.locationManager.getLocation()
             MetaWearManager.realtimeData.addData(RealtimeWalkingDataPoint(gyroscope: gyroscope,
                                                              location: location))
-//            print("gyroscope received")
+            print("gyroscope received: \(gyroscope.x)")
+            
+            // Split it by 2000 data points (40 sec)
+            if MetaWearManager.realtimeData.size() > 2000 {
+                let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
+                let documentUuid = UUID().uuidString
+                FirestoreHandler.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
+                MetaWearManager.realtimeDataDocNames.append(documentUuid)
+                MetaWearManager.realtimeData.resetData()
+            }
         }
         mbl_mw_gyro_bmi160_enable_rotation_sampling(MetaWearManager.device.board)
         mbl_mw_gyro_bmi160_start(board)
+    }
+
+    static func sendHazardReport(hazards: [String], intensity: [Int]) {
+        // Upload remaining realtime data
+        let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
+        let documentUuid = UUID().uuidString
+        FirestoreHandler.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
+        MetaWearManager.realtimeDataDocNames.append(documentUuid)
+        MetaWearManager.realtimeData.resetData()
+        
+        // Upload
+        FirestoreHandler.connect()
+        FirestoreHandler.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
+                                   realtimeDataDocNames: MetaWearManager.realtimeDataDocNames)
     }
     
     /// Stops recording the gyroscope and location data.

@@ -13,6 +13,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func startRecording() {
         clm.delegate = self
         clm.startUpdatingLocation()
+        clm.allowsBackgroundLocationUpdates = true
     }
     
     /// Stop recording device location. Required after `getLocation()`.

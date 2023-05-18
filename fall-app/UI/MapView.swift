@@ -6,7 +6,7 @@ import Polyline
 ///
 /// ### Author & Version
 /// Originally by Mauricio Vazquez (https://rb.gy/h983w), retrieved May 15, 2023
-/// https://github.com/raphaelmor/Polyline/
+/// Using Polyline library: https://github.com/raphaelmor/Polyline/
 /// Modified by Seung-Gu Lee (seunggu@umich.edu), last modified May 15, 2023
 ///
 struct MapView: UIViewRepresentable {
@@ -89,7 +89,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.strokeColor = .red
-        renderer.lineWidth = 3.0
+        renderer.lineWidth = 1.5
         return renderer
     }
 }

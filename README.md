@@ -6,9 +6,6 @@ Last updated: Apr. 16, 2023
 
 Our focus is monitoring and mitigating distress and fall risk using wearable sensors and mobile sensors on daily walking trips and construction sites. This iOS application will be able to collect multi-sensor data, visualize the data in the map interface, and build a pipeline to operate a machine-learning algorithm or route recommendation algorithm.
 
-## Technologies
-
-This project uses Swift 5 (SwiftUI) and Firebase (Cloud Firestore). A supported Mac is required. 
 
 ## Contact Information
 
@@ -22,6 +19,10 @@ Project of [DPM (Dynamic Project Management)](https://dpm.engin.umich.edu/) at t
 # For Developers
 
 This part of the README file is intended for developers who wish to contribute to this project.
+
+## Technologies
+
+This project uses Swift 5 (SwiftUI) and Firebase (Cloud Firestore). A supported Mac is required for development. 
 
 ## Documentation
 

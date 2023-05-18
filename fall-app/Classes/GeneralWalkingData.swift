@@ -18,6 +18,9 @@ struct GeneralWalkingData {
     /// Current timestamp in seconds from Jan. 1, 1970
     var timestamp = NSDate().timeIntervalSince1970;
     
+    /// Names of realtime data documents
+    var realtimeDocNames: [String] = []
+    
     /// Retrieves the list of hazards as a form of dictionary (key = String, value = Int).
     func hazards() -> [String: Int] {
         var dict: [String: Int] = [:];

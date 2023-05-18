@@ -35,8 +35,7 @@ struct HistoryView: View
 
                         if(numRecs != 0) {
                             ForEach(records.generalDataArr.indices) { index in
-                                RecordItem(generalData: records.generalDataArr[numRecs - index - 1],
-                                           realtimeData: records.realtimeDataArr[numRecs - index - 1])
+                                RecordItem(generalData: records.generalDataArr[numRecs - index - 1])
                                 
                             }
                         }

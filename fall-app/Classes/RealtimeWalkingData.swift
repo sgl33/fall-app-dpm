@@ -41,6 +41,10 @@ class RealtimeWalkingData {
     /// Construct the object from an array of dictionaries
     init(arr: [[String: Double]]) {
         data = []
+        append(arr: arr)
+    }
+    
+    func append(arr: [[String: Double]]) {
         for dict in arr {
             let gscope = MblMwCartesianFloat(x: Float(dict["gscope_x"] ?? 0),
                                              y: Float(dict["gscope_y"] ?? 0),
@@ -52,6 +56,11 @@ class RealtimeWalkingData {
                                                  location: location,
                                                  timestamp: dict["timestamp"] ?? 0))
         }
+    }
+    
+    /// Copy constructor
+    init(copyFrom: RealtimeWalkingData) {
+        data = copyFrom.data
     }
     
     /// Add data point to array
@@ -104,12 +113,21 @@ class RealtimeWalkingData {
     
     /// Returns the final location
     func getFinalLocation() -> CLLocationCoordinate2D {
+        if data.count == 0 {
+            return CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        }
+        
         let last = data[data.count - 1];
         return CLLocationCoordinate2D(latitude: last.location[0],
                                       longitude: last.location[1])
     }
     
+    /// Gets start time of the recording in `hh:mm a` format (e.g. `11:59 PM`)
     func getStartTime() -> String {
+        if data.isEmpty {
+            return "Loading..."
+        }
+        
         let date = Date(timeIntervalSince1970: data[0].timestamp)
         let dateFormatter = DateFormatter()
         
@@ -117,7 +135,12 @@ class RealtimeWalkingData {
         return dateFormatter.string(from: date)
     }
     
+    /// Gets end time of the recording in `hh:mm a` format (e.g. `11:59 PM`)
     func getEndTime() -> String {
+        if data.isEmpty {
+            return "Loading..."
+        }
+        
         let date = Date(timeIntervalSince1970: data[data.count - 1].timestamp)
         let dateFormatter = DateFormatter()
         
@@ -141,10 +164,10 @@ class RealtimeWalkingData {
             index = index + (pollingRate * dataPointInterval)
         }
         
-        return dist;
+        return dist / 0.3048;
     }
     
-    /// Gets duration of travel
+    /// Gets duration of travel in form `0:00:00`
     func getDuration() -> String {
         let duration = Int(data[data.count - 1].timestamp - data[0].timestamp) // seconds
         let hr = duration / 3600
@@ -165,5 +188,29 @@ class RealtimeWalkingData {
         return String(hr) + ":" + str
     }
     
+    /// Returns the size of the data array
+    func size() -> Int {
+        return data.count
+    }
     
+}
+
+
+class RealtimeWalkingDataLoader: ObservableObject {
+    @Published var data: RealtimeWalkingData = RealtimeWalkingData()
+    @Published var isLoading: Bool = false
+    var tempData: [Int: RealtimeWalkingData] = [:]
+    
+    func combineTempData(numDocs: Int) {
+        var index: Int = 0;
+        while(index < numDocs) {
+            data.append(arr: tempData[index]?.toArrDict() ?? [[:]])
+            index += 1
+        }
+    }
+    
+    func clear() {
+        data = RealtimeWalkingData()
+        tempData = [:]
+    }
 }
