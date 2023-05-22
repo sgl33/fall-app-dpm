@@ -23,7 +23,7 @@ struct StatusItem: View {
                 .resizable()
                 .frame(width: 14, height: 14)
             Text(active ? activeText : inactiveText)
-                .foregroundColor(Color(white: 0.8))
+                .foregroundColor(DarkMode.isDarkMode() ? Color(white: 0.8) : Color(white: 0.2))
                 .font(.system(size: 14))
         }
     }

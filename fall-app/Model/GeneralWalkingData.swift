@@ -109,6 +109,7 @@ struct GeneralWalkingData {
         }
     }
     
+    /// Returns true if a hazard has been encountered, false otherwise.
     func hazardEncountered() -> Bool {
         return hazards_intensity.reduce(0, +) != 0
     }

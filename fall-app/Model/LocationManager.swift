@@ -7,6 +7,7 @@ import CoreLocation
 /// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
 ///
 class LocationManager: NSObject, CLLocationManagerDelegate {
+    /// `CLLocationManager` object
     let clm = CLLocationManager()
     
     /// Start recording device location. Required before `getLocation()`.
@@ -21,9 +22,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         clm.stopUpdatingLocation()
     }
     
-    /// Get the current location of the device: (latitude, longitude, altitude)
+    /// Get the current location of the device as an array of doubles: (latitude, longitude, altitude)
     ///`startRecording()` must be called before calling this function.
-    /// It is recommended to call `stopRecording()` afterwards.
+    /// It is recommended to call `stopRecording()` after all `getLocation()` calls.
     func getLocation() -> [Double] {
         var coord: [Double] = [0, 0, 0]
         

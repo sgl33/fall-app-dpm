@@ -4,7 +4,7 @@ import SwiftUI
 ///
 /// ### Usage
 /// ```
-/// RecordItem(generalData: ..., realtimeData: ...)
+/// RecordItem(generalData: ...)
 /// ```
 ///
 /// ### Author & Version
@@ -21,6 +21,7 @@ struct RecordItem: View {
                     .frame(width: 24);
                 
                 HStack {
+                    // Text
                     VStack {
                         Spacer()
                             .frame(height: 8);
@@ -38,6 +39,7 @@ struct RecordItem: View {
                             .frame(height: 8);
                     }
                     
+                    // > symbol
                     Image(systemName: "greaterthan")
                         .resizable()
                         .frame(width: 6, height: 12)

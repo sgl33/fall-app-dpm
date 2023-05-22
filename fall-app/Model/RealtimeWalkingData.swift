@@ -125,7 +125,7 @@ class RealtimeWalkingData {
     /// Gets start time of the recording in `hh:mm a` format (e.g. `11:59 PM`)
     func getStartTime() -> String {
         if data.isEmpty {
-            return "Loading..."
+            return "Loading"
         }
         
         let date = Date(timeIntervalSince1970: data[0].timestamp)
@@ -138,7 +138,7 @@ class RealtimeWalkingData {
     /// Gets end time of the recording in `hh:mm a` format (e.g. `11:59 PM`)
     func getEndTime() -> String {
         if data.isEmpty {
-            return "Loading..."
+            return "Loading"
         }
         
         let date = Date(timeIntervalSince1970: data[data.count - 1].timestamp)
@@ -193,24 +193,4 @@ class RealtimeWalkingData {
         return data.count
     }
     
-}
-
-
-class RealtimeWalkingDataLoader: ObservableObject {
-    @Published var data: RealtimeWalkingData = RealtimeWalkingData()
-    @Published var isLoading: Bool = false
-    var tempData: [Int: RealtimeWalkingData] = [:]
-    
-    func combineTempData(numDocs: Int) {
-        var index: Int = 0;
-        while(index < numDocs) {
-            data.append(arr: tempData[index]?.toArrDict() ?? [[:]])
-            index += 1
-        }
-    }
-    
-    func clear() {
-        data = RealtimeWalkingData()
-        tempData = [:]
-    }
 }

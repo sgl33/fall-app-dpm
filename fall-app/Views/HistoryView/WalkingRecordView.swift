@@ -64,7 +64,7 @@ struct WalkingRecordView: View {
                         let hazardsArr = generalData.hazardsToStringArr()
                         ForEach(hazardsArr.indices) { index in
                             Text("• " + hazardsArr[index])
-                                .frame(width: 240, alignment: .leading)
+                                .frame(width: 300, alignment: .leading)
                         }
                     }
                     .frame(height: 160)

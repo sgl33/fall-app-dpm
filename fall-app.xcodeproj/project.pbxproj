@@ -70,6 +70,22 @@
 		FE9761C729EBA21300C1ADDE /* poor_lighting.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761C529EBA21300C1ADDE /* poor_lighting.png */; };
 		FE9761CC29EC983100C1ADDE /* slope.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761CB29EC983100C1ADDE /* slope.png */; };
 		FE9761CE29EC98F400C1ADDE /* umich-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761CD29EC98F400C1ADDE /* umich-logo.png */; };
+		FEE155F92A1831C200398DCD /* RecordingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE155F82A1831C200398DCD /* RecordingButton.swift */; };
+		FEE155FD2A18342500398DCD /* RealtimeWalkingDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE155FC2A18342500398DCD /* RealtimeWalkingDataLoader.swift */; };
+		FEE156012A18372100398DCD /* ConnectionStatusObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE156002A18372100398DCD /* ConnectionStatusObject.swift */; };
+		FEE156032A18373D00398DCD /* BatteryStatusObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE156022A18373D00398DCD /* BatteryStatusObject.swift */; };
+		FEE156052A1BD2C700398DCD /* main_graphic.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE156042A1BD2C700398DCD /* main_graphic.png */; };
+		FEE156072A1BD45700398DCD /* liberty_mutual_logo_tb.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE156062A1BD45700398DCD /* liberty_mutual_logo_tb.png */; };
+		FEE156092A1BD76900398DCD /* block_m_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE156082A1BD76900398DCD /* block_m_logo.png */; };
+		FEE1560F2A1BD90F00398DCD /* NunitoSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEE1560E2A1BD90F00398DCD /* NunitoSans.ttf */; };
+		FEE156102A1BD90F00398DCD /* NunitoSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEE1560E2A1BD90F00398DCD /* NunitoSans.ttf */; };
+		FEE156112A1BD90F00398DCD /* NunitoSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEE1560E2A1BD90F00398DCD /* NunitoSans.ttf */; };
+		FEE156132A1BE4A400398DCD /* MultiRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE156122A1BE4A400398DCD /* MultiRecordsView.swift */; };
+		FEE156142A1BE4A400398DCD /* MultiRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE156122A1BE4A400398DCD /* MultiRecordsView.swift */; };
+		FEE156152A1BE4A400398DCD /* MultiRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE156122A1BE4A400398DCD /* MultiRecordsView.swift */; };
+		FEE156172A1BE54D00398DCD /* MultiWalkingDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE156162A1BE54D00398DCD /* MultiWalkingDataLoader.swift */; };
+		FEE156182A1BE54D00398DCD /* MultiWalkingDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE156162A1BE54D00398DCD /* MultiWalkingDataLoader.swift */; };
+		FEE156192A1BE54D00398DCD /* MultiWalkingDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE156162A1BE54D00398DCD /* MultiWalkingDataLoader.swift */; };
 		FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */; };
 		FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5A729DF5FD700C0015B /* ContentView.swift */; };
 		FEEBA5AA29DF5FD800C0015B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEEBA5A929DF5FD800C0015B /* Assets.xcassets */; };
@@ -140,6 +156,17 @@
 		FE9761CB29EC983100C1ADDE /* slope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slope.png; sourceTree = "<group>"; };
 		FE9761CD29EC98F400C1ADDE /* umich-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umich-logo.png"; sourceTree = "<group>"; };
 		FE9761CF29EC9A4500C1ADDE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FEE155F82A1831C200398DCD /* RecordingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingButton.swift; sourceTree = "<group>"; };
+		FEE155FC2A18342500398DCD /* RealtimeWalkingDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeWalkingDataLoader.swift; sourceTree = "<group>"; };
+		FEE155FE2A1836DF00398DCD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FEE156002A18372100398DCD /* ConnectionStatusObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatusObject.swift; sourceTree = "<group>"; };
+		FEE156022A18373D00398DCD /* BatteryStatusObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusObject.swift; sourceTree = "<group>"; };
+		FEE156042A1BD2C700398DCD /* main_graphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_graphic.png; sourceTree = "<group>"; };
+		FEE156062A1BD45700398DCD /* liberty_mutual_logo_tb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liberty_mutual_logo_tb.png; sourceTree = "<group>"; };
+		FEE156082A1BD76900398DCD /* block_m_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block_m_logo.png; sourceTree = "<group>"; };
+		FEE1560E2A1BD90F00398DCD /* NunitoSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NunitoSans.ttf; sourceTree = "<group>"; };
+		FEE156122A1BE4A400398DCD /* MultiRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiRecordsView.swift; sourceTree = "<group>"; };
+		FEE156162A1BE54D00398DCD /* MultiWalkingDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiWalkingDataLoader.swift; sourceTree = "<group>"; };
 		FEEBA5A229DF5FD700C0015B /* fall-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fall-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appApp.swift; sourceTree = "<group>"; };
 		FEEBA5A729DF5FD700C0015B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -223,21 +250,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FE5B712729E0B01C002D92F3 /* UI */ = {
+		FE5B712729E0B01C002D92F3 /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
 				FE5B712829E0B049002D92F3 /* IconButtonInner.swift */,
 				FE5B712A29E0B085002D92F3 /* IconButtonStyle.swift */,
-				FE5B712E29E0BAEA002D92F3 /* SurveyDropdown.swift */,
-				FE5B713429E7384F002D92F3 /* SurveyMultiCheckbox.swift */,
-				FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */,
-				FE5B713029E0BE9D002D92F3 /* SurveyNumberField.swift */,
 				FE5B713229E202F3002D92F3 /* Toast.swift */,
-				FE9761BC29EB938B00C1ADDE /* RecordItem.swift */,
-				FE620EA22A0C4E3D0073B8F0 /* StatusItem.swift */,
-				FE620EAB2A12B9830073B8F0 /* MapView.swift */,
 			);
-			path = UI;
+			path = "UI Elements";
 			sourceTree = "<group>";
 		};
 		FE5B713629E88944002D92F3 /* Icons */ = {
@@ -258,6 +278,9 @@
 		FE5B714029E8902B002D92F3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FEE156082A1BD76900398DCD /* block_m_logo.png */,
+				FEE156062A1BD45700398DCD /* liberty_mutual_logo_tb.png */,
+				FEE156042A1BD2C700398DCD /* main_graphic.png */,
 				FE620E982A0B16E50073B8F0 /* metamotions_gray.png */,
 				FE620E962A0B13250073B8F0 /* metamotions.png */,
 				FE9761CD29EC98F400C1ADDE /* umich-logo.png */,
@@ -269,36 +292,31 @@
 		FE5B714329E8933B002D92F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FEE1560B2A1BD79800398DCD /* Fonts */,
+				FE5B712729E0B01C002D92F3 /* UI Elements */,
+				FEE155FB2A18321500398DCD /* HistoryView */,
+				FEE155FA2A1831E600398DCD /* Survey */,
+				FEE155F72A1831A300398DCD /* MainView */,
 				FEEBA5A729DF5FD700C0015B /* ContentView.swift */,
-				FEEBA5CF29DF8C9A00C0015B /* Survey.swift */,
-				FE5B714429E89369002D92F3 /* MainView.swift */,
-				FE5B714629E893E9002D92F3 /* HistoryView.swift */,
 				FE5B714829E89417002D92F3 /* DummyView.swift */,
 				FE620E942A0AEC420073B8F0 /* DeviceView.swift */,
-				FE620EA72A12AB080073B8F0 /* WalkingRecordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		FE620EA42A0C53F20073B8F0 /* Classes */ = {
+		FE620EA52A0C54110073B8F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FE5B718729E9FD21002D92F3 /* GeneralWalkingData.swift */,
-				FE620E9E2A0C1FC90073B8F0 /* RealtimeWalkingData.swift */,
-				FE620EA92A12AD740073B8F0 /* WalkingRecordsArr.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		FE620EA52A0C54110073B8F0 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
+				FEE155FF2A1836F800398DCD /* Loaders */,
 				FE620EA02A0C27280073B8F0 /* LocationManager.swift */,
 				FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */,
 				FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */,
 				FE620EAD2A12DD5E0073B8F0 /* DarkMode.swift */,
+				FE5B718729E9FD21002D92F3 /* GeneralWalkingData.swift */,
+				FE620E9E2A0C1FC90073B8F0 /* RealtimeWalkingData.swift */,
+				FEE155FE2A1836DF00398DCD /* README.md */,
 			);
-			path = Managers;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		FE9761C829EBA9E900C1ADDE /* Documentation */ = {
@@ -308,6 +326,60 @@
 				FE9761CA29EBAA2C00C1ADDE /* Firebase.md */,
 			);
 			path = Documentation;
+			sourceTree = "<group>";
+		};
+		FEE155F72A1831A300398DCD /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				FE5B714429E89369002D92F3 /* MainView.swift */,
+				FEE155F82A1831C200398DCD /* RecordingButton.swift */,
+				FE620EA22A0C4E3D0073B8F0 /* StatusItem.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		FEE155FA2A1831E600398DCD /* Survey */ = {
+			isa = PBXGroup;
+			children = (
+				FEEBA5CF29DF8C9A00C0015B /* Survey.swift */,
+				FE5B712E29E0BAEA002D92F3 /* SurveyDropdown.swift */,
+				FE5B713429E7384F002D92F3 /* SurveyMultiCheckbox.swift */,
+				FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */,
+				FE5B713029E0BE9D002D92F3 /* SurveyNumberField.swift */,
+			);
+			path = Survey;
+			sourceTree = "<group>";
+		};
+		FEE155FB2A18321500398DCD /* HistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				FE5B714629E893E9002D92F3 /* HistoryView.swift */,
+				FE620EA72A12AB080073B8F0 /* WalkingRecordView.swift */,
+				FE9761BC29EB938B00C1ADDE /* RecordItem.swift */,
+				FE620EAB2A12B9830073B8F0 /* MapView.swift */,
+				FEE156122A1BE4A400398DCD /* MultiRecordsView.swift */,
+			);
+			path = HistoryView;
+			sourceTree = "<group>";
+		};
+		FEE155FF2A1836F800398DCD /* Loaders */ = {
+			isa = PBXGroup;
+			children = (
+				FE620EA92A12AD740073B8F0 /* WalkingRecordsArr.swift */,
+				FEE155FC2A18342500398DCD /* RealtimeWalkingDataLoader.swift */,
+				FEE156002A18372100398DCD /* ConnectionStatusObject.swift */,
+				FEE156022A18373D00398DCD /* BatteryStatusObject.swift */,
+				FEE156162A1BE54D00398DCD /* MultiWalkingDataLoader.swift */,
+			);
+			path = Loaders;
+			sourceTree = "<group>";
+		};
+		FEE1560B2A1BD79800398DCD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FEE1560E2A1BD90F00398DCD /* NunitoSans.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		FEEBA59929DF5FD700C0015B = {
@@ -338,15 +410,13 @@
 			isa = PBXGroup;
 			children = (
 				FEEBA5A929DF5FD800C0015B /* Assets.xcassets */,
-				FE5B714029E8902B002D92F3 /* Images */,
 				FE5B713629E88944002D92F3 /* Icons */,
-				FE620EA52A0C54110073B8F0 /* Managers */,
-				FE620EA42A0C53F20073B8F0 /* Classes */,
+				FE5B714029E8902B002D92F3 /* Images */,
+				FE620EA52A0C54110073B8F0 /* Model */,
 				FE620E932A099C5F0073B8F0 /* Info.plist */,
 				FE9761C829EBA9E900C1ADDE /* Documentation */,
 				FE5B714A29E9F177002D92F3 /* GoogleService-Info.plist */,
 				FE5B714329E8933B002D92F3 /* Views */,
-				FE5B712729E0B01C002D92F3 /* UI */,
 				FEEBA5A529DF5FD700C0015B /* fall_appApp.swift */,
 				FEEBA5AB29DF5FD800C0015B /* Preview Content */,
 			);
@@ -523,11 +593,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEE156092A1BD76900398DCD /* block_m_logo.png in Resources */,
 				FE9761C329EBA0B500C1ADDE /* uneven_surface.png in Resources */,
+				FEE156072A1BD45700398DCD /* liberty_mutual_logo_tb.png in Resources */,
 				FE620E9C2A0B19340073B8F0 /* checkmark_green.png in Resources */,
 				FE9761CE29EC98F400C1ADDE /* umich-logo.png in Resources */,
 				FE9761C729EBA21300C1ADDE /* poor_lighting.png in Resources */,
 				FE620E992A0B16E50073B8F0 /* metamotions_gray.png in Resources */,
+				FEE156052A1BD2C700398DCD /* main_graphic.png in Resources */,
 				FEEBA5AD29DF5FD800C0015B /* Preview Assets.xcassets in Resources */,
 				FE9761C629EBA21300C1ADDE /* changes_in_floor_levels.png in Resources */,
 				FEEBA5AA29DF5FD800C0015B /* Assets.xcassets in Resources */,
@@ -535,6 +608,7 @@
 				FE5B714229E89038002D92F3 /* cafe-g47ee2568d_1920.jpg in Resources */,
 				FE9761C229EBA0B500C1ADDE /* debris_obstacles.png in Resources */,
 				FE5B714B29E9F177002D92F3 /* GoogleService-Info.plist in Resources */,
+				FEE1560F2A1BD90F00398DCD /* NunitoSans.ttf in Resources */,
 				FE620E9D2A0B19340073B8F0 /* xmark_red.png in Resources */,
 				FE9761C129EBA0B500C1ADDE /* slippery.png in Resources */,
 				FE620E972A0B13250073B8F0 /* metamotions.png in Resources */,
@@ -545,6 +619,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEE156102A1BD90F00398DCD /* NunitoSans.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +627,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEE156112A1BD90F00398DCD /* NunitoSans.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +687,7 @@
 				FE620EA32A0C4E3D0073B8F0 /* StatusItem.swift in Sources */,
 				FE620E952A0AEC420073B8F0 /* DeviceView.swift in Sources */,
 				FE620EAE2A12DD5E0073B8F0 /* DarkMode.swift in Sources */,
+				FEE155F92A1831C200398DCD /* RecordingButton.swift in Sources */,
 				FE620E9F2A0C1FC90073B8F0 /* RealtimeWalkingData.swift in Sources */,
 				FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */,
 				FE5B718829E9FD21002D92F3 /* GeneralWalkingData.swift in Sources */,
@@ -618,12 +695,17 @@
 				FE5B712B29E0B085002D92F3 /* IconButtonStyle.swift in Sources */,
 				FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */,
 				FE5B712F29E0BAEA002D92F3 /* SurveyDropdown.swift in Sources */,
+				FEE156132A1BE4A400398DCD /* MultiRecordsView.swift in Sources */,
 				FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */,
+				FEE156032A18373D00398DCD /* BatteryStatusObject.swift in Sources */,
 				FE9761BD29EB938B00C1ADDE /* RecordItem.swift in Sources */,
 				FE620EAA2A12AD740073B8F0 /* WalkingRecordsArr.swift in Sources */,
 				FE620EA12A0C27280073B8F0 /* LocationManager.swift in Sources */,
+				FEE156172A1BE54D00398DCD /* MultiWalkingDataLoader.swift in Sources */,
 				FE5B713129E0BE9D002D92F3 /* SurveyNumberField.swift in Sources */,
+				FEE155FD2A18342500398DCD /* RealtimeWalkingDataLoader.swift in Sources */,
 				FE5B712929E0B049002D92F3 /* IconButtonInner.swift in Sources */,
+				FEE156012A18372100398DCD /* ConnectionStatusObject.swift in Sources */,
 				FE5B714529E89369002D92F3 /* MainView.swift in Sources */,
 				FE620E922A0995FA0073B8F0 /* MetaWearManager.swift in Sources */,
 				FE5B713329E202F3002D92F3 /* Toast.swift in Sources */,
@@ -637,6 +719,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEEBA5B729DF5FD800C0015B /* fall_appTests.swift in Sources */,
+				FEE156142A1BE4A400398DCD /* MultiRecordsView.swift in Sources */,
+				FEE156182A1BE54D00398DCD /* MultiWalkingDataLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +728,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEE156192A1BE54D00398DCD /* MultiWalkingDataLoader.swift in Sources */,
+				FEE156152A1BE4A400398DCD /* MultiRecordsView.swift in Sources */,
 				FEEBA5C329DF5FD800C0015B /* fall_appUITestsLaunchTests.swift in Sources */,
 				FEEBA5C129DF5FD800C0015B /* fall_appUITests.swift in Sources */,
 			);
@@ -809,7 +895,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -849,7 +935,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (

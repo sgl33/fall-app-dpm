@@ -1,6 +1,6 @@
 import Foundation
 
-/// A class that contains an array of general and realtime data objects.
+/// A class that contains an array of general data objects.
 ///
 /// Create a `@StateObject` of this type, and pass it by reference to the `FirestoreHandler`.
 ///
@@ -19,7 +19,6 @@ class WalkingRecordsArr: ObservableObject {
     func getGeneralDataArr() -> [GeneralWalkingData] {
         return generalDataArr;
     }
-    
     
     /// Clear both arrays
     func clearArr() {

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// View to connect to MetaWear devices
+/// View to connect to MetaWear devices.
 ///
 /// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
@@ -9,7 +9,6 @@ struct DeviceView: View {
     /// Connection status object
     @ObservedObject var connectionStatus: ConnectionStatusObject = ConnectionStatusObject()
     
-    /// Toggle to refresh
     @ObservedObject var bso: BatteryStatusObject = BatteryStatusObject()
     
     var body: some View {
@@ -136,7 +135,7 @@ struct DeviceView: View {
                     }
                 }
                 .frame(width: 350, height: 112)
-                .background(Color(white: 0.13).opacity(0.93))
+                .background(Color(white: 0.13).opacity(0.98))
                 .foregroundColor(Color(white: 0.95))
                 .cornerRadius(12)
                 .onDisappear {

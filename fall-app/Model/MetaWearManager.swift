@@ -41,14 +41,12 @@ class MetaWearManager
                 cso.setStatus(status: ConnectionStatus.found)
                 
                 d.connectAndSetup().continueWith { t in
-                    if let error = t.error {
-                        // failed to connect
+                    if let error = t.error { // failed to connect
                         print("ERROR!!")
                         print(error)
                         cso.setStatus(status: ConnectionStatus.notConnected)
                     }
-                    else {
-                        // success
+                    else { // success
                         print("Device connected")
                         cso.setStatus(status: ConnectionStatus.connected)
                         MetaWearManager.device.flashLED(color: .green, intensity: 1.0, _repeat: 3)
@@ -65,6 +63,7 @@ class MetaWearManager
         }
     }
     
+    /// Flashes blue LED on board, to identify boards.
     static func pingBoard() {
         MetaWearManager.device.flashLED(color: .blue, intensity: 1.0, _repeat: 3)
     }
@@ -93,7 +92,6 @@ class MetaWearManager
         else {
             cso.conn = device.isConnectedAndSetup
         }
-        
     }
     
     /// Disconnects (and resets) the board.
@@ -148,6 +146,8 @@ class MetaWearManager
         mbl_mw_gyro_bmi160_start(board)
     }
 
+    /// Sends hazard report to Firebase.
+    /// Called when user presses "No, close" or submits a hazard report.
     static func sendHazardReport(hazards: [String], intensity: [Int]) {
         // Upload remaining realtime data
         let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
@@ -156,13 +156,15 @@ class MetaWearManager
         MetaWearManager.realtimeDataDocNames.append(documentUuid)
         MetaWearManager.realtimeData.resetData()
         
-        // Upload
+        // Upload general data
         FirestoreHandler.connect()
         FirestoreHandler.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
                                    realtimeDataDocNames: MetaWearManager.realtimeDataDocNames)
     }
     
     /// Stops recording the gyroscope and location data.
+    /// Called when user presses "Stop Recording".
+    /// Note that this does not upload any data to the database; `sendHazardReport` must be called separately.
     ///
     /// Non-static function. Usage: `MetaWearManager().startRecording()`
     ///
@@ -176,7 +178,6 @@ class MetaWearManager
     }
     
     /// Updates `bso` the battery percentage as string, e.g. `75%`.
-    /// If device is disconnected or cannot retrieve the percentage for some reason, returns "Unknown"
     static func getBattery(bso: BatteryStatusObject) {
         if(MetaWearManager.connected()) {
             mbl_mw_settings_get_battery_state_data_signal(MetaWearManager.device.board).read().continueWith(.mainThread) {
@@ -190,45 +191,5 @@ class MetaWearManager
     }
 }
 
-/// Status of the connection between the sensor and the iPhone.
-///
-/// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified May 9, 2023
-///
-class ConnectionStatusObject: ObservableObject {
-    
-    @Published var status: ConnectionStatus = ConnectionStatus.notConnected;
-    @Published var conn: Bool = false
 
-    func setStatus(status: ConnectionStatus) {
-        self.status = status
-    }
-    
-    func getStatus() -> ConnectionStatus {
-        return self.status
-    }
-    
-    func showModal() -> Bool {
-        return self.status == ConnectionStatus.scanning ||
-            self.status == ConnectionStatus.found
-    }
-    
-    func connected() -> Bool {
-        return self.status == ConnectionStatus.connected
-    }
-}
 
-/// Enum indicating connection status between the sensor and the iPhone.
-enum ConnectionStatus {
-    case notConnected, scanning, found, disconnecting, connected
-}
-
-/// Call `.refresh()` to refresh the screen for async methods. Once per object only.
-///
-/// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified May 9, 2023
-///
-class BatteryStatusObject: ObservableObject {
-    @Published var battery_percentage: String = "-"
-    @Published var battery_icon: String = "battery.0"
-}

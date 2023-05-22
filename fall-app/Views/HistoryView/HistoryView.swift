@@ -14,37 +14,47 @@ struct HistoryView: View
         
         NavigationStack {
             let numRecs = records.generalDataArr.count;
+            
 //            // Header
             Text("Walking History")
                 .fontWeight(.bold)
                 .font(.system(size: 32))
                 .padding(.top, 32).padding(.bottom, 4)
             
-                                        
-            
             //  Print records
             ScrollView(.vertical) {
                 if records.isDoneFetching() { // done loading
                     // Content
                     VStack {
+                        NavigationLink(destination: MultiRecordsView()) {
+                            HStack {
+                                Text("View records from all trips")
+                                Image(systemName: "arrow.right")
+                                    .imageScale(.small)
+                            }
+                        }
+                        Spacer()
+                            .frame(height: 16)
+                        
                         let numRecs = records.generalDataArr.count;
                         Text(String(numRecs) + " record(s) found.")
                             .padding(.bottom, 10)
                             .padding(.top, 8)
                             .frame(width: 320)
 
-                        if(numRecs != 0) {
+                        if(numRecs != 0) { // the boxes
                             ForEach(records.generalDataArr.indices) { index in
                                 RecordItem(generalData: records.generalDataArr[numRecs - index - 1])
                                 
                             }
                         }
+                        
+                        
                     }
                 }
                 else { // still loading
                     // Skeleton UI
                     VStack {
-
                         Text("Loading...")
                             .padding(.bottom, 10)
                             .padding(.top, 8)
@@ -61,7 +71,7 @@ struct HistoryView: View
                 }
             }
             .frame(alignment: .center)
-    
+                
         }
         .onAppear {
             getRecords()
