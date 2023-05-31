@@ -12,7 +12,7 @@ import SwiftUI
 ///
 struct StatusItem: View {
     
-    var active: Bool = false
+    @Binding var active: Bool
     var activeText: String
     var inactiveText: String
     
@@ -23,7 +23,7 @@ struct StatusItem: View {
                 .resizable()
                 .frame(width: 14, height: 14)
             Text(active ? activeText : inactiveText)
-                .foregroundColor(DarkMode.isDarkMode() ? Color(white: 0.8) : Color(white: 0.2))
+                .foregroundColor(Utilities.isDarkMode() ? Color(white: 0.8) : Color(white: 0.2))
                 .font(.system(size: 14))
         }
     }

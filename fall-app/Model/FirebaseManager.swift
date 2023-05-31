@@ -211,6 +211,7 @@ class FirestoreHandler {
     }
     
     /// Retrieves all records of all users.
+    /// Used by "View records from all trips", not to be used in production
     static func getAllRecords(loader: MultiWalkingLoader) {
 //        loader.reset()
         loader.start()

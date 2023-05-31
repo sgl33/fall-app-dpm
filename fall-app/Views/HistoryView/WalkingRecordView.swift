@@ -51,7 +51,7 @@ struct WalkingRecordView: View {
                         Spacer()
                             .frame(width: 16)
                     }
-                    .background(DarkMode.isDarkMode() ? Color(white: 0.1) : Color(white: 0.9))
+                    .background(Utilities.isDarkMode() ? Color(white: 0.1) : Color(white: 0.9))
                     .cornerRadius(12)
                     
                     Spacer()

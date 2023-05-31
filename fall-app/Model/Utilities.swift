@@ -1,14 +1,13 @@
-//
-//  DarkMode.swift
-//  fall-app
-//
-//  Created by Seung-Gu Lee on 5/15/23.
-//
 
 import Foundation
 import SwiftUI
 
-class DarkMode {
+/// Contains useful general functions for the app
+///
+/// ### Author & Version
+/// Seung-Gu Lee (seunggu@umich.edu), last modified May 31, 2023
+///
+class Utilities {
     /// Detects if dark mode is enabled or not.
     static func isDarkMode() -> Bool {
         return UITraitCollection.current.userInterfaceStyle == .dark

@@ -28,6 +28,8 @@ class MetaWearManager
     /// List of document names of realtime (gyroscope and location) data
     static var realtimeDataDocNames: [String] = []
     
+    static var recording: Bool = false
+    
     /// Scans the board and updates the status on`cso`.
     static func scanBoard(cso: ConnectionStatusObject) {
         print("Scanning...")
@@ -52,15 +54,29 @@ class MetaWearManager
                         MetaWearManager.device.flashLED(color: .green, intensity: 1.0, _repeat: 3)
                     }
                     
-                    // Disconnected
+                    // On disconnected
                     t.result?.continueWith { t in
+                        print("Device disconnected, unexpectedly")
                         cso.setStatus(status: ConnectionStatus.notConnected)
+                        
+                        // notifications
+                        if UserDefaults.standard.bool(forKey: "receiveErrorNotifications") {
+                            let body = recording ? "Ongoing walking session temporarily suspended. Please reconnect to your IMU sensor on the app." :
+                                "Walking detection is not available while disconnected. Please reconnect to your IMU sensor on the app."
+                            NotificationManager.sendNotificationNow(title: "Sensor Disconnected",
+                                                                    body: body,
+                            rateLimit: 60,
+                                                                    rateLimitId: "sensorDisconnectAlert")
+                        }
+                            
+                        
                     }
                 }
                 MetaWearManager.device = d
                 MetaWearManager.device.remember()
             }
         }
+//        MetaWearManager.locationManager.startRecording()
     }
     
     /// Flashes blue LED on board, to identify boards.
@@ -109,7 +125,6 @@ class MetaWearManager
     }
     
     /// Starts recording the gyroscope and location data.
-    ///
     /// Non-static function. Usage: `MetaWearManager().startRecording()`
     ///
     func startRecording() {
@@ -117,6 +132,7 @@ class MetaWearManager
         MetaWearManager.realtimeData.resetData()
         MetaWearManager.locationManager.startRecording()
         MetaWearManager.realtimeDataDocNames = []
+        MetaWearManager.recording = true
         
         FirestoreHandler.connect()
         
@@ -131,7 +147,7 @@ class MetaWearManager
             let location = MetaWearManager.locationManager.getLocation()
             MetaWearManager.realtimeData.addData(RealtimeWalkingDataPoint(gyroscope: gyroscope,
                                                              location: location))
-            print("gyroscope received: \(gyroscope.x)")
+//            print("gyroscope received: \(gyroscope.x)")
             
             // Split it by 2000 data points (40 sec)
             if MetaWearManager.realtimeData.size() > 2000 {
@@ -174,7 +190,7 @@ class MetaWearManager
         mbl_mw_gyro_bmi160_stop(MetaWearManager.device.board)
         mbl_mw_gyro_bmi160_disable_rotation_sampling(MetaWearManager.device.board)
         mbl_mw_datasignal_unsubscribe(signal)
-        MetaWearManager.locationManager.stopRecording()
+        MetaWearManager.recording = false
     }
     
     /// Updates `bso` the battery percentage as string, e.g. `75%`.

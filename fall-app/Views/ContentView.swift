@@ -31,7 +31,7 @@ struct ContentView: View {
                     Text("History")
                 }
                 .tag(2)
-            DummyView()
+            SettingsView()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")

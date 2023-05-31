@@ -6,7 +6,7 @@ import Foundation
 ///
 class WalkingRecordsArr: ObservableObject {
     
-    @Published var generalDataArr: [GeneralWalkingData] = [];
+    var generalDataArr: [GeneralWalkingData] = [];
     
     @Published var done: Bool = false;
     

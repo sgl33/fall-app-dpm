@@ -67,7 +67,7 @@ struct DeviceView: View {
                 }
                 
                 // Buttons
-                if(connectionStatus.connected()) {
+                if(connectionStatus.connected()) { // when connected
                     // Disconnect
                     Button(action: {
                         MetaWearManager.disconnectBoard(cso: connectionStatus,
@@ -84,6 +84,13 @@ struct DeviceView: View {
                         IconButtonInner(iconName: "wave.3.right", buttonText: "Ping")
                     }.buttonStyle(IconButtonStyle(backgroundColor: Color(red: 69/255, green: 104/255, blue: 218/255),
                                                   foregroundColor: .white))
+                
+                    Text("Please keep the sensor within 4 feet of your iPhone and do not disable Bluetooth.")
+                        .font(.system(size: 12))
+                        .frame(maxWidth: 300)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Utilities.isDarkMode() ? Color(white: 0.8) : Color(white: 0.2))
+                        .padding(.top, 4)
                 }
                 else {
                     // Connect
@@ -93,6 +100,12 @@ struct DeviceView: View {
                         IconButtonInner(iconName: "link", buttonText: "Connect")
                     }.buttonStyle(IconButtonStyle(backgroundColor: Color(red: 0, green: 146/255, blue: 12/255),
                                                   foregroundColor: .white))
+                    
+                    Text("Bluetooth must be enabled.")
+                        .font(.system(size: 12))
+                        .frame(maxWidth: 300)
+                        .foregroundColor(Utilities.isDarkMode() ? Color(white: 0.8) : Color(white: 0.2))
+                        .padding(.top, 4)
                 }
             }
             

@@ -1,7 +1,7 @@
 import Foundation
 import CoreLocation
 
-/// An interface for location data.
+/// An interface for location data. Handles all location-related actions.
 ///
 /// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023

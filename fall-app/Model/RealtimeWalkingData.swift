@@ -111,7 +111,8 @@ class RealtimeWalkingData {
         return polyline.encodedPolyline
     }
     
-    /// Returns the final location
+    /// Returns the final location of the record
+    /// Used to display hazard pin, if reported by user
     func getFinalLocation() -> CLLocationCoordinate2D {
         if data.count == 0 {
             return CLLocationCoordinate2D(latitude: 0, longitude: 0)

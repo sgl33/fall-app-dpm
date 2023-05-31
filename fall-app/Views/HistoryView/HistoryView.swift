@@ -26,15 +26,15 @@ struct HistoryView: View
                 if records.isDoneFetching() { // done loading
                     // Content
                     VStack {
-                        NavigationLink(destination: MultiRecordsView()) {
-                            HStack {
-                                Text("View records from all trips")
-                                Image(systemName: "arrow.right")
-                                    .imageScale(.small)
-                            }
-                        }
-                        Spacer()
-                            .frame(height: 16)
+//                        NavigationLink(destination: MultiRecordsView()) {
+//                            HStack {
+//                                Text("View records from all trips")
+//                                Image(systemName: "arrow.right")
+//                                    .imageScale(.small)
+//                            }
+//                        }
+//                        Spacer()
+//                            .frame(height: 16)
                         
                         let numRecs = records.generalDataArr.count;
                         Text(String(numRecs) + " record(s) found.")
@@ -60,12 +60,20 @@ struct HistoryView: View
                             .padding(.top, 8)
                             .frame(width: 320)
                             .skeleton(with: !records.isDoneFetching(),
-                                      size: CGSize(width: 240, height: 30))
+                                      size: CGSize(width: 240, height: 16))
 
                         ForEach(1..<12) { index in
-                            Text("")
-                                .skeleton(with: !records.isDoneFetching(),
-                                          size: CGSize(width: 320, height: 56))
+                            VStack(alignment: .leading) {
+                                Text("Loading...")
+                                    .skeleton(with: !records.isDoneFetching(),
+                                              size: CGSize(width: 320, height: 16))
+                                Text("Loading...")
+                                    .skeleton(with: !records.isDoneFetching(),
+                                              size: CGSize(width: 280, height: 16))
+                            }
+                            .frame(width: 280, height: 56)
+                            
+                                
                         }
                     }
                 }

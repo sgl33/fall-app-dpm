@@ -3,15 +3,16 @@ import Foundation
 /// Status of the connection between the sensor and the iPhone.
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified May 9, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified May 23, 2023
 ///
 class ConnectionStatusObject: ObservableObject {
     
     @Published var status: ConnectionStatus = ConnectionStatus.notConnected;
-    @Published var conn: Bool = false
+    @Published var conn: Bool = false // connected
 
     func setStatus(status: ConnectionStatus) {
         self.status = status
+        conn = connected()
     }
     
     func getStatus() -> ConnectionStatus {

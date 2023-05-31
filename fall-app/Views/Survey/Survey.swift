@@ -11,12 +11,6 @@ struct Survey1: View {
     @State var showPopup2: Bool = false
     @Binding var tabSelection: Int
     
-    /// MODIFY ME!! Types of hazards to be shown
-    let hazards: [String] = ["Change in Floor Levels", "Uneven Surface", "Debris or Obstacles", "Slippery", "Slope", "Poor Lighting"]
-    
-    /// Icons of hazards to be shown. Size must match that of `hazards`.
-    let hazardIcons: [String] = ["changes_in_floor_levels", "uneven_surface", "debris_obstacles", "slippery", "slope", "poor_lighting"]
-    
     /// Intensity for each hazards. Default value = 0. Size must match that of `hazards`.
     @State private var intensity: [Int] = [0, 0, 0, 0, 0, 0];
     
@@ -52,8 +46,8 @@ struct Survey1: View {
         }
         .sheet(isPresented: $showPopup2) {
             Survey2(showPopup1: $showPopup1, showPopup2: $showPopup2,
-                    hazards: hazards, hazardIcons: hazardIcons,
-                    intensity: $intensity, tabSelection: $tabSelection)
+                    hazards: AppConstants.hazards, hazardIcons: AppConstants.hazardIcons,
+                    tabSelection: $tabSelection)
                 .presentationDetents([.large])
         }
         
@@ -62,7 +56,7 @@ struct Survey1: View {
     /// Sends hazard report (with no hazards) to Firebase and closes the popup.
     func sendReport() {
         // Firebase
-        MetaWearManager.sendHazardReport(hazards: hazards,
+        MetaWearManager.sendHazardReport(hazards: AppConstants.hazards,
                                          intensity: intensity)
         showPopup1 = false;
         tabSelection = 2; // switch to HistoryView
@@ -84,14 +78,10 @@ struct Survey2: View {
     var hazards: [String]
     var hazardIcons: [String]
     
-    @Binding var intensity: [Int]
+    @State var intensity: [Int] = [0, 0, 0, 0, 0, 0]
     
     @State var showAlert: Bool = false;
     @Binding var tabSelection: Int
-    
-    /// Levels of intensity
-    let optionTexts: [String] = ["None (0)", "Low (1)", "Medium (2)", "High (3)"]
-    let optionValues: [Int] = [0, 1, 2, 3]
     
     var body: some View {
         VStack {
@@ -99,11 +89,10 @@ struct Survey2: View {
             HStack {
                 Button(action: { // back
                     showPopup2 = false;
-                    clearIntensities();
-                    
+                    sendHazardReport(ignoreWarning: true)
                 }) {
                     Spacer().frame(width: 16)
-                    Text("Back")
+                    Text("Cancel")
                     Spacer()
                 }
             }.padding(.top, 14)
@@ -133,8 +122,8 @@ struct Survey2: View {
                 ForEach(hazards.indices) { index in
                     SurveyDropdown(label: hazards[index],
                                    icon: hazardIcons[index],
-                                   optionTexts: optionTexts,
-                                   optionValues: optionValues,
+                                   optionTexts: AppConstants.optionTexts,
+                                   optionValues: AppConstants.optionValues,
                                     value: $intensity[index])
                 }
                 
@@ -156,7 +145,7 @@ struct Survey2: View {
             .alert("No Hazard Selected", isPresented: $showAlert, actions: {
                 Button("Close",  role: .cancel, action: { showAlert = false; })
             }, message: {
-                Text("You have not selected any hazards to report. Please press \"Back\" if you have none to report.")
+                Text("You have not selected any hazards to report. Please press \"Cancel\" if you have none to report.")
             })
         }
     }
@@ -177,6 +166,20 @@ struct Survey2: View {
         Toast.showToast("Submitted. Thank you!")
         tabSelection = 2; // switch to HistoryView
         
+    }
+    
+    func sendHazardReport(ignoreWarning: Bool) {
+        if ignoreWarning {
+            MetaWearManager.sendHazardReport(hazards: hazards,
+                                             intensity: intensity)
+            showPopup1 = false;
+            showPopup2 = false;
+            Toast.showToast("Submitted. Thank you!")
+            tabSelection = 2;
+        }
+        else {
+            sendHazardReport()
+        }
     }
     
     /// Returns true if user did not select any hazard to report, false otherwise.
