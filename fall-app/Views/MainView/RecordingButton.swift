@@ -37,7 +37,7 @@ struct RecordingButton: View
             .background(Color(white: 0.95))
             .cornerRadius(16)
             .onAppear {
-                MetaWearManager.locationManager.checkPermissions()
+                MetaWearManager.locationManager.requestPermissions()
                 isRecording = MetaWearManager.recording
             }
             

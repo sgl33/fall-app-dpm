@@ -86,16 +86,16 @@ struct Survey2: View {
     var body: some View {
         VStack {
             // Back button (at the top)
-            HStack {
-                Button(action: { // back
-                    showPopup2 = false;
-                    sendHazardReport(ignoreWarning: true)
-                }) {
-                    Spacer().frame(width: 16)
-                    Text("Cancel")
-                    Spacer()
-                }
-            }.padding(.top, 14)
+//            HStack {
+//                Button(action: { // back
+//                    showPopup2 = false;
+//                    sendHazardReport(ignoreWarning: true)
+//                }) {
+//                    Spacer().frame(width: 16)
+//                    Text("Cancel")
+//                    Spacer()
+//                }
+//            }.padding(.top, 14)
             
             // Scroll view
             ScrollView(.vertical, showsIndicators: false)
@@ -154,10 +154,10 @@ struct Survey2: View {
     /// Sends hazard report to Firebase and closes the survey.
     func sendHazardReport() {
         // Hazard not selected?
-        if(noHazardSelected()) {
-            showAlert = true;
-            return;
-        }
+//        if(noHazardSelected()) {
+//            showAlert = true;
+//            return;
+//        }
         
         MetaWearManager.sendHazardReport(hazards: hazards,
                                          intensity: intensity)

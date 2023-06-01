@@ -9,81 +9,82 @@ import SkeletonUI
 struct HistoryView: View
 {
     @StateObject var records = WalkingRecordsArr();
+    @State var toggleToRefresh: Bool = false
     
     var body: some View {
-        
-        NavigationStack {
-            let numRecs = records.generalDataArr.count;
-            
-//            // Header
-            Text("Walking History")
-                .fontWeight(.bold)
-                .font(.system(size: 32))
-                .padding(.top, 32).padding(.bottom, 4)
-            
-            //  Print records
-            ScrollView(.vertical) {
-                if records.isDoneFetching() { // done loading
-                    // Content
-                    VStack {
-//                        NavigationLink(destination: MultiRecordsView()) {
-//                            HStack {
-//                                Text("View records from all trips")
-//                                Image(systemName: "arrow.right")
-//                                    .imageScale(.small)
-//                            }
-//                        }
-//                        Spacer()
-//                            .frame(height: 16)
-                        
-                        let numRecs = records.generalDataArr.count;
-                        Text(String(numRecs) + " record(s) found.")
-                            .padding(.bottom, 10)
-                            .padding(.top, 8)
-                            .frame(width: 320)
-
-                        if(numRecs != 0) { // the boxes
-                            ForEach(records.generalDataArr.indices) { index in
-                                RecordItem(generalData: records.generalDataArr[numRecs - index - 1])
-                                
-                            }
-                        }
-                        
-                        
-                    }
-                }
-                else { // still loading
-                    // Skeleton UI
-                    VStack {
-                        Text("Loading...")
-                            .padding(.bottom, 10)
-                            .padding(.top, 8)
-                            .frame(width: 320)
-                            .skeleton(with: !records.isDoneFetching(),
-                                      size: CGSize(width: 240, height: 16))
-
-                        ForEach(1..<12) { index in
-                            VStack(alignment: .leading) {
-                                Text("Loading...")
-                                    .skeleton(with: !records.isDoneFetching(),
-                                              size: CGSize(width: 320, height: 16))
-                                Text("Loading...")
-                                    .skeleton(with: !records.isDoneFetching(),
-                                              size: CGSize(width: 280, height: 16))
-                            }
-                            .frame(width: 280, height: 56)
-                            
-                                
-                        }
-                    }
-                }
-            }
-            .frame(alignment: .center)
+        GeometryReader { metrics in
+            NavigationStack {
+                let numRecs = records.generalDataArr.count;
                 
-        }
-        .onAppear {
-            getRecords()
-        }
+                //  Print records
+                ScrollView(.vertical) {
+                    if records.isDoneFetching() { // done loading
+                        // Content
+                        VStack {
+                            /// TEST ONLY
+                            //                        NavigationLink(destination: MultiRecordsView()) {
+                            //                            HStack {
+                            //                                Text("View records from all trips")
+                            //                                Image(systemName: "arrow.right")
+                            //                                    .imageScale(.small)
+                            //                            }
+                            //                        }
+                            //                        Spacer()
+                            //                            .frame(height: 16)
+                            
+                            let numRecs = records.generalDataArr.count;
+                            Text(String(numRecs) + " record(s) found.")
+                                .padding(.bottom, 10)
+                                .padding(.top, 8)
+                                .frame(width: 320)
+                            
+                            if(numRecs != 0) { // the boxes
+                                ForEach(records.generalDataArr.indices) { index in
+                                    RecordItem(generalData: records.generalDataArr[numRecs - index - 1])
+                                }
+                            }
+                            
+                            
+                        }
+                    }
+                    else { // still loading
+                        // Skeleton UI
+                        VStack {
+                            Text("Loading...")
+                                .padding(.bottom, 10)
+                                .padding(.top, 8)
+                                .frame(width: 320)
+                                .skeleton(with: !records.isDoneFetching(),
+                                          size: CGSize(width: 240, height: 16))
+                            
+                            ForEach(1..<12) { index in
+                                VStack(alignment: .leading) {
+                                    Text("Loading...")
+                                        .skeleton(with: !records.isDoneFetching(),
+                                                  size: CGSize(width: 320, height: 16))
+                                    Text("Loading...")
+                                        .skeleton(with: !records.isDoneFetching(),
+                                                  size: CGSize(width: 280, height: 16))
+                                }
+                                .frame(width: 280, height: 56)
+                                
+                                
+                            }
+                        }
+                    }
+                } // ScrollView
+                .frame(width: metrics.size.width, alignment: .center)
+                .navigationTitle(Text("Walking History"))
+                .refreshable {
+                    toggleToRefresh.toggle()
+                    getRecords()
+                }
+            } // NavigationView
+            .onAppear {
+                getRecords()
+            }
+            .frame(width: metrics.size.width)
+        } // GeometryReader
     }
     
     /// Retrieves records from Firebase and refreshes the screen.
@@ -91,5 +92,23 @@ struct HistoryView: View
         records.clearArr()
         FirestoreHandler.connect()
         FirestoreHandler.getRecords(arr: records)
+    }
+    
+    /// Returns a dictionary where key = date (Unix timestamp of start of day) and value = array of data from that date.
+//    func splitByDay(records: WalkingRecordsArr) -> [Int: [GeneralWalkingData]] {
+//        var dict: [Int: [GeneralWalkingData]] = [:]
+//
+//        for item in records.generalDataArr {
+//            var date = Date(timeIntervalSince1970: item.timestamp).startOfDay.timeIntervalSince1970
+//            (dict[Int(date)] ?? []).append(item)
+//        }
+//
+//        return dict
+//    }
+}
+
+extension Date {
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
     }
 }

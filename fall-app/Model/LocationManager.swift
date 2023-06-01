@@ -36,7 +36,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     /// Check if app has location permissions, and ask for permissions as needed
-    func checkPermissions() {
+    func requestPermissions() {
         // Handle permissions
         let permStatus = CLLocationManager.authorizationStatus()
         if(permStatus == .denied || permStatus == .restricted) {

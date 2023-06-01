@@ -84,6 +84,16 @@ struct DeviceView: View {
                         IconButtonInner(iconName: "wave.3.right", buttonText: "Ping")
                     }.buttonStyle(IconButtonStyle(backgroundColor: Color(red: 69/255, green: 104/255, blue: 218/255),
                                                   foregroundColor: .white))
+                    
+                    // Manual
+                    Link(destination: URL(string: "https://mbientlab.com/tutorials/MetaMotionS.html")!) {
+                        HStack {
+                            Image(systemName: "book.fill")
+                                .imageScale(.medium)
+                            Text("User Manual")
+                        }
+                    }
+                    .padding(.top, 8)
                 
                     Text("Please keep the sensor within 4 feet of your iPhone and do not disable Bluetooth.")
                         .font(.system(size: 12))
@@ -100,6 +110,16 @@ struct DeviceView: View {
                         IconButtonInner(iconName: "link", buttonText: "Connect")
                     }.buttonStyle(IconButtonStyle(backgroundColor: Color(red: 0, green: 146/255, blue: 12/255),
                                                   foregroundColor: .white))
+                    
+                    // Manual
+                    Link(destination: URL(string: "https://mbientlab.com/tutorials/MetaMotionS.html")!) {
+                        HStack {
+                            Image(systemName: "book.fill")
+                                .imageScale(.medium)
+                            Text("User Manual")
+                        }
+                    }
+                    .padding(.top, 8)
                     
                     Text("Bluetooth must be enabled.")
                         .font(.system(size: 12))

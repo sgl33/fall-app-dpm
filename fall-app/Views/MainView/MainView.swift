@@ -7,11 +7,22 @@ import SwiftUI
 ///
 struct MainView: View
 {
+    /// Whether walking is recording or not.
+    /// Gets data from`MetaWearManager.connected()` every 1 second.
     @State var isRecording: Bool = false
-    @State var showPopup1: Bool = false
-    @State var showPopup2: Bool = false
-    @Binding var tabSelection: Int;
+    
+    /// Used to determine sensor connection status.
     @ObservedObject var cso = ConnectionStatusObject()
+    
+    @State var showSurvey1: Bool = false
+    @State var showSurvey2: Bool = false
+    @State var showCancelPopup: Bool = false
+    
+    /// Tab selection on `ContentView`.
+    @Binding var tabSelection: Int;
+    
+    
+    
     @State var connectionComplete: Bool = false
     
     @State var animationBool: Bool = false
@@ -39,12 +50,13 @@ struct MainView: View
             GeometryReader { metrics in
                 Image("main_graphic")
                     .resizable()
-                    .frame(width: metrics.size.width, height: metrics.size.width * 800 / 1280,
+                    .frame(width: metrics.size.width, height: metrics.size.width  * 800 / 1280,
                            alignment: .center)
+                    .offset(y: -16)
             }
             
             Spacer()
-                .frame(height: 160)
+                .frame(maxHeight: 160)
 
             StatusItem(active: $cso.conn,
                        activeText: "Sensor Connected",
@@ -67,7 +79,7 @@ struct MainView: View
                             .stroke(wheelColor, lineWidth: circleLineWidth)
                             .frame(width: circleSize, height: circleSize)
                         
-                        if isRecording {
+                        if isRecording && cso.conn {
                             Circle() // animation
                                 .trim(from: 0, to: 0.25)
                                 .stroke(.cyan, lineWidth: circleLineWidth)
@@ -87,13 +99,65 @@ struct MainView: View
                     }
                     .frame(width: circleSize, height: circleSize)
                     
-                    Text(isRecording ? "Recording" : "Not Recording")
+                    let statusText = isRecording ? (cso.conn ? "Recording" : "Suspended") : "Not Recording"
+                    Text(statusText)
                         .padding(.leading, 4)
                         .font(.system(size: 16, weight: .semibold))
                 }
                 
                 // text or button
-                if !cso.conn { // sensor disconnected
+                if isRecording { // recording
+                    
+                    if !cso.conn { // sensor disconnected
+                        Text("Sensor disconnected, recording suspended.")
+                            .font(.system(size: 14))
+                            .frame(maxWidth: 330)
+                            .multilineTextAlignment(.center)
+                    }
+                    
+                    // end, report hazard
+                    Button(action: {
+                        showSurvey2 = true
+                        MetaWearManager().stopRecording()
+                        isRecording = false
+                        animationBool = false
+                        WalkingDetectionManager.reset()
+                    }) {
+                        IconButtonInner(iconName: "exclamationmark.triangle", buttonText: "Report Hazard")
+                    }
+                    .buttonStyle(IconButtonStyle(backgroundColor: .yellow,
+                                                 foregroundColor: .black))
+                    
+                    // end, no hazard
+                    Button(action: {
+                        MetaWearManager().stopRecording()
+                        isRecording = false
+                        animationBool = false
+                        MetaWearManager.sendHazardReport(hazards: AppConstants.hazards, intensity: AppConstants.defaultHazardIntensity)
+                        Toast.showToast("Submitted. Thank you!")
+                        tabSelection = 2;
+                    }) {
+                        IconButtonInner(iconName: "stop.circle.fill", buttonText: "End Session (no hazard)")
+                    }
+                    .buttonStyle(IconButtonStyle(backgroundColor: Color(white: 0.4),
+                                                 foregroundColor: .white))
+                    
+                    // cancel
+                    Button(action: {
+                        showCancelPopup = true
+                    }) {
+                        HStack {
+                            Image(systemName: "xmark")
+                                .imageScale(.small)
+                            Text("Cancel Session")
+                                .font(.system(size: 14))
+                        }
+                        .padding(.top, 2)
+                    }
+                    
+                    
+                }
+                else if !cso.conn { // sensor disconnected & not recording
                     Text("Please connect the sensor to enable walking detection.")
                         .font(.system(size: 14))
                         .frame(maxWidth: 330)
@@ -105,18 +169,6 @@ struct MainView: View
                         .frame(maxWidth: 330)
                         .multilineTextAlignment(.center)
                 }
-                else { // recording
-                    Button(action: {
-                        showPopup2 = true
-                        MetaWearManager().stopRecording()
-                        isRecording = false
-                        animationBool = false
-                    }) {
-                        IconButtonInner(iconName: "exclamationmark.triangle", buttonText: "Report Hazard")
-                    }
-                    .buttonStyle(IconButtonStyle(backgroundColor: .yellow,
-                                                 foregroundColor: .black))
-                }
                 
                 Spacer()
                     .frame(height: 12)
@@ -126,15 +178,18 @@ struct MainView: View
             .cornerRadius(12)
             .padding(.bottom, 4).padding(.top, -2)
             
-            Spacer().frame(height: 56)
-        }
+            Spacer()
+                .frame(maxHeight: 42)
+        } // VStack
         
-        .sheet(isPresented: $showPopup1) {
-            Survey1(showPopup1: $showPopup1, tabSelection: $tabSelection)
+        // Survey sheet (1)
+        .sheet(isPresented: $showSurvey1) {
+            Survey1(showPopup1: $showSurvey1, tabSelection: $tabSelection)
                 .presentationDetents([.fraction(0.38)])
         }
-        .sheet(isPresented: $showPopup2) {
-            Survey2(showPopup1: $showPopup1, showPopup2: $showPopup2,
+        // Survey sheet (2)
+        .sheet(isPresented: $showSurvey2) {
+            Survey2(showPopup1: $showSurvey1, showPopup2: $showSurvey2,
                     hazards: AppConstants.hazards, hazardIcons: AppConstants.hazardIcons,
                     tabSelection: $tabSelection)
                 .presentationDetents([.large])
@@ -145,26 +200,36 @@ struct MainView: View
             
             WalkingDetectionManager.initialize()
             NotificationManager.requestPermissions()
-            
-            /// DEBUG - shows list of font names
-//            for family: String in UIFont.familyNames
-//            {
-//                print(family)
-//                for names: String in UIFont.fontNames(forFamilyName: family)
-//                {
-//                    print("== \(names)")
-//                }
-//            }
+            MetaWearManager.locationManager.requestPermissions()
         }
+        // Refresh every 1 sec
         .onReceive(timer) { _ in
             isRecording = MetaWearManager.recording
             MetaWearManager.connected(cso)
         }
+        // Handles animation
         .onChange(of: isRecording) { _ in
             if isRecording == false {
                 animationBool = false
             }
         }
+        // Popup when user
+        .alert("Cancel?", isPresented: $showCancelPopup, actions: {
+            Button("Cancel Session", role: .destructive, action: {
+                MetaWearManager().stopRecording()
+                isRecording = false
+                animationBool = false
+                MetaWearManager.cancelSession()
+                WalkingDetectionManager.reset()
+                showCancelPopup = false
+                Toast.showToast("Successfully cancelled.")
+            })
+            Button("Back", role: .cancel, action: {
+                showCancelPopup = false
+            })
+        }, message: {
+            Text("Are you sure you want to cancel the ongoing walking session?")
+        })
         
     }
 }

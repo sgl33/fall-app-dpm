@@ -12,6 +12,8 @@ class AppConstants {
     /// Icons of hazards to be shown. Size must match that of `hazards`.
     static let hazardIcons: [String] = ["changes_in_floor_levels", "uneven_surface", "debris_obstacles", "slippery", "slope", "poor_lighting"]
     
+    static let defaultHazardIntensity: [Int] = [0, 0, 0, 0, 0, 0]
+    
     /// Hazard intensity options.
     static let optionTexts: [String] = ["None (0)", "Low (1)", "Medium (2)", "High (3)"]
     

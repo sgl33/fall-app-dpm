@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct SettingsView: View {
     
     @AppStorage("walkingDetectionSensitivity")
-    var walkingDetectionSensitivity: Int = 60
+    var walkingDetectionSensitivity: Int = 45
     
     @AppStorage("receiveWalkingDetectionNotifications")
-    var receiveWalkingDetectionNotifications: Bool = false
+    var receiveWalkingDetectionNotifications: Bool = true
     
     @AppStorage("receiveErrorNotifications")
     var receiveErrorNotifications: Bool = true
@@ -23,22 +24,19 @@ struct SettingsView: View {
             Form {
                 // Walking Detection
                 Section(header: Text("Walking Detection"),
-                        footer: Text("You can configure how sensitive you want the walking detection to be. More sensitive - records short walking sessions better. Less sensitive - more accurate detection (fewer false positives).")
+                        footer: Text("Higher sensitivity allows the app to record short walking sessions better, but it may be less accurate. We recommend Medium (45s).")
                 ) {
-                    NavigationLink("Learn More") {
-                        DummyView()
-                    }
                     // walking sensitivity
                     Picker(selection: $walkingDetectionSensitivity,
-                           label: Text("Detection Sensitivity")) {
-                        Text("Testing Only (5s)").tag(5)
+                           label: Text("Sensitivity")) {
+                        Text("Extremely High (5s)").tag(5)
                         Text("Very High (15s)").tag(15)
                         Text("High (30s)").tag(30)
-                        Text("Medium (60s)").tag(60)
-                        Text("Low (120s)").tag(120)
-                        Text("Very Low (180s)").tag(180)
+                        Text("Medium (45s)").tag(45)
+                        Text("Low (60s)").tag(60)
+                        Text("Very Low (90s)").tag(90)
+                        Text("Extremely Low (180s)").tag(180)
                     }
-                    
                 }
                 
                 // Notifications
@@ -67,11 +65,18 @@ struct SettingsView: View {
                         DummyView()
                     }
                 }
+                
+                // Quit App
+                Section(header: Text("Quit"),
+                        footer: Text("This will disable walking detection and location tracking until you open the app again.")) {
+                    Button("Quit App") {
+                        exit(0)
+                    }
+                }
             } // form
             .navigationTitle(Text("Settings"))
         }
-        
-    }
+    } // NavigationView
 }
 
 struct SettingsView_Previews: PreviewProvider {

@@ -6,6 +6,10 @@ import FirebaseFirestore
 /// A struct that stores general data of a walking record.
 struct GeneralWalkingData {
     
+    /// Name of the document.
+    /// Not required for uploading new records, but required for editing existing records.
+    var docName: String = ""
+    
     /// Array of hazard types.
     var hazards_type: [String];
     

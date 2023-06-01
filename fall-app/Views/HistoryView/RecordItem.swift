@@ -13,6 +13,7 @@ import SwiftUI
 struct RecordItem: View {
     
     var generalData: GeneralWalkingData
+
     
     var body: some View {
         NavigationLink(destination: WalkingRecordView(generalData: generalData)) {

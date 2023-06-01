@@ -14,6 +14,7 @@ import FirebaseFirestore
 ///
 /// ### Author & Version
 /// Provided by Firebase, as of Apr. 14, 2023.
+/// Modified by Seung-Gu Lee, last modified Jun. 1, 2023
 ///
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
@@ -74,6 +75,24 @@ class FirestoreHandler {
         }
     }
     
+    /// Edits an existing hazard report.
+    /// `rec` must have a valid `docName` field
+    static func editHazardReport(rec: GeneralWalkingData) {
+        var ref: DocumentReference? = nil;
+        db.collection(records_table).document(rec.docName).setData([
+            "user_id": rec.user_id,
+            "timestamp": rec.timestamp,
+            "hazards": rec.hazards(),
+            "gscope_data": rec.realtimeDocNames
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document \(rec.docName) successfully written!")
+            }
+        }
+    }
+    
     /// Adds gyroscope and location data to Firebase on specified document name.
     ///
     /// Must connect to database by calling `FirestoreHandler.connect()` before running.
@@ -126,7 +145,8 @@ class FirestoreHandler {
                             hazards_intensity.append(intensity);
                         }
                         
-                        arr.append(item: GeneralWalkingData(hazards_type: hazards_type,
+                        arr.append(item: GeneralWalkingData(docName: document.documentID,
+                            hazards_type: hazards_type,
                                                             hazards_intensity: hazards_intensity,
                                                             timestamp: timestamp ?? 0,
                                                             realtimeDocNames: realtimeDocNames ?? ["not_found"]));
@@ -236,7 +256,8 @@ class FirestoreHandler {
                             hazards_intensity.append(intensity);
                         }
                         
-                        let generalData = GeneralWalkingData(hazards_type: hazards_type,
+                        let generalData = GeneralWalkingData(docName: document.documentID,
+                                                             hazards_type: hazards_type,
                                                              hazards_intensity: hazards_intensity,
                                                              timestamp: timestamp ?? 0,
                                                              realtimeDocNames: realtimeDocNames ?? ["not_found"]);

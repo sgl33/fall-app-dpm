@@ -70,6 +70,7 @@
 		FE9761C729EBA21300C1ADDE /* poor_lighting.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761C529EBA21300C1ADDE /* poor_lighting.png */; };
 		FE9761CC29EC983100C1ADDE /* slope.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761CB29EC983100C1ADDE /* slope.png */; };
 		FE9761CE29EC98F400C1ADDE /* umich-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761CD29EC98F400C1ADDE /* umich-logo.png */; };
+		FECE8F122A29185C00BA6B73 /* EditHazardReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECE8F112A29185C00BA6B73 /* EditHazardReportView.swift */; };
 		FEE155F92A1831C200398DCD /* RecordingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE155F82A1831C200398DCD /* RecordingButton.swift */; };
 		FEE155FD2A18342500398DCD /* RealtimeWalkingDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE155FC2A18342500398DCD /* RealtimeWalkingDataLoader.swift */; };
 		FEE156012A18372100398DCD /* ConnectionStatusObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE156002A18372100398DCD /* ConnectionStatusObject.swift */; };
@@ -169,6 +170,7 @@
 		FE9761CB29EC983100C1ADDE /* slope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slope.png; sourceTree = "<group>"; };
 		FE9761CD29EC98F400C1ADDE /* umich-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umich-logo.png"; sourceTree = "<group>"; };
 		FE9761CF29EC9A4500C1ADDE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FECE8F112A29185C00BA6B73 /* EditHazardReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHazardReportView.swift; sourceTree = "<group>"; };
 		FEE155F82A1831C200398DCD /* RecordingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingButton.swift; sourceTree = "<group>"; };
 		FEE155FC2A18342500398DCD /* RealtimeWalkingDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeWalkingDataLoader.swift; sourceTree = "<group>"; };
 		FEE155FE2A1836DF00398DCD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 				FE9761BC29EB938B00C1ADDE /* RecordItem.swift */,
 				FE620EAB2A12B9830073B8F0 /* MapView.swift */,
 				FEE156122A1BE4A400398DCD /* MultiRecordsView.swift */,
+				FECE8F112A29185C00BA6B73 /* EditHazardReportView.swift */,
 			);
 			path = HistoryView;
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				FE620EAE2A12DD5E0073B8F0 /* Utilities.swift in Sources */,
 				FEE155F92A1831C200398DCD /* RecordingButton.swift in Sources */,
 				FE620E9F2A0C1FC90073B8F0 /* RealtimeWalkingData.swift in Sources */,
+				FECE8F122A29185C00BA6B73 /* EditHazardReportView.swift in Sources */,
 				FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */,
 				FE5B718829E9FD21002D92F3 /* GeneralWalkingData.swift in Sources */,
 				FE5B714729E893E9002D92F3 /* HistoryView.swift in Sources */,
@@ -947,7 +951,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = umich.dpm.safesteps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -988,7 +992,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = umich.dpm.safesteps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

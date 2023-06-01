@@ -52,6 +52,7 @@ class MetaWearManager
                         print("Device connected")
                         cso.setStatus(status: ConnectionStatus.connected)
                         MetaWearManager.device.flashLED(color: .green, intensity: 1.0, _repeat: 3)
+                        WalkingDetectionManager.initialize()
                     }
                     
                     // On disconnected
@@ -176,6 +177,15 @@ class MetaWearManager
         FirestoreHandler.connect()
         FirestoreHandler.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
                                    realtimeDataDocNames: MetaWearManager.realtimeDataDocNames)
+    }
+    
+    static func cancelSession() {
+        // Upload remaining realtime data
+        let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
+        let documentUuid = UUID().uuidString
+        FirestoreHandler.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
+        MetaWearManager.realtimeDataDocNames.append(documentUuid)
+        MetaWearManager.realtimeData.resetData()
     }
     
     /// Stops recording the gyroscope and location data.

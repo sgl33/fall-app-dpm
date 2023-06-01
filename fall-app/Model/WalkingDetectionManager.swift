@@ -68,12 +68,17 @@ class WalkingDetectionManager {
         
         // update timestamps
         if motion?.confidence == .high {
-            if motion?.walking != nil && motion?.walking == true { // is walking
-                lastWalkingDetected = Date().timeIntervalSince1970
+            if motion?.walking != nil { // is walking
+                if motion?.walking == true {
+                    lastWalkingDetected = Date().timeIntervalSince1970
+                }
+                else {
+                    lastStationaryDetected = Date().timeIntervalSince1970
+                }
             }
-            if motion?.stationary != nil && motion?.stationary == true { // is stationary
-                lastStationaryDetected = Date().timeIntervalSince1970
-            }
+//            if motion?.stationary != nil && motion?.stationary == true { // is stationary
+//                lastStationaryDetected = Date().timeIntervalSince1970
+//            }
         }
         
         // update walking status?
@@ -98,7 +103,7 @@ class WalkingDetectionManager {
         }
         else { // not recording
             if lastWalkingDetected - lastStationaryDetected > CGFloat(timeToTrigger) {
-                // problems
+                // Error - sensor disconnected
                 if(!MetaWearManager.connected()) {
                     if UserDefaults.standard.bool(forKey: "receiveErrorNotifications") {
                         let title = "Cannot Start Recording"
@@ -110,6 +115,7 @@ class WalkingDetectionManager {
                     print("Cannot start session: sensor disconnected")
                     return
                 }
+                // Error - location disabled
                 if(LocationManager.locationDisabled()) {
                     if UserDefaults.standard.bool(forKey: "receiveErrorNotifications") {
                         let title = "Cannot Start Recording"

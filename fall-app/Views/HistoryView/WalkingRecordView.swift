@@ -10,6 +10,7 @@ struct WalkingRecordView: View {
     
     var generalData: GeneralWalkingData
     @ObservedObject var realtimeData: RealtimeWalkingDataLoader = RealtimeWalkingDataLoader()
+    @State var toggleToRefresh: Bool = false
     
     var body: some View {
 
@@ -65,6 +66,13 @@ struct WalkingRecordView: View {
                         ForEach(hazardsArr.indices) { index in
                             Text("• " + hazardsArr[index])
                                 .frame(width: 300, alignment: .leading)
+                        }
+                        NavigationLink(destination: EditHazardReportView(generalData: generalData,
+                                                                         toggleToRefresh: $toggleToRefresh)) {
+                            HStack {
+                                Image(systemName: "pencil")
+                                Text("Edit")
+                            }.padding(.top, 8)
                         }
                     }
                     .frame(height: 160)
