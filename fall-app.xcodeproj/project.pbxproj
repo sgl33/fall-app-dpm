@@ -49,6 +49,7 @@
 		FE5B718229E9F206002D92F3 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = FE5B718129E9F206002D92F3 /* FirebaseStorageCombine-Community */; };
 		FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */; };
 		FE5B718829E9FD21002D92F3 /* GeneralWalkingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718729E9FD21002D92F3 /* GeneralWalkingData.swift */; };
+		FE5ED24A2A33C0F300C9E3D7 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ED2492A33C0F300C9E3D7 /* ImagePickerView.swift */; };
 		FE620E922A0995FA0073B8F0 /* MetaWearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */; };
 		FE620E952A0AEC420073B8F0 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E942A0AEC420073B8F0 /* DeviceView.swift */; };
 		FE620E972A0B13250073B8F0 /* metamotions.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E962A0B13250073B8F0 /* metamotions.png */; };
@@ -145,6 +146,7 @@
 		FE5B714A29E9F177002D92F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FE5B718729E9FD21002D92F3 /* GeneralWalkingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralWalkingData.swift; sourceTree = "<group>"; };
+		FE5ED2492A33C0F300C9E3D7 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaWearManager.swift; sourceTree = "<group>"; };
 		FE620E932A099C5F0073B8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FE620E942A0AEC420073B8F0 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				FE5B713429E7384F002D92F3 /* SurveyMultiCheckbox.swift */,
 				FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */,
 				FE5B713029E0BE9D002D92F3 /* SurveyNumberField.swift */,
+				FE5ED2492A33C0F300C9E3D7 /* ImagePickerView.swift */,
 			);
 			path = Survey;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				FE5B712B29E0B085002D92F3 /* IconButtonStyle.swift in Sources */,
 				FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */,
 				FE5B712F29E0BAEA002D92F3 /* SurveyDropdown.swift in Sources */,
+				FE5ED24A2A33C0F300C9E3D7 /* ImagePickerView.swift in Sources */,
 				FEE156132A1BE4A400398DCD /* MultiRecordsView.swift in Sources */,
 				FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */,
 				FEE156032A18373D00398DCD /* BatteryStatusObject.swift in Sources */,
@@ -936,6 +940,7 @@
 				INFOPLIST_FILE = "fall-app/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "DPM Fall App";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Bluetooth is required to connect to IMU sensors.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera will be used to take photos of fall hazards.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used for walking recording and automatic walking detection. Please select 'Always Allow' or 'Allow While In Use'.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location will be used for walking recording and automatic walking detection. Please select 'Always Allow' or 'Allow While In Use'.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used for walking recording and automatic walking detection. Please select 'Always Allow' or 'Allow While In Use'.";
@@ -977,6 +982,7 @@
 				INFOPLIST_FILE = "fall-app/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "DPM Fall App";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Bluetooth is required to connect to IMU sensors.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera will be used to take photos of fall hazards.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used for walking recording and automatic walking detection. Please select 'Always Allow' or 'Allow While In Use'.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location will be used for walking recording and automatic walking detection. Please select 'Always Allow' or 'Allow While In Use'.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used for walking recording and automatic walking detection. Please select 'Always Allow' or 'Allow While In Use'.";

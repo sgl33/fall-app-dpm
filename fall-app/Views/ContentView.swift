@@ -38,7 +38,6 @@ struct ContentView: View {
                 }
                 .tag(4)
                 .background(Color(UIColor.systemBackground))
-                
         }
     }
     

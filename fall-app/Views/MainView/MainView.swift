@@ -94,7 +94,12 @@ struct MainView: View
                                     animationBool = true
                                 }
                         }
-                        
+                        else if !cso.conn {
+                            Image("xmark_red")
+                                .resizable()
+                                .frame(width: circleSize + (circleLineWidth * 2),
+                                       height: circleSize + (circleLineWidth * 2))
+                        }
                         
                     }
                     .frame(width: circleSize, height: circleSize)
@@ -133,7 +138,9 @@ struct MainView: View
                         MetaWearManager().stopRecording()
                         isRecording = false
                         animationBool = false
-                        MetaWearManager.sendHazardReport(hazards: AppConstants.hazards, intensity: AppConstants.defaultHazardIntensity)
+                        MetaWearManager.sendHazardReport(hazards: AppConstants.hazards,
+                                                         intensity: AppConstants.defaultHazardIntensity,
+                                                         imageId: "")
                         Toast.showToast("Submitted. Thank you!")
                         tabSelection = 2;
                     }) {

@@ -1,6 +1,7 @@
 import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseStorage
 
 /// Connects to Firebase on app launch
 ///
@@ -39,6 +40,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 ///
 class FirestoreHandler {
     static var db: Firestore!
+    static var storage: Storage!
     
     /// Name of collection on Firebase to read records/history from.
     static let records_table: String = "records";
@@ -46,6 +48,7 @@ class FirestoreHandler {
     /// Connects to Firestore database. Required before calling other functions.
     static func connect() {
         db = Firestore.firestore()
+        storage = Storage.storage()
     }
     
     /// Adds a new walking record to database.
@@ -57,15 +60,21 @@ class FirestoreHandler {
     /// FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity),
     ///                             gscope: &MetaWearManager.walkingData)
     /// ```
-    static func addRecord(rec: GeneralWalkingData,
-                          realtimeDataDocNames: [String]) { // passed by reference
+    static func addRecord(rec: GeneralWalkingData, // passed by reference
+                          realtimeDataDocNames: [String],
+                          imageId: String,
+                          lastLocation: [String:Double]) {
         var ref: DocumentReference? = nil;
         let docName: String = String(rec.user_id ?? "invalid-id") + "___" + String(rec.timestampToDateInt());
+        
+        
         db.collection(records_table).document(docName).setData([
             "user_id": rec.user_id,
             "timestamp": rec.timestamp,
             "hazards": rec.hazards(),
-            "gscope_data": realtimeDataDocNames
+            "gscope_data": realtimeDataDocNames,
+            "image_id": imageId,
+            "last_loc": lastLocation
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -267,5 +276,21 @@ class FirestoreHandler {
                     }
                 }
             }
+    }
+    
+    /// Uploads image to Firebase Storage under `hazard_reports`.
+    static func uploadImage(uuid: String, image: UIImage) {
+        let ref = storage.reference().child("hazard_reports/\(uuid).jpg")
+        let imageData = image.jpegData(compressionQuality: 0.8)
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpg"
+        
+        if let imageData = imageData {
+            ref.putData(imageData, metadata: metadata) { (metadata, error) in
+                if let error = error {
+                    print(error)
+                }
+            }
+        }
     }
 }

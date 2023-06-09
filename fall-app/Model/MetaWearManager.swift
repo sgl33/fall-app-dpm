@@ -35,7 +35,7 @@ class MetaWearManager
         print("Scanning...")
         cso.setStatus(status: ConnectionStatus.scanning)
         
-        let signalThreshold = -65
+        let signalThreshold = -70
         MetaWearScanner.shared.startScan(allowDuplicates: true) { (d) in
             // Close sensor found?
             if d.rssi > signalThreshold {
@@ -165,20 +165,29 @@ class MetaWearManager
 
     /// Sends hazard report to Firebase.
     /// Called when user presses "No, close" or submits a hazard report.
-    static func sendHazardReport(hazards: [String], intensity: [Int]) {
+    static func sendHazardReport(hazards: [String], intensity: [Int], imageId: String) {
         // Upload remaining realtime data
         let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
         let documentUuid = UUID().uuidString
         FirestoreHandler.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
         MetaWearManager.realtimeDataDocNames.append(documentUuid)
+        
+        // last location
+        let lastLocation = MetaWearManager.realtimeData.data.last?.location ?? [0, 0, 0]
+        let lastLocationDict: [String: Double] = ["latitude": lastLocation[0],
+                                                  "longitude": lastLocation[1],
+                                                  "altitude": lastLocation[2]]
         MetaWearManager.realtimeData.resetData()
         
         // Upload general data
         FirestoreHandler.connect()
         FirestoreHandler.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
-                                   realtimeDataDocNames: MetaWearManager.realtimeDataDocNames)
+                                   realtimeDataDocNames: MetaWearManager.realtimeDataDocNames,
+                                   imageId: imageId,
+                                   lastLocation: lastLocationDict)
     }
     
+    /// Cancels current walking recording session.
     static func cancelSession() {
         // Upload remaining realtime data
         let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)

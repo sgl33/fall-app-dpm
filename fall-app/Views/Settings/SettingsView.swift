@@ -37,6 +37,7 @@ struct SettingsView: View {
                         Text("Very Low (90s)").tag(90)
                         Text("Extremely Low (180s)").tag(180)
                     }
+                    
                 }
                 
                 // Notifications
@@ -58,10 +59,7 @@ struct SettingsView: View {
                     NavigationLink("Help & Support") {
                         DummyView()
                     }
-                    NavigationLink("Terms and Conditions") {
-                        DummyView()
-                    }
-                    NavigationLink("Privacy Policy") {
+                    NavigationLink("Legal") {
                         DummyView()
                     }
                 }

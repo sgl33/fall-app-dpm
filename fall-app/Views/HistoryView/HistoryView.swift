@@ -4,7 +4,7 @@ import SkeletonUI
 /// History view of the application, showing past walking records
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified May 15, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 2, 2023
 ///
 struct HistoryView: View
 {
@@ -73,17 +73,20 @@ struct HistoryView: View
                         }
                     }
                 } // ScrollView
-                .frame(width: metrics.size.width, alignment: .center)
+//                .frame(width: metrics.size.width, alignment: .center)
+//                .frame(minWidth: 360)
                 .navigationTitle(Text("Walking History"))
                 .refreshable {
                     toggleToRefresh.toggle()
                     getRecords()
                 }
+                .padding([.horizontal], 0)
             } // NavigationView
             .onAppear {
                 getRecords()
             }
-            .frame(width: metrics.size.width)
+//            .frame(width: metrics.size.width)
+            .padding([.horizontal], 0)
         } // GeometryReader
     }
     

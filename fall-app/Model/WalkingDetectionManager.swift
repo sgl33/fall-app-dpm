@@ -53,6 +53,9 @@ class WalkingDetectionManager {
     /// Handles motion data when received by listener
     /// Called by `initialize()`
     static func handleMotionData(_ motion: CMMotionActivity?) {
+        
+        
+        
         // Debug
         let confidence: [CMMotionActivityConfidence? : String] = [.high : "High",
                                                                  .medium : "Medium",
@@ -97,7 +100,8 @@ class WalkingDetectionManager {
                 let intensity: [Int] = [0, 0, 0, 0, 0, 0]; // none reported
                 MetaWearManager().stopRecording()
                 MetaWearManager.sendHazardReport(hazards: AppConstants.hazards,
-                                                 intensity: intensity)
+                                                 intensity: intensity,
+                                                 imageId: "")
                 reset()
             }
         }
@@ -110,7 +114,7 @@ class WalkingDetectionManager {
                         let body = "Walking detected, but the sensor isn't connected. "
                             + "Please connect to an IMU sensor on the app."
                         NotificationManager.sendNotificationNow(title: title,
-                                                                body: body, rateLimit: 120, rateLimitId: "cannotStartSessionSensorDisconnected")
+                                                                body: body, rateLimit: 180, rateLimitId: "cannotStartSessionSensorDisconnected")
                     }
                     print("Cannot start session: sensor disconnected")
                     return
@@ -123,7 +127,7 @@ class WalkingDetectionManager {
                             + "Please enable location services to record your walking sessions."
                         NotificationManager.sendNotificationNow(title: title,
                                                                 body: body,
-                                                                rateLimit: 120, rateLimitId: "cannotStartSessionLocationDisabled")
+                                                                rateLimit: 180, rateLimitId: "cannotStartSessionLocationDisabled")
                     }
                     
                     print("Cannot start session: location disabled")
@@ -144,6 +148,6 @@ class WalkingDetectionManager {
             }
         }
         
-        
+        let curLoc = MetaWearManager.locationManager.getLocation()
     }
 }

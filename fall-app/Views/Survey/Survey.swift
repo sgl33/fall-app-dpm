@@ -1,4 +1,5 @@
 import SwiftUI
+import PhotosUI
 
 /// Popup view that asks users if they experienced fall risk.
 ///
@@ -57,7 +58,8 @@ struct Survey1: View {
     func sendReport() {
         // Firebase
         MetaWearManager.sendHazardReport(hazards: AppConstants.hazards,
-                                         intensity: intensity)
+                                         intensity: intensity,
+                                         imageId: "")
         showPopup1 = false;
         tabSelection = 2; // switch to HistoryView
         Toast.showToast("Submitted. Thank you!")
@@ -68,7 +70,7 @@ struct Survey1: View {
 /// to the first view.
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 9, 2023
 ///
 struct Survey2: View {
     @Binding var showPopup1: Bool
@@ -78,9 +80,18 @@ struct Survey2: View {
     var hazards: [String]
     var hazardIcons: [String]
     
+    /// Intensity of hazards
     @State var intensity: [Int] = [0, 0, 0, 0, 0, 0]
     
+    @State var hazardImageId: String = ""
+    
+    /// Show photo picker / camera?
+    @State var showPhotoPicker: Bool = false
+    
+    /// Show "no hazard selected" alert?
     @State var showAlert: Bool = false;
+    
+    /// Tab selection number on `ContentView`
     @Binding var tabSelection: Int
     
     var body: some View {
@@ -100,13 +111,15 @@ struct Survey2: View {
             // Scroll view
             ScrollView(.vertical, showsIndicators: false)
             {
+                Spacer()
+                    .frame(height: 32)
+                
                 // Header
                 Text("Report Fall Risk")
                     .fontWeight(.bold)
                     .font(.system(size: 28))
-                    .padding(.top, 8)
+                    .padding(.top, 16)
                     .padding(.bottom, 0)
-                
                 HStack {
                     Spacer().frame(width: 36)
                     
@@ -126,6 +139,20 @@ struct Survey2: View {
                                    optionValues: AppConstants.optionValues,
                                     value: $intensity[index])
                 }
+                
+                // Take Photo
+                Button(action: {
+                    showPhotoPicker = true
+                }) {
+                    if hazardImageId == "" { 
+                        IconButtonInner(iconName: "camera.fill", buttonText: "Take Photo")
+                    }
+                    else {
+                        IconButtonInner(iconName: "checkmark.circle.fill", buttonText: "Photo Selected")
+                    }
+                }
+                .buttonStyle(IconButtonStyle(backgroundColor: hazardImageId == "" ? .cyan : .gray,
+                                             foregroundColor: .white))
                 
                 // Disclaimer text
                 Text("This form is not monitored. If you need medical assistance,\nplease call 911 or your local healthcare provider.")
@@ -148,6 +175,15 @@ struct Survey2: View {
                 Text("You have not selected any hazards to report. Please press \"Cancel\" if you have none to report.")
             })
         }
+        // Photo Picker
+        .sheet(isPresented: $showPhotoPicker) {
+            ImagePickerView() { image in
+                hazardImageId = UUID().uuidString
+                FirestoreHandler.uploadImage(uuid: hazardImageId,
+                                             image: image)
+                showPhotoPicker = false
+            }.presentationDetents([.large])
+        }
     }
                       
     
@@ -159,8 +195,11 @@ struct Survey2: View {
 //            return;
 //        }
         
+        // Image not uploaded?
+        
         MetaWearManager.sendHazardReport(hazards: hazards,
-                                         intensity: intensity)
+                                         intensity: intensity,
+                                         imageId: hazardImageId)
         showPopup1 = false;
         showPopup2 = false;
         Toast.showToast("Submitted. Thank you!")
@@ -168,19 +207,19 @@ struct Survey2: View {
         
     }
     
-    func sendHazardReport(ignoreWarning: Bool) {
-        if ignoreWarning {
-            MetaWearManager.sendHazardReport(hazards: hazards,
-                                             intensity: intensity)
-            showPopup1 = false;
-            showPopup2 = false;
-            Toast.showToast("Submitted. Thank you!")
-            tabSelection = 2;
-        }
-        else {
-            sendHazardReport()
-        }
-    }
+//    func sendHazardReport(ignoreWarning: Bool) {
+//        if ignoreWarning {
+//            MetaWearManager.sendHazardReport(hazards: hazards,
+//                                             intensity: intensity)
+//            showPopup1 = false;
+//            showPopup2 = false;
+//            Toast.showToast("Submitted. Thank you!")
+//            tabSelection = 2;
+//        }
+//        else {
+//            sendHazardReport()
+//        }
+//    }
     
     /// Returns true if user did not select any hazard to report, false otherwise.
     func noHazardSelected() -> Bool {
