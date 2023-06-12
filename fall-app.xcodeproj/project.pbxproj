@@ -50,6 +50,10 @@
 		FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */; };
 		FE5B718829E9FD21002D92F3 /* GeneralWalkingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B718729E9FD21002D92F3 /* GeneralWalkingData.swift */; };
 		FE5ED24A2A33C0F300C9E3D7 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ED2492A33C0F300C9E3D7 /* ImagePickerView.swift */; };
+		FE5ED24D2A37946D00C9E3D7 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ED24C2A37946D00C9E3D7 /* ImageLoader.swift */; };
+		FE5ED24F2A37964100C9E3D7 /* HazardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ED24E2A37964100C9E3D7 /* HazardImageView.swift */; };
+		FE5ED2512A37A3B500C9E3D7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ED2502A37A3B500C9E3D7 /* OnboardingView.swift */; };
+		FE5ED2532A37C36000C9E3D7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ED2522A37C36000C9E3D7 /* User.swift */; };
 		FE620E922A0995FA0073B8F0 /* MetaWearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */; };
 		FE620E952A0AEC420073B8F0 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E942A0AEC420073B8F0 /* DeviceView.swift */; };
 		FE620E972A0B13250073B8F0 /* metamotions.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E962A0B13250073B8F0 /* metamotions.png */; };
@@ -147,6 +151,10 @@
 		FE5B718329E9F2AD002D92F3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FE5B718729E9FD21002D92F3 /* GeneralWalkingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralWalkingData.swift; sourceTree = "<group>"; };
 		FE5ED2492A33C0F300C9E3D7 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		FE5ED24C2A37946D00C9E3D7 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		FE5ED24E2A37964100C9E3D7 /* HazardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HazardImageView.swift; sourceTree = "<group>"; };
+		FE5ED2502A37A3B500C9E3D7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		FE5ED2522A37C36000C9E3D7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaWearManager.swift; sourceTree = "<group>"; };
 		FE620E932A099C5F0073B8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FE620E942A0AEC420073B8F0 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
@@ -324,6 +332,7 @@
 				FEEBA5A729DF5FD700C0015B /* ContentView.swift */,
 				FE5B714829E89417002D92F3 /* DummyView.swift */,
 				FE620E942A0AEC420073B8F0 /* DeviceView.swift */,
+				FE5ED2502A37A3B500C9E3D7 /* OnboardingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -342,6 +351,7 @@
 				FEE155FE2A1836DF00398DCD /* README.md */,
 				FEE156262A1E61D900398DCD /* WalkingDetectionManager.swift */,
 				FEE1564A2A27B44E00398DCD /* AppConstants.swift */,
+				FE5ED2522A37C36000C9E3D7 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -387,6 +397,7 @@
 				FE620EAB2A12B9830073B8F0 /* MapView.swift */,
 				FEE156122A1BE4A400398DCD /* MultiRecordsView.swift */,
 				FECE8F112A29185C00BA6B73 /* EditHazardReportView.swift */,
+				FE5ED24E2A37964100C9E3D7 /* HazardImageView.swift */,
 			);
 			path = HistoryView;
 			sourceTree = "<group>";
@@ -399,6 +410,7 @@
 				FEE156002A18372100398DCD /* ConnectionStatusObject.swift */,
 				FEE156022A18373D00398DCD /* BatteryStatusObject.swift */,
 				FEE156162A1BE54D00398DCD /* MultiWalkingDataLoader.swift */,
+				FE5ED24C2A37946D00C9E3D7 /* ImageLoader.swift */,
 			);
 			path = Loaders;
 			sourceTree = "<group>";
@@ -733,13 +745,16 @@
 				FEE155F92A1831C200398DCD /* RecordingButton.swift in Sources */,
 				FE620E9F2A0C1FC90073B8F0 /* RealtimeWalkingData.swift in Sources */,
 				FECE8F122A29185C00BA6B73 /* EditHazardReportView.swift in Sources */,
+				FE5ED2512A37A3B500C9E3D7 /* OnboardingView.swift in Sources */,
 				FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */,
 				FE5B718829E9FD21002D92F3 /* GeneralWalkingData.swift in Sources */,
 				FE5B714729E893E9002D92F3 /* HistoryView.swift in Sources */,
 				FE5B712B29E0B085002D92F3 /* IconButtonStyle.swift in Sources */,
+				FE5ED2532A37C36000C9E3D7 /* User.swift in Sources */,
 				FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */,
 				FE5B712F29E0BAEA002D92F3 /* SurveyDropdown.swift in Sources */,
 				FE5ED24A2A33C0F300C9E3D7 /* ImagePickerView.swift in Sources */,
+				FE5ED24F2A37964100C9E3D7 /* HazardImageView.swift in Sources */,
 				FEE156132A1BE4A400398DCD /* MultiRecordsView.swift in Sources */,
 				FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */,
 				FEE156032A18373D00398DCD /* BatteryStatusObject.swift in Sources */,
@@ -748,6 +763,7 @@
 				FE620EA12A0C27280073B8F0 /* LocationManager.swift in Sources */,
 				FEE156172A1BE54D00398DCD /* MultiWalkingDataLoader.swift in Sources */,
 				FEE1561D2A1D0F8700398DCD /* NotificationManager.swift in Sources */,
+				FE5ED24D2A37946D00C9E3D7 /* ImageLoader.swift in Sources */,
 				FE5B713129E0BE9D002D92F3 /* SurveyNumberField.swift in Sources */,
 				FEE155FD2A18342500398DCD /* RealtimeWalkingDataLoader.swift in Sources */,
 				FE5B712929E0B049002D92F3 /* IconButtonInner.swift in Sources */,
@@ -956,7 +972,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = umich.dpm.safesteps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -998,7 +1014,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = umich.dpm.safesteps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

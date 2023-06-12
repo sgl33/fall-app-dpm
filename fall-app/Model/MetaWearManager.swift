@@ -135,7 +135,7 @@ class MetaWearManager
         MetaWearManager.realtimeDataDocNames = []
         MetaWearManager.recording = true
         
-        FirestoreHandler.connect()
+        FirebaseManager.connect()
         
         let board = MetaWearManager.device.board
         let signal = mbl_mw_gyro_bmi160_get_rotation_data_signal(board)!
@@ -154,7 +154,7 @@ class MetaWearManager
             if MetaWearManager.realtimeData.size() > 2000 {
                 let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
                 let documentUuid = UUID().uuidString
-                FirestoreHandler.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
+                FirebaseManager.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
                 MetaWearManager.realtimeDataDocNames.append(documentUuid)
                 MetaWearManager.realtimeData.resetData()
             }
@@ -169,7 +169,7 @@ class MetaWearManager
         // Upload remaining realtime data
         let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
         let documentUuid = UUID().uuidString
-        FirestoreHandler.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
+        FirebaseManager.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
         MetaWearManager.realtimeDataDocNames.append(documentUuid)
         
         // last location
@@ -180,8 +180,8 @@ class MetaWearManager
         MetaWearManager.realtimeData.resetData()
         
         // Upload general data
-        FirestoreHandler.connect()
-        FirestoreHandler.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
+        FirebaseManager.connect()
+        FirebaseManager.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
                                    realtimeDataDocNames: MetaWearManager.realtimeDataDocNames,
                                    imageId: imageId,
                                    lastLocation: lastLocationDict)
@@ -192,7 +192,7 @@ class MetaWearManager
         // Upload remaining realtime data
         let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
         let documentUuid = UUID().uuidString
-        FirestoreHandler.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
+        FirebaseManager.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
         MetaWearManager.realtimeDataDocNames.append(documentUuid)
         MetaWearManager.realtimeData.resetData()
     }

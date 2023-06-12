@@ -38,7 +38,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 /// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 15, 2023
 ///
-class FirestoreHandler {
+class FirebaseManager {
     static var db: Firestore!
     static var storage: Storage!
     
@@ -49,6 +49,30 @@ class FirestoreHandler {
     static func connect() {
         db = Firestore.firestore()
         storage = Storage.storage()
+    }
+    
+    
+    /// Adds a new user to the database under `users`.
+    ///
+    /// Must connect to database by calling `FirestoreHandler.connect()` before running.
+    ///
+    static func addUserInfo(_ user: User) {
+        var ref: DocumentReference? = nil;
+        let docName: String = user.device_id;
+        
+        db.collection("users").document(docName).setData([
+            "device_id" : user.device_id,
+            "name" : user.name,
+            "age" : user.age,
+            "sex" : user.sex,
+            "survey_responses" : user.survey_responses
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document \(docName) successfully written!")
+            }
+        }
     }
     
     /// Adds a new walking record to database.
@@ -88,11 +112,12 @@ class FirestoreHandler {
     /// `rec` must have a valid `docName` field
     static func editHazardReport(rec: GeneralWalkingData) {
         var ref: DocumentReference? = nil;
-        db.collection(records_table).document(rec.docName).setData([
+        db.collection(records_table).document(rec.docName).updateData([
             "user_id": rec.user_id,
             "timestamp": rec.timestamp,
             "hazards": rec.hazards(),
-            "gscope_data": rec.realtimeDocNames
+            "gscope_data": rec.realtimeDocNames,
+            "image_id": rec.image_id
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -101,6 +126,8 @@ class FirestoreHandler {
             }
         }
     }
+    
+    
     
     /// Adds gyroscope and location data to Firebase on specified document name.
     ///
@@ -145,6 +172,7 @@ class FirestoreHandler {
                         let hazards = document.get("hazards") as? [String: Int];
                         let timestamp = document.get("timestamp") as? Double;
                         let realtimeDocNames = document.get("gscope_data") as? [String]
+                        let imageId = document.get("image_id") as? String
                         
                         // Map -> 2 arrays
                         var hazards_type: [String] = [];
@@ -158,7 +186,8 @@ class FirestoreHandler {
                             hazards_type: hazards_type,
                                                             hazards_intensity: hazards_intensity,
                                                             timestamp: timestamp ?? 0,
-                                                            realtimeDocNames: realtimeDocNames ?? ["not_found"]));
+                                                            realtimeDocNames: realtimeDocNames ?? ["not_found"],
+                                                            image_id: imageId ?? ""));
                     }
                     arr.doneFetching()
                 }
@@ -272,7 +301,7 @@ class FirestoreHandler {
                                                              realtimeDocNames: realtimeDocNames ?? ["not_found"]);
                         let realtimeLoader = RealtimeWalkingDataLoader()
                         loader.addRecord(generalData, realtimeLoader)
-                        FirestoreHandler.loadRealtimeData(loader: realtimeLoader, docNames: realtimeDocNames ?? ["not_found"])
+                        FirebaseManager.loadRealtimeData(loader: realtimeLoader, docNames: realtimeDocNames ?? ["not_found"])
                     }
                 }
             }
@@ -281,7 +310,7 @@ class FirestoreHandler {
     /// Uploads image to Firebase Storage under `hazard_reports`.
     static func uploadImage(uuid: String, image: UIImage) {
         let ref = storage.reference().child("hazard_reports/\(uuid).jpg")
-        let imageData = image.jpegData(compressionQuality: 0.8)
+        let imageData = image.jpegData(compressionQuality: 0.7)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
         
@@ -290,6 +319,21 @@ class FirestoreHandler {
                 if let error = error {
                     print(error)
                 }
+            }
+        }
+    }
+    
+    /// Retrieves image from Firebase Storage (`hazard_reports`) using `uuid`.
+    static func loadImage(uuid: String, loader: ImageLoader) {
+        loader.loading = true
+        let ref = storage.reference(withPath: "hazard_reports/\(uuid).jpg")
+        ref.getData(maxSize: 5 * 1024 * 1024) { data, error in
+            if let error = error {
+                print(error)
+            }
+            else {
+                loader.image = UIImage(data: data!) ?? loader.image
+                loader.loading = false
             }
         }
     }

@@ -25,6 +25,9 @@ struct GeneralWalkingData {
     /// Names of realtime data documents
     var realtimeDocNames: [String] = []
     
+    /// Image ID as stored on Firebase.
+    var image_id: String = ""
+    
     /// Retrieves the list of hazards as a form of dictionary (key = String, value = Int).
     func hazards() -> [String: Int] {
         var dict: [String: Int] = [:];

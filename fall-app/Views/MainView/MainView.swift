@@ -124,6 +124,7 @@ struct MainView: View
                     Button(action: {
                         showSurvey2 = true
                         MetaWearManager().stopRecording()
+                        WalkingDetectionManager.enableDetection(false)
                         isRecording = false
                         animationBool = false
                         WalkingDetectionManager.reset()

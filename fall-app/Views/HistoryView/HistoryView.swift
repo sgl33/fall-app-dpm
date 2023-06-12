@@ -93,8 +93,8 @@ struct HistoryView: View
     /// Retrieves records from Firebase and refreshes the screen.
     func getRecords() {
         records.clearArr()
-        FirestoreHandler.connect()
-        FirestoreHandler.getRecords(arr: records)
+        FirebaseManager.connect()
+        FirebaseManager.getRecords(arr: records)
     }
     
     /// Returns a dictionary where key = date (Unix timestamp of start of day) and value = array of data from that date.

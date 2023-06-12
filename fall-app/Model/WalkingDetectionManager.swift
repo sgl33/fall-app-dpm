@@ -13,6 +13,8 @@ class WalkingDetectionManager {
     /// Indicates whether walking detection has been initialized or not
     static var initialized: Bool = false // MUST BE FALSE!!
     
+    static var enabled: Bool = true
+    
     static var lastWalkingDetected: Double = -1 // Unix timestamp
     static var lastStationaryDetected: Double = -1
     
@@ -50,11 +52,17 @@ class WalkingDetectionManager {
         lastStationaryDetected = Date().timeIntervalSince1970
     }
     
+    static func enableDetection(_ enable: Bool) {
+        enabled = enable
+    }
+    
     /// Handles motion data when received by listener
     /// Called by `initialize()`
     static func handleMotionData(_ motion: CMMotionActivity?) {
-        
-        
+        // disabled
+        if !enabled {
+            return
+        }
         
         // Debug
         let confidence: [CMMotionActivityConfidence? : String] = [.high : "High",

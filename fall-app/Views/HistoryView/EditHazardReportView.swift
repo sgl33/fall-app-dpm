@@ -52,7 +52,7 @@ struct EditHazardReportView: View {
                     var rec = generalData // copy
                     rec.hazards_type = AppConstants.hazards
                     rec.hazards_intensity = intensity
-                    FirestoreHandler.editHazardReport(rec: rec)
+                    FirebaseManager.editHazardReport(rec: rec)
                     showSubmittedAlert = true
                 }) {
                     IconButtonInner(iconName: "paperplane.fill", buttonText: "Submit Changes")

@@ -12,7 +12,7 @@ struct MultiRecordsView: View {
     static var numLoaded: Int = 0
     
     init() {
-        FirestoreHandler.getAllRecords(loader: multiDataLoader)
+        FirebaseManager.getAllRecords(loader: multiDataLoader)
     }
     
     var body: some View {

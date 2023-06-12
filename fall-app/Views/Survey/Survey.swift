@@ -144,7 +144,7 @@ struct Survey2: View {
                 Button(action: {
                     showPhotoPicker = true
                 }) {
-                    if hazardImageId == "" { 
+                    if hazardImageId == "" {
                         IconButtonInner(iconName: "camera.fill", buttonText: "Take Photo")
                     }
                     else {
@@ -152,7 +152,7 @@ struct Survey2: View {
                     }
                 }
                 .buttonStyle(IconButtonStyle(backgroundColor: hazardImageId == "" ? .cyan : .gray,
-                                             foregroundColor: .white))
+                                             foregroundColor: hazardImageId == "" ? .black : .white))
                 
                 // Disclaimer text
                 Text("This form is not monitored. If you need medical assistance,\nplease call 911 or your local healthcare provider.")
@@ -179,11 +179,12 @@ struct Survey2: View {
         .sheet(isPresented: $showPhotoPicker) {
             ImagePickerView() { image in
                 hazardImageId = UUID().uuidString
-                FirestoreHandler.uploadImage(uuid: hazardImageId,
+                FirebaseManager.uploadImage(uuid: hazardImageId,
                                              image: image)
                 showPhotoPicker = false
             }.presentationDetents([.large])
         }
+        .interactiveDismissDisabled()
     }
                       
     
@@ -195,8 +196,7 @@ struct Survey2: View {
 //            return;
 //        }
         
-        // Image not uploaded?
-        
+        WalkingDetectionManager.enableDetection(true)
         MetaWearManager.sendHazardReport(hazards: hazards,
                                          intensity: intensity,
                                          imageId: hazardImageId)

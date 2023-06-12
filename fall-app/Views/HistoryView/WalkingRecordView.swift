@@ -8,9 +8,11 @@ import MapKit
 ///
 struct WalkingRecordView: View {
     
-    var generalData: GeneralWalkingData
+    @State var generalData: GeneralWalkingData
     @ObservedObject var realtimeData: RealtimeWalkingDataLoader = RealtimeWalkingDataLoader()
     @State var toggleToRefresh: Bool = false
+    
+    @State var showSubmittedAlert: Bool = false
     
     var body: some View {
 
@@ -75,27 +77,51 @@ struct WalkingRecordView: View {
                             }.padding(.top, 8)
                         }
                     }
-                    .frame(height: 160)
+                    .frame(maxHeight: 160)
+                    
+                    if generalData.image_id != "" {
+                        NavigationLink(destination: HazardImageView(imageId: generalData.image_id)) {
+                                IconButtonInner(iconName: "photo", buttonText: "View Hazard Photo")
+                        }
+                        .buttonStyle(IconButtonStyle(backgroundColor: .yellow, foregroundColor: .black))
+                        .padding(.bottom, 8)
+                    }
+                    else {
+                        NavigationLink(destination: ImagePickerView() { image in
+                            let uuid = UUID().uuidString
+                            generalData.image_id = uuid
+                            FirebaseManager.editHazardReport(rec: generalData)
+                            FirebaseManager.uploadImage(uuid: uuid, image: image)
+                            showSubmittedAlert = true
+                        }) {
+                                IconButtonInner(iconName: "camera.fill", buttonText: "Add Photo")
+                        }
+                        .buttonStyle(IconButtonStyle(backgroundColor: .cyan, foregroundColor: .black))
+                        .padding(.bottom, 8)
+                    }
+                    
                 }
-                .frame(height: 300, alignment: .center)
+                .frame(height: 320, alignment: .center)
                 
                     
             }
             .onAppear {
-                FirestoreHandler.loadRealtimeData(loader: realtimeData,
+                FirebaseManager.loadRealtimeData(loader: realtimeData,
                                                   docNames: generalData.realtimeDocNames)
             }
+            .alert("Submitted", isPresented: $showSubmittedAlert, actions: {
+                Button("Close", role: nil, action: {
+                    showSubmittedAlert = false
+                })
+            }, message: {
+                Text("Hazard reported updated! Please note that it may take a few minutes for changes to be reflected on the app.")
+            })
             
             if realtimeData.isLoading {
                 Text("Loading...")
             }
         }
         
-        
-        
-//        ForEach(realtimeData.data.indices) { index in
-//            Text(String(realtimeData.data[index].timestamp))
-//        }
     }
 }
 

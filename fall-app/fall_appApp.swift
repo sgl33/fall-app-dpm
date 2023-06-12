@@ -10,10 +10,16 @@ import SwiftUI
 @main
 struct fall_appApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @AppStorage("userOnboarded") var userOnboarded: Bool = false
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if userOnboarded {
+                ContentView()
+            }
+            else {
+                OnboardingView(userOnboarded: $userOnboarded)
+            }
         }
     }
 }
