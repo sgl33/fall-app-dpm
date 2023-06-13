@@ -52,7 +52,7 @@ struct HistoryView: View
                         VStack {
                             Text("Loading...")
                                 .padding(.bottom, 10)
-                                .padding(.top, 8)
+                                .padding(.top, 16)
                                 .frame(width: 320)
                                 .skeleton(with: !records.isDoneFetching(),
                                           size: CGSize(width: 240, height: 16))
@@ -110,8 +110,3 @@ struct HistoryView: View
 //    }
 }
 
-extension Date {
-    var startOfDay: Date {
-        return Calendar.current.startOfDay(for: self)
-    }
-}

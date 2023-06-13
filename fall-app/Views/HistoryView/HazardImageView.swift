@@ -20,18 +20,27 @@ struct HazardImageView: View {
     
     var body: some View {
         VStack {
+            // loading
             if imageLoader.loading {
                 Text("Loading...")
             }
             else {
-                Image(uiImage: imageLoader.image)
-                    .resizable()
-                    .scaledToFit()
+                // failed - image may be deleted by admin, network issue, etc.
+                if imageLoader.failed {
+                    Text("Failed to load image.\nPlease try again later.")
+                        .multilineTextAlignment(.center)
+                }
+                // success
+                else {
+                    Image(uiImage: imageLoader.image)
+                        .resizable()
+                        .scaledToFit()
+                }
                 
                 Button(action: {
                     showPhotoPicker = true
                 }) {
-                    IconButtonInner(iconName: "camera.fill", buttonText: "Replace Photo")
+                    IconButtonInner(iconName: "camera.fill", buttonText: "Retake Photo")
                 }
                 .buttonStyle(IconButtonStyle(backgroundColor: .cyan,
                                              foregroundColor: .black))

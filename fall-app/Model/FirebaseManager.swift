@@ -78,7 +78,7 @@ class FirebaseManager {
     /// Adds a new walking record to database.
     ///
     /// Must connect to database by calling `FirestoreHandler.connect()` before running.
-    ///
+    ///56
     /// ### Example
     /// ```
     /// FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity),
@@ -89,10 +89,10 @@ class FirebaseManager {
                           imageId: String,
                           lastLocation: [String:Double]) {
         var ref: DocumentReference? = nil;
-        let docName: String = String(rec.user_id ?? "invalid-id") + "___" + String(rec.timestampToDateInt());
+        let docName: String = String(rec.timestampToDateInt());
         
-        
-        db.collection(records_table).document(docName).setData([
+        db.collection("users").document(rec.user_id ?? "")
+            .collection("records").document(docName).setData([
             "user_id": rec.user_id,
             "timestamp": rec.timestamp,
             "hazards": rec.hazards(),
@@ -112,7 +112,9 @@ class FirebaseManager {
     /// `rec` must have a valid `docName` field
     static func editHazardReport(rec: GeneralWalkingData) {
         var ref: DocumentReference? = nil;
-        db.collection(records_table).document(rec.docName).updateData([
+        
+        db.collection("users").document(rec.user_id ?? "")
+            .collection("records").document(rec.docName).updateData([
             "user_id": rec.user_id,
             "timestamp": rec.timestamp,
             "hazards": rec.hazards(),
@@ -137,7 +139,8 @@ class FirebaseManager {
                                 docNameUuid: String) {
         var ref: DocumentReference? = nil;
         let docName: String = docNameUuid;
-        db.collection("realtime_data").document(docName).setData([
+        db.collection("users").document(Utilities.deviceId())
+            .collection("realtime_data").document(docName).setData([
             "gscope_data": gscope.toArrDict()
         ]) { err in
             if let err = err {
@@ -160,7 +163,8 @@ class FirebaseManager {
     /// ```
     static func getRecords(arr: WalkingRecordsArr) {
         arr.startFetching()
-        db.collection(records_table)
+        db.collection("users").document(Utilities.deviceId())
+            .collection("records")
             .whereField("user_id", isEqualTo: UIDevice.current.identifierForVendor?.uuidString)
             .order(by: "timestamp")
             .getDocuments() { (querySnapshot, err) in
@@ -207,7 +211,8 @@ class FirebaseManager {
         // For each document name
         for docName in docNames {
             let docIndex = index
-            let docRef = db.collection("realtime_data") .document(docName)
+            let docRef = db.collection("users").document(Utilities.deviceId())
+                .collection("realtime_data") .document(docName)
             docRef.getDocument { (document, err) in
                 if let document = document, document.exists {
                     let realtimeData = document.get("gscope_data") as? [[String: Double]]
@@ -246,7 +251,8 @@ class FirebaseManager {
         // For each document name
         for docName in docNames {
             let docIndex = index
-            let docRef = db.collection("realtime_data") .document(docName)
+            let docRef = db.collection("users").document(Utilities.deviceId())
+                .collection("realtime_data").document(docName)
             docRef.getDocument { (document, err) in
                 if let document = document, document.exists {
                     let realtimeData = document.get("gscope_data") as? [[String: Double]]
@@ -274,7 +280,8 @@ class FirebaseManager {
 //        loader.reset()
         loader.start()
         // All records
-        db.collection(records_table)
+        db.collection("users").document(Utilities.deviceId())
+            .collection(records_table)
             .order(by: "timestamp")
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -309,7 +316,7 @@ class FirebaseManager {
     
     /// Uploads image to Firebase Storage under `hazard_reports`.
     static func uploadImage(uuid: String, image: UIImage) {
-        let ref = storage.reference().child("hazard_reports/\(uuid).jpg")
+        let ref = storage.reference().child("hazard_reports/\(Utilities.deviceId())/\(uuid).jpg")
         let imageData = image.jpegData(compressionQuality: 0.7)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
@@ -326,9 +333,11 @@ class FirebaseManager {
     /// Retrieves image from Firebase Storage (`hazard_reports`) using `uuid`.
     static func loadImage(uuid: String, loader: ImageLoader) {
         loader.loading = true
-        let ref = storage.reference(withPath: "hazard_reports/\(uuid).jpg")
+        let ref = storage.reference(withPath: "hazard_reports/\(Utilities.deviceId())/\(uuid).jpg")
         ref.getData(maxSize: 5 * 1024 * 1024) { data, error in
             if let error = error {
+                loader.failed = true
+                loader.loading = false
                 print(error)
             }
             else {

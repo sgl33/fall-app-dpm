@@ -12,4 +12,6 @@ class ImageLoader: ObservableObject {
     @Published var image: UIImage = UIImage()
     
     @Published var loading: Bool = false
+    
+    @Published var failed: Bool = false
 }

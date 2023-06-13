@@ -67,18 +67,18 @@ struct GeneralWalkingData {
         return dateFormatter.string(from: date)
     }
     
-    /// Retrieves the timestamp as a sorting-friendly integer.
+    /// Retrieves the timestamp as a sorting- and human-friendly string.
     ///
     /// ### Format
-    /// `yyyyMMddHHmmss`
-    /// Example: `20230115233405
+    /// `yyyyMMdd-HHmmss`
+    /// Example: `20230115-233405
     ///
-    func timestampToDateInt() -> Int {
+    func timestampToDateInt() -> String {
         let date = Date(timeIntervalSince1970: timestamp)
         let dateFormatter = DateFormatter()
         
-        dateFormatter.dateFormat = "yyyyMMddHHmmss"
-        return Int(dateFormatter.string(from: date)) ?? 0
+        dateFormatter.dateFormat = "yyyyMMdd-HHmmss"
+        return dateFormatter.string(from: date)
     }
     
     /// Retrieves the reported hazards in array of strings.

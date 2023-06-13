@@ -22,12 +22,14 @@ struct MainView: View
     @Binding var tabSelection: Int;
     
     
-    
     @State var connectionComplete: Bool = false
     
+    
+    // used for rotating animation
     @State var animationBool: Bool = false
     
-    @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect() // refresh every second
+    // refresh every second
+    @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
@@ -37,6 +39,13 @@ struct MainView: View
             // Logos
             MainView_Logos()
             
+            // Hello
+//            let name = UserDefaults.standard.string(forKey: "userName") ?? "welcome"
+//            let firstName = name.components(separatedBy: " ")[0]
+//            Text("Hello, \(firstName)!")
+            
+            Spacer()
+            
             // Info text
             VStack {
                 Text("SafeSteps")
@@ -45,6 +54,7 @@ struct MainView: View
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: 350)
             }
+            .offset(y: -8)
             
             // Graphic
             GeometryReader { metrics in
@@ -57,11 +67,10 @@ struct MainView: View
             
             Spacer()
                 .frame(maxHeight: 160)
-
+            
             StatusItem(active: $cso.conn,
                        activeText: "Sensor Connected",
                        inactiveText: "Sensor Disconnected")
-            
             
             // Interact
             VStack {
@@ -78,6 +87,7 @@ struct MainView: View
                         Circle()
                             .stroke(wheelColor, lineWidth: circleLineWidth)
                             .frame(width: circleSize, height: circleSize)
+                            .zIndex(-999)
                         
                         if isRecording && cso.conn {
                             Circle() // animation
@@ -94,7 +104,7 @@ struct MainView: View
                                     animationBool = true
                                 }
                         }
-                        else if !cso.conn {
+                        else if !cso.conn { // disconnected
                             Image("xmark_red")
                                 .resizable()
                                 .frame(width: circleSize + (circleLineWidth * 2),
@@ -162,8 +172,6 @@ struct MainView: View
                         }
                         .padding(.top, 2)
                     }
-                    
-                    
                 }
                 else if !cso.conn { // sensor disconnected & not recording
                     Text("Please connect the sensor to enable walking detection.")

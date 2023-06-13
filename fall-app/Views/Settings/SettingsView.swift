@@ -29,13 +29,12 @@ struct SettingsView: View {
                     // walking sensitivity
                     Picker(selection: $walkingDetectionSensitivity,
                            label: Text("Sensitivity")) {
-                        Text("Extremely High (5s)").tag(5)
+                        Text("Testing Only (5s)").tag(5)
                         Text("Very High (15s)").tag(15)
                         Text("High (30s)").tag(30)
                         Text("Medium (45s)").tag(45)
                         Text("Low (60s)").tag(60)
                         Text("Very Low (90s)").tag(90)
-                        Text("Extremely Low (180s)").tag(180)
                     }
                     
                 }
@@ -54,13 +53,13 @@ struct SettingsView: View {
                 // App Info
                 Section(header: Text("App Info")) {
                     NavigationLink("About SafeSteps") {
-                        DummyView()
+                        WebView(url: URL(string: "https://google.com"))
                     }
                     NavigationLink("Help & Support") {
-                        DummyView()
+                        WebView(url: URL(string: "https://google.com"))
                     }
                     NavigationLink("Legal") {
-                        DummyView()
+                        WebView(url: URL(string: "https://google.com"))
                     }
                 }
                 
@@ -72,7 +71,7 @@ struct SettingsView: View {
                     }
                 }
             } // form
-            .navigationTitle(Text("Settings"))
+            
         }
     } // NavigationView
 }

@@ -12,4 +12,14 @@ class Utilities {
     static func isDarkMode() -> Bool {
         return UITraitCollection.current.userInterfaceStyle == .dark
     }
+    
+    static func deviceId() -> String {
+        return UIDevice.current.identifierForVendor?.uuidString ?? ""
+    }
+}
+
+extension Date {
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
 }

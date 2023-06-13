@@ -78,160 +78,11 @@ struct OnboardingView: View {
         // page 2
         else if page == 1 {
             let padding: CGFloat = 20
-            VStack {
-                GeometryReader { metrics in
-                    ScrollView(.vertical, showsIndicators: false) {
-                        Text("Questionnaire")
-                            .font(.system(size: 32, weight: .bold))
-                            .padding(.bottom, -2)
-                            .padding(.top, 54)
-                        Text("Now, please respond to the following brief questionnaire. Please read the questions carefully.")
-                            .padding(.bottom, 16)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .multilineTextAlignment(.center)
-                        
-                        // Q 1-2
-                        VStack {
-                            VStack {
-                                Text("Vigorous Activities")
-                                    .font(.system(size: 18, weight: .bold))
-                                    .padding([.vertical], 2)
-                                
-                                Text("Think about all the **vigorous** activities that you did in the **last 7 days**. Vigorous physical activities refer to activities that take hard physical effort and make you breathe much harder than normal. Think only about those physical activities that you did for at least 10 minutes at a time.")
-                                    .font(.system(size: 15.5))
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .padding(.bottom, 8)
-                                
-                                SurveyNumberField(question: "During the last 7 days, on how many days did you do vigorous physical activities like heavy lifting, digging, aerobics, or fast bicycling?",
-                                                  value: $q1,
-                                                  unit: "days per week",
-                                                  totalWidth: metrics.size.width - (padding * 2))
-                                
-                                if q1 != "" && q1 != "0" {
-                                    SurveyNumberField(question: "How much time did you usually spend doing vigorous physical activities on one of those days?",
-                                                      value: $q2,
-                                                      unit: "minutes per day",
-                                                      totalWidth: metrics.size.width - (padding * 2))
-                                }
-                            }
-                            .padding([.all], 12)
-                        }
-                        .background(Utilities.isDarkMode() ? Color(white: 0.08) : Color(white: 0.92))
-                        .cornerRadius(16)
-                        
-                        // Q 3-4
-                        VStack {
-                            VStack {
-                                Text("Moderate Activities")
-                                    .font(.system(size: 18, weight: .bold))
-                                    .padding([.vertical], 2)
-                                
-                                Text("Think about all the **moderate** activities that you did in the **last 7 days**. Moderate activities refer to activities that take moderate physical effort and make you breathe somewhat harder than normal.  Think only about those physical activities that you did for at least 10 minutes at a time.")
-                                    .font(.system(size: 15.5))
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .padding(.bottom, 8)
-                                
-                                SurveyNumberField(question: "During the last 7 days, on how many days did you do moderate physical activities like carrying light loads, bicycling at a regular pace, or doubles tennis? Do not include walking.",
-                                                  value: $q3,
-                                                  unit: "days per week",
-                                                  totalWidth: metrics.size.width - (padding * 2))
-                                
-                                if q3 != "" && q3 != "0" {
-                                    SurveyNumberField(question: "How much time did you usually spend doing moderate physical activities on one of those days?",
-                                                      value: $q4,
-                                                      unit: "minutes per day",
-                                                      totalWidth: metrics.size.width - (padding * 2))
-                                }
-                            }
-                            .padding([.all], 12)
-                        }
-                        .background(Utilities.isDarkMode() ? Color(white: 0.08) : Color(white: 0.92))
-                        .cornerRadius(16)
-                        
-                        // Q 5-6
-                        VStack {
-                            VStack {
-                                Text("Walking")
-                                    .font(.system(size: 18, weight: .bold))
-                                    .padding([.vertical], 2)
-                                
-                                Text("Think about the time you spent **walking** in the **last 7 days**. This includes at work and at home, walking to travel from place to place, and any other walking that you have done solely for recreation, sport, exercise, or leisure.")
-                                    .font(.system(size: 15.5))
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .padding(.bottom, 8)
-                                
-                                SurveyNumberField(question: "During the last 7 days, on how many days did you do moderate physical activities like carrying light loads, bicycling at a regular pace, or doubles tennis? Do not include walking.",
-                                                  value: $q5,
-                                                  unit: "days per week",
-                                                  totalWidth: metrics.size.width - (padding * 2))
-                                
-                                if q5 != "" && q5 != "0" {
-                                    SurveyNumberField(question: "How much time did you usually spend walking on one of those days?",
-                                                      value: $q6,
-                                                      unit: "minutes per day",
-                                                      totalWidth: metrics.size.width - (padding * 2))
-                                }
-                            }
-                            .padding([.all], 12)
-                        }
-                        .background(Utilities.isDarkMode() ? Color(white: 0.08) : Color(white: 0.92))
-                        .cornerRadius(16)
-                        
-                        // Q 7
-                        VStack {
-                            VStack {
-                                Text("Sitting")
-                                    .font(.system(size: 18, weight: .bold))
-                                    .padding([.vertical], 2)
-                                
-                                Text("The last question is about the time you spent **sitting** on **weekdays** during the **last 7 days**. Include time spent at work, at home, while doing course work and during leisure time. This may include time spent sitting at a desk, visiting friends, reading, or sitting or lying down to watch television.")
-                                    .font(.system(size: 15.5))
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .padding(.bottom, 8)
-                                
-                                SurveyNumberField(question: "During the last 7 days, how much time did you spend sitting on a week day?",
-                                                  value: $q7,
-                                                  unit: "hours per day",
-                                                  totalWidth: metrics.size.width - (padding * 2))
-                            }
-                            .padding([.all], 12)
-                        }
-                        .background(Utilities.isDarkMode() ? Color(white: 0.08) : Color(white: 0.92))
-                        .cornerRadius(16)
-                        
-                        // continue button
-                        if !q1.isEmpty && !q3.isEmpty && !q5.isEmpty && !q7.isEmpty {
-                            Text("This is the end of the questionnaire, thank you for participating!")
-                                .multilineTextAlignment(.center)
-                                .padding(.top, 8)
-                                .padding(.bottom, -2)
-                            Text("By submitting, you agree to the terms and conditions and the privacy policy of this application.")
-                                .multilineTextAlignment(.center)
-                                .font(.system(size: 11))
-                            
-                            VStack {
-                                Button(action: continueOnboarding) {
-                                    HStack {
-                                        Text("Submit & Continue to App")
-                                        Image(systemName: "arrow.right")
-                                            .imageScale(.medium)
-                                    }
-                                }
-                                .padding(.top, 16)
-                                .padding(.bottom, 36)
-                            }
-                        }
-                        else {
-                            Text("Please respond to all questions above.")
-                                .multilineTextAlignment(.center)
-                                .padding(.top, 8)
-                        }
-                    } // GeometryReader
-                } // ScrollView
-                .padding([.horizontal], padding)
-                
-                
-            } // VStack
+            questionnaire(padding) // VStack
+        }
+        // page 3
+        else if page == 2 {
+            
         }
     }
     
@@ -243,20 +94,184 @@ struct OnboardingView: View {
                         age: Int(age),
                         sex: sex,
                         survey_responses: [
-                            "1_vigorous_days_per_wk" : Int(q1) ?? -1,
-                            "2_vigorous_mins_per_day" : Int(q2) ?? -1,
-                            "3_moderate_days_per_wk" : Int(q3) ?? -1,
-                            "4_moderate_mins_per_day" : Int(q4) ?? -1,
-                            "5_walking_days_per_wk" : Int(q5) ?? -1,
-                            "6_walking_mins_per_day" : Int(q6) ?? -1,
-                            "7_sitting_hrs_per_day" : Int(q7) ?? -1
+                            "1_vigorous_days_per_wk" : Int(q1) ?? 0,
+                            "2_vigorous_mins_per_day" : Int(q2) ?? 0,
+                            "3_moderate_days_per_wk" : Int(q3) ?? 0,
+                            "4_moderate_mins_per_day" : Int(q4) ?? 0,
+                            "5_walking_days_per_wk" : Int(q5) ?? 0,
+                            "6_walking_mins_per_day" : Int(q6) ?? 0,
+                            "7_sitting_hrs_per_day" : Int(q7) ?? 0
                         ])
         FirebaseManager.addUserInfo(user)
+        UserDefaults.standard.setValue(45, forKey: "walkingDetectionSensitivity")
+        UserDefaults.standard.setValue(name, forKey: "userName")
+        
+        // Permissions
+        WalkingDetectionManager.initialize()
+        NotificationManager.requestPermissions()
+        MetaWearManager.locationManager.requestPermissions()
         
         // mark complete
         userOnboarded = true
         Toast.showToast("Welcome!")
     }
     
+    fileprivate func questionnaire(_ padding: CGFloat) -> VStack<some View> {
+        return VStack {
+            GeometryReader { metrics in
+                ScrollView(.vertical, showsIndicators: false) {
+                    Text("Questionnaire")
+                        .font(.system(size: 32, weight: .bold))
+                        .padding(.bottom, -2)
+                        .padding(.top, 54)
+                    Text("Now, please respond to the following brief questionnaire. Please read the questions carefully.")
+                        .padding(.bottom, 16)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.center)
+                    
+                    // Q 1-2
+                    VStack {
+                        VStack {
+                            Text("Vigorous Activities")
+                                .font(.system(size: 18, weight: .bold))
+                                .padding([.vertical], 2)
+                            
+                            Text("Think about all the **vigorous** activities that you did in the **last 7 days**. Vigorous physical activities refer to activities that take hard physical effort and make you breathe much harder than normal. Think only about those physical activities that you did for at least 10 minutes at a time.")
+                                .font(.system(size: 15.5))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.bottom, 8)
+                            
+                            SurveyNumberField(question: "During the last 7 days, on how many days did you do vigorous physical activities like heavy lifting, digging, aerobics, or fast bicycling?",
+                                              value: $q1,
+                                              unit: "days per week",
+                                              totalWidth: metrics.size.width - (padding * 2))
+                            
+                            if q1 != "" && q1 != "0" {
+                                SurveyNumberField(question: "How much time did you usually spend doing vigorous physical activities on one of those days?",
+                                                  value: $q2,
+                                                  unit: "minutes per day",
+                                                  totalWidth: metrics.size.width - (padding * 2))
+                            }
+                        }
+                        .padding([.all], 12)
+                    }
+                    .background(Utilities.isDarkMode() ? Color(white: 0.08) : Color(white: 0.92))
+                    .cornerRadius(16)
+                    
+                    // Q 3-4
+                    VStack {
+                        VStack {
+                            Text("Moderate Activities")
+                                .font(.system(size: 18, weight: .bold))
+                                .padding([.vertical], 2)
+                            
+                            Text("Think about all the **moderate** activities that you did in the **last 7 days**. Moderate activities refer to activities that take moderate physical effort and make you breathe somewhat harder than normal.  Think only about those physical activities that you did for at least 10 minutes at a time.")
+                                .font(.system(size: 15.5))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.bottom, 8)
+                            
+                            SurveyNumberField(question: "During the last 7 days, on how many days did you do moderate physical activities like carrying light loads, bicycling at a regular pace, or doubles tennis? Do not include walking.",
+                                              value: $q3,
+                                              unit: "days per week",
+                                              totalWidth: metrics.size.width - (padding * 2))
+                            
+                            if q3 != "" && q3 != "0" {
+                                SurveyNumberField(question: "How much time did you usually spend doing moderate physical activities on one of those days?",
+                                                  value: $q4,
+                                                  unit: "minutes per day",
+                                                  totalWidth: metrics.size.width - (padding * 2))
+                            }
+                        }
+                        .padding([.all], 12)
+                    }
+                    .background(Utilities.isDarkMode() ? Color(white: 0.08) : Color(white: 0.92))
+                    .cornerRadius(16)
+                    
+                    // Q 5-6
+                    VStack {
+                        VStack {
+                            Text("Walking")
+                                .font(.system(size: 18, weight: .bold))
+                                .padding([.vertical], 2)
+                            
+                            Text("Think about the time you spent **walking** in the **last 7 days**. This includes at work and at home, walking to travel from place to place, and any other walking that you have done solely for recreation, sport, exercise, or leisure.")
+                                .font(.system(size: 15.5))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.bottom, 8)
+                            
+                            SurveyNumberField(question: "During the last 7 days, on how many days did you do moderate physical activities like carrying light loads, bicycling at a regular pace, or doubles tennis? Do not include walking.",
+                                              value: $q5,
+                                              unit: "days per week",
+                                              totalWidth: metrics.size.width - (padding * 2))
+                            
+                            if q5 != "" && q5 != "0" {
+                                SurveyNumberField(question: "How much time did you usually spend walking on one of those days?",
+                                                  value: $q6,
+                                                  unit: "minutes per day",
+                                                  totalWidth: metrics.size.width - (padding * 2))
+                            }
+                        }
+                        .padding([.all], 12)
+                    }
+                    .background(Utilities.isDarkMode() ? Color(white: 0.08) : Color(white: 0.92))
+                    .cornerRadius(16)
+                    
+                    // Q 7
+                    VStack {
+                        VStack {
+                            Text("Sitting")
+                                .font(.system(size: 18, weight: .bold))
+                                .padding([.vertical], 2)
+                            
+                            Text("The last question is about the time you spent **sitting** on **weekdays** during the **last 7 days**. Include time spent at work, at home, while doing course work and during leisure time. This may include time spent sitting at a desk, visiting friends, reading, or sitting or lying down to watch television.")
+                                .font(.system(size: 15.5))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.bottom, 8)
+                            
+                            SurveyNumberField(question: "During the last 7 days, how much time did you spend sitting on a week day?",
+                                              value: $q7,
+                                              unit: "hours per day",
+                                              totalWidth: metrics.size.width - (padding * 2))
+                        }
+                        .padding([.all], 12)
+                    }
+                    .background(Utilities.isDarkMode() ? Color(white: 0.08) : Color(white: 0.92))
+                    .cornerRadius(16)
+                    
+                    // continue button
+                    if !q1.isEmpty && !q3.isEmpty && !q5.isEmpty && !q7.isEmpty {
+                        Text("This is the end of the questionnaire, thank you for participating!")
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 8)
+                            .padding(.bottom, -2)
+                        Text("By submitting, you agree to the terms and conditions and the privacy policy of this application.")
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: 11))
+                        
+                        VStack {
+                            Button(action: continueOnboarding) {
+                                HStack {
+                                    Text("Submit & Continue to App")
+                                    Image(systemName: "arrow.right")
+                                        .imageScale(.medium)
+                                }
+                            }
+                            .padding(.top, 16)
+                            .padding(.bottom, 36)
+                        }
+                    }
+                    else {
+                        Text("Please respond to all questions above.")
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 8)
+                    }
+                } // GeometryReader
+            } // ScrollView
+            .padding([.horizontal], padding)
+            
+            
+        }
+    }
 }
+
 

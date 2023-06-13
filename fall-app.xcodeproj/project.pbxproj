@@ -54,6 +54,7 @@
 		FE5ED24F2A37964100C9E3D7 /* HazardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ED24E2A37964100C9E3D7 /* HazardImageView.swift */; };
 		FE5ED2512A37A3B500C9E3D7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ED2502A37A3B500C9E3D7 /* OnboardingView.swift */; };
 		FE5ED2532A37C36000C9E3D7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ED2522A37C36000C9E3D7 /* User.swift */; };
+		FE5ED2562A38D30B00C9E3D7 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ED2552A38D30B00C9E3D7 /* WebView.swift */; };
 		FE620E922A0995FA0073B8F0 /* MetaWearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */; };
 		FE620E952A0AEC420073B8F0 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620E942A0AEC420073B8F0 /* DeviceView.swift */; };
 		FE620E972A0B13250073B8F0 /* metamotions.png in Resources */ = {isa = PBXBuildFile; fileRef = FE620E962A0B13250073B8F0 /* metamotions.png */; };
@@ -155,6 +156,8 @@
 		FE5ED24E2A37964100C9E3D7 /* HazardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HazardImageView.swift; sourceTree = "<group>"; };
 		FE5ED2502A37A3B500C9E3D7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		FE5ED2522A37C36000C9E3D7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FE5ED2542A37C80C00C9E3D7 /* fall-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fall-app.entitlements"; sourceTree = "<group>"; };
+		FE5ED2552A38D30B00C9E3D7 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		FE620E912A0995FA0073B8F0 /* MetaWearManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaWearManager.swift; sourceTree = "<group>"; };
 		FE620E932A099C5F0073B8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FE620E942A0AEC420073B8F0 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
@@ -333,6 +336,7 @@
 				FE5B714829E89417002D92F3 /* DummyView.swift */,
 				FE620E942A0AEC420073B8F0 /* DeviceView.swift */,
 				FE5ED2502A37A3B500C9E3D7 /* OnboardingView.swift */,
+				FE5ED2552A38D30B00C9E3D7 /* WebView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -458,6 +462,7 @@
 		FEEBA5A429DF5FD700C0015B /* fall-app */ = {
 			isa = PBXGroup;
 			children = (
+				FE5ED2542A37C80C00C9E3D7 /* fall-app.entitlements */,
 				FEEBA5A929DF5FD800C0015B /* Assets.xcassets */,
 				FE5B713629E88944002D92F3 /* Icons */,
 				FE5B714029E8902B002D92F3 /* Images */,
@@ -759,6 +764,7 @@
 				FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */,
 				FEE156032A18373D00398DCD /* BatteryStatusObject.swift in Sources */,
 				FE9761BD29EB938B00C1ADDE /* RecordItem.swift in Sources */,
+				FE5ED2562A38D30B00C9E3D7 /* WebView.swift in Sources */,
 				FE620EAA2A12AD740073B8F0 /* WalkingRecordsArr.swift in Sources */,
 				FE620EA12A0C27280073B8F0 /* LocationManager.swift in Sources */,
 				FEE156172A1BE54D00398DCD /* MultiWalkingDataLoader.swift in Sources */,
@@ -939,6 +945,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "fall-app/fall-app.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -988,6 +995,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "fall-app/fall-app.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
