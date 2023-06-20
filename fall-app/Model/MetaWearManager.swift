@@ -165,7 +165,12 @@ class MetaWearManager
 
     /// Sends hazard report to Firebase.
     /// Called when user presses "No, close" or submits a hazard report.
-    static func sendHazardReport(hazards: [String], intensity: [Int], imageId: String) {
+    static func sendHazardReport(hazards: [String],
+                                 intensity: [Int],
+                                 imageId: String,
+                                 buildingId: String = "",
+                                 buildingFloor: String = "",
+                                 buildingHazardLocation: [Double] = [0.0, 0.0]) {
         // Upload remaining realtime data
         let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
         let documentUuid = UUID().uuidString
@@ -182,9 +187,12 @@ class MetaWearManager
         // Upload general data
         FirebaseManager.connect()
         FirebaseManager.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
-                                   realtimeDataDocNames: MetaWearManager.realtimeDataDocNames,
-                                   imageId: imageId,
-                                   lastLocation: lastLocationDict)
+                                  realtimeDataDocNames: MetaWearManager.realtimeDataDocNames,
+                                  imageId: imageId,
+                                  lastLocation: lastLocationDict,
+                                  buildingId: buildingId,
+                                  buildingFloor: buildingFloor,
+                                  buildingHazardLocation: buildingHazardLocation)
     }
     
     /// Cancels current walking recording session.

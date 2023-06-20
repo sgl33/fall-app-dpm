@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		746D402A6CCF760677C71C88 /* Pods_fall_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08330BF678E50607484AD5FE /* Pods_fall_app.framework */; };
+		FE4CB0C22A41005A000B9988 /* SurveyBuildingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C12A41005A000B9988 /* SurveyBuildingsView.swift */; };
+		FE4CB0C42A4101F0000B9988 /* BuildingsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C32A4101F0000B9988 /* BuildingsLoader.swift */; };
+		FE4CB0C62A421B6B000B9988 /* SurveyFloorPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */; };
 		FE5B712929E0B049002D92F3 /* IconButtonInner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B712829E0B049002D92F3 /* IconButtonInner.swift */; };
 		FE5B712B29E0B085002D92F3 /* IconButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B712A29E0B085002D92F3 /* IconButtonStyle.swift */; };
 		FE5B712D29E0B61D002D92F3 /* SurveyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */; };
@@ -66,7 +69,7 @@
 		FE620EA32A0C4E3D0073B8F0 /* StatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EA22A0C4E3D0073B8F0 /* StatusItem.swift */; };
 		FE620EA82A12AB080073B8F0 /* WalkingRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EA72A12AB080073B8F0 /* WalkingRecordView.swift */; };
 		FE620EAA2A12AD740073B8F0 /* WalkingRecordsArr.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EA92A12AD740073B8F0 /* WalkingRecordsArr.swift */; };
-		FE620EAC2A12B9830073B8F0 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EAB2A12B9830073B8F0 /* MapView.swift */; };
+		FE620EAC2A12B9830073B8F0 /* MapPolylineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EAB2A12B9830073B8F0 /* MapPolylineView.swift */; };
 		FE620EAE2A12DD5E0073B8F0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE620EAD2A12DD5E0073B8F0 /* Utilities.swift */; };
 		FE9761BD29EB938B00C1ADDE /* RecordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9761BC29EB938B00C1ADDE /* RecordItem.swift */; };
 		FE9761C129EBA0B500C1ADDE /* slippery.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9761BE29EBA0B500C1ADDE /* slippery.png */; };
@@ -113,7 +116,7 @@
 		FEEBA5B729DF5FD800C0015B /* fall_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5B629DF5FD800C0015B /* fall_appTests.swift */; };
 		FEEBA5C129DF5FD800C0015B /* fall_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5C029DF5FD800C0015B /* fall_appUITests.swift */; };
 		FEEBA5C329DF5FD800C0015B /* fall_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5C229DF5FD800C0015B /* fall_appUITestsLaunchTests.swift */; };
-		FEEBA5D029DF8C9A00C0015B /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5CF29DF8C9A00C0015B /* Survey.swift */; };
+		FEEBA5D029DF8C9A00C0015B /* SurveyHazardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEBA5CF29DF8C9A00C0015B /* SurveyHazardForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +140,9 @@
 		08330BF678E50607484AD5FE /* Pods_fall_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fall_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		397F8D1E91AF2093EB506942 /* Pods-fall-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fall-app.debug.xcconfig"; path = "Target Support Files/Pods-fall-app/Pods-fall-app.debug.xcconfig"; sourceTree = "<group>"; };
 		C77252FD3EFC01778CE4B886 /* Pods-fall-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fall-app.release.xcconfig"; path = "Target Support Files/Pods-fall-app/Pods-fall-app.release.xcconfig"; sourceTree = "<group>"; };
+		FE4CB0C12A41005A000B9988 /* SurveyBuildingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyBuildingsView.swift; sourceTree = "<group>"; };
+		FE4CB0C32A4101F0000B9988 /* BuildingsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsLoader.swift; sourceTree = "<group>"; };
+		FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyFloorPlanView.swift; sourceTree = "<group>"; };
 		FE5B712829E0B049002D92F3 /* IconButtonInner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonInner.swift; sourceTree = "<group>"; };
 		FE5B712A29E0B085002D92F3 /* IconButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonStyle.swift; sourceTree = "<group>"; };
 		FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyTextField.swift; sourceTree = "<group>"; };
@@ -170,7 +176,7 @@
 		FE620EA22A0C4E3D0073B8F0 /* StatusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItem.swift; sourceTree = "<group>"; };
 		FE620EA72A12AB080073B8F0 /* WalkingRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingRecordView.swift; sourceTree = "<group>"; };
 		FE620EA92A12AD740073B8F0 /* WalkingRecordsArr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingRecordsArr.swift; sourceTree = "<group>"; };
-		FE620EAB2A12B9830073B8F0 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		FE620EAB2A12B9830073B8F0 /* MapPolylineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolylineView.swift; sourceTree = "<group>"; };
 		FE620EAD2A12DD5E0073B8F0 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FE9761BC29EB938B00C1ADDE /* RecordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordItem.swift; sourceTree = "<group>"; };
 		FE9761BE29EBA0B500C1ADDE /* slippery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slippery.png; path = "fall-app/Icons/slippery.png"; sourceTree = SOURCE_ROOT; };
@@ -210,7 +216,7 @@
 		FEEBA5BC29DF5FD800C0015B /* fall-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "fall-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEEBA5C029DF5FD800C0015B /* fall_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appUITests.swift; sourceTree = "<group>"; };
 		FEEBA5C229DF5FD800C0015B /* fall_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fall_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		FEEBA5CF29DF8C9A00C0015B /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
+		FEEBA5CF29DF8C9A00C0015B /* SurveyHazardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyHazardForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,12 +289,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FE4CB0C02A40FF26000B9988 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				FE620E942A0AEC420073B8F0 /* DeviceView.swift */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
+		FE4CB0C72A421B6F000B9988 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				FE5B713429E7384F002D92F3 /* SurveyMultiCheckbox.swift */,
+				FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */,
+				FE5B713029E0BE9D002D92F3 /* SurveyNumberField.swift */,
+			);
+			path = Unused;
+			sourceTree = "<group>";
+		};
 		FE5B712729E0B01C002D92F3 /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
 				FE5B712829E0B049002D92F3 /* IconButtonInner.swift */,
 				FE5B712A29E0B085002D92F3 /* IconButtonStyle.swift */,
 				FE5B713229E202F3002D92F3 /* Toast.swift */,
+				FE5ED2552A38D30B00C9E3D7 /* WebView.swift */,
+				FE5B714829E89417002D92F3 /* DummyView.swift */,
 			);
 			path = "UI Elements";
 			sourceTree = "<group>";
@@ -326,6 +352,7 @@
 		FE5B714329E8933B002D92F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FE4CB0C02A40FF26000B9988 /* Device */,
 				FEE1564E2A27E72E00398DCD /* Settings */,
 				FEE1560B2A1BD79800398DCD /* Fonts */,
 				FE5B712729E0B01C002D92F3 /* UI Elements */,
@@ -333,10 +360,7 @@
 				FEE155FA2A1831E600398DCD /* Survey */,
 				FEE155F72A1831A300398DCD /* MainView */,
 				FEEBA5A729DF5FD700C0015B /* ContentView.swift */,
-				FE5B714829E89417002D92F3 /* DummyView.swift */,
-				FE620E942A0AEC420073B8F0 /* DeviceView.swift */,
 				FE5ED2502A37A3B500C9E3D7 /* OnboardingView.swift */,
-				FE5ED2552A38D30B00C9E3D7 /* WebView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -382,12 +406,12 @@
 		FEE155FA2A1831E600398DCD /* Survey */ = {
 			isa = PBXGroup;
 			children = (
-				FEEBA5CF29DF8C9A00C0015B /* Survey.swift */,
+				FE4CB0C72A421B6F000B9988 /* Unused */,
+				FE4CB0C12A41005A000B9988 /* SurveyBuildingsView.swift */,
+				FEEBA5CF29DF8C9A00C0015B /* SurveyHazardForm.swift */,
 				FE5B712E29E0BAEA002D92F3 /* SurveyDropdown.swift */,
-				FE5B713429E7384F002D92F3 /* SurveyMultiCheckbox.swift */,
-				FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */,
-				FE5B713029E0BE9D002D92F3 /* SurveyNumberField.swift */,
 				FE5ED2492A33C0F300C9E3D7 /* ImagePickerView.swift */,
+				FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */,
 			);
 			path = Survey;
 			sourceTree = "<group>";
@@ -398,7 +422,7 @@
 				FE5B714629E893E9002D92F3 /* HistoryView.swift */,
 				FE620EA72A12AB080073B8F0 /* WalkingRecordView.swift */,
 				FE9761BC29EB938B00C1ADDE /* RecordItem.swift */,
-				FE620EAB2A12B9830073B8F0 /* MapView.swift */,
+				FE620EAB2A12B9830073B8F0 /* MapPolylineView.swift */,
 				FEE156122A1BE4A400398DCD /* MultiRecordsView.swift */,
 				FECE8F112A29185C00BA6B73 /* EditHazardReportView.swift */,
 				FE5ED24E2A37964100C9E3D7 /* HazardImageView.swift */,
@@ -415,6 +439,7 @@
 				FEE156022A18373D00398DCD /* BatteryStatusObject.swift */,
 				FEE156162A1BE54D00398DCD /* MultiWalkingDataLoader.swift */,
 				FE5ED24C2A37946D00C9E3D7 /* ImageLoader.swift */,
+				FE4CB0C32A4101F0000B9988 /* BuildingsLoader.swift */,
 			);
 			path = Loaders;
 			sourceTree = "<group>";
@@ -740,10 +765,10 @@
 				FEE156502A27EB0900398DCD /* SettingsView.swift in Sources */,
 				FE5B714929E89417002D92F3 /* DummyView.swift in Sources */,
 				FEE1564B2A27B44E00398DCD /* AppConstants.swift in Sources */,
-				FE620EAC2A12B9830073B8F0 /* MapView.swift in Sources */,
+				FE620EAC2A12B9830073B8F0 /* MapPolylineView.swift in Sources */,
 				FE620EA82A12AB080073B8F0 /* WalkingRecordView.swift in Sources */,
 				FEE156272A1E61D900398DCD /* WalkingDetectionManager.swift in Sources */,
-				FEEBA5D029DF8C9A00C0015B /* Survey.swift in Sources */,
+				FEEBA5D029DF8C9A00C0015B /* SurveyHazardForm.swift in Sources */,
 				FE620EA32A0C4E3D0073B8F0 /* StatusItem.swift in Sources */,
 				FE620E952A0AEC420073B8F0 /* DeviceView.swift in Sources */,
 				FE620EAE2A12DD5E0073B8F0 /* Utilities.swift in Sources */,
@@ -759,18 +784,21 @@
 				FEEBA5A829DF5FD700C0015B /* ContentView.swift in Sources */,
 				FE5B712F29E0BAEA002D92F3 /* SurveyDropdown.swift in Sources */,
 				FE5ED24A2A33C0F300C9E3D7 /* ImagePickerView.swift in Sources */,
+				FE4CB0C62A421B6B000B9988 /* SurveyFloorPlanView.swift in Sources */,
 				FE5ED24F2A37964100C9E3D7 /* HazardImageView.swift in Sources */,
 				FEE156132A1BE4A400398DCD /* MultiRecordsView.swift in Sources */,
 				FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */,
 				FEE156032A18373D00398DCD /* BatteryStatusObject.swift in Sources */,
 				FE9761BD29EB938B00C1ADDE /* RecordItem.swift in Sources */,
 				FE5ED2562A38D30B00C9E3D7 /* WebView.swift in Sources */,
+				FE4CB0C42A4101F0000B9988 /* BuildingsLoader.swift in Sources */,
 				FE620EAA2A12AD740073B8F0 /* WalkingRecordsArr.swift in Sources */,
 				FE620EA12A0C27280073B8F0 /* LocationManager.swift in Sources */,
 				FEE156172A1BE54D00398DCD /* MultiWalkingDataLoader.swift in Sources */,
 				FEE1561D2A1D0F8700398DCD /* NotificationManager.swift in Sources */,
 				FE5ED24D2A37946D00C9E3D7 /* ImageLoader.swift in Sources */,
 				FE5B713129E0BE9D002D92F3 /* SurveyNumberField.swift in Sources */,
+				FE4CB0C22A41005A000B9988 /* SurveyBuildingsView.swift in Sources */,
 				FEE155FD2A18342500398DCD /* RealtimeWalkingDataLoader.swift in Sources */,
 				FE5B712929E0B049002D92F3 /* IconButtonInner.swift in Sources */,
 				FEE156012A18372100398DCD /* ConnectionStatusObject.swift in Sources */,
@@ -979,7 +1007,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = umich.dpm.safesteps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1022,7 +1050,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = umich.dpm.safesteps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -17,7 +17,7 @@ import Polyline
 /// Using Polyline library: https://github.com/raphaelmor/Polyline/
 /// Modified by Seung-Gu Lee (seunggu@umich.edu), last modified May 22, 2023
 ///
-struct MapView: UIViewRepresentable {
+struct MapPolylineView: UIViewRepresentable {
     private let locationViewModel = LocationViewModel()
     private let mapZoomEdgeInsets = UIEdgeInsets(top: 60.0, left: 60.0, bottom: 60.0, right: 60.0)
     let hazardEncountered: [Bool]
@@ -55,14 +55,14 @@ struct MapView: UIViewRepresentable {
         return mapView
     }
 
-    func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<MapView>) {
+    func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<MapPolylineView>) {
         updateOverlays(from: uiView)
         
         // Mark hazards (annotations)
         var i: Int = 0
         while i < hazardLocation.count {
             if(hazardEncountered[i]) {
-                uiView.addAnnotation(MapAnnotation(hazardLocation[i]))
+                uiView.addAnnotation(HazardMapAnnotation(hazardLocation[i]))
             }
             i += 1
         }
@@ -94,7 +94,7 @@ struct MapView: UIViewRepresentable {
 
 /// Annotations (pins) on map
 /// Used in `updateUIView`
-class MapAnnotation: NSObject, MKAnnotation {
+class HazardMapAnnotation: NSObject, MKAnnotation {
     let title: String?
     let subtitle: String?
     let coordinate: CLLocationCoordinate2D
@@ -108,9 +108,9 @@ class MapAnnotation: NSObject, MKAnnotation {
 
 
 final class MapViewCoordinator: NSObject, MKMapViewDelegate {
-    private let map: MapView
+    private let map: MapPolylineView
 
-    init(_ control: MapView) {
+    init(_ control: MapPolylineView) {
         self.map = control
     }
 

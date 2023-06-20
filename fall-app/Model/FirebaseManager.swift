@@ -78,7 +78,7 @@ class FirebaseManager {
     /// Adds a new walking record to database.
     ///
     /// Must connect to database by calling `FirestoreHandler.connect()` before running.
-    ///56
+    ///
     /// ### Example
     /// ```
     /// FirestoreHandler.addRecord(rec: WalkingRecord.toRecord(type: hazards, intensity: intensity),
@@ -87,7 +87,11 @@ class FirebaseManager {
     static func addRecord(rec: GeneralWalkingData, // passed by reference
                           realtimeDataDocNames: [String],
                           imageId: String,
-                          lastLocation: [String:Double]) {
+                          lastLocation: [String:Double],
+                          buildingId: String,
+                          buildingFloor: String,
+                          buildingHazardLocation: [Double] // (x, y)
+    ) {
         var ref: DocumentReference? = nil;
         let docName: String = String(rec.timestampToDateInt());
         
@@ -98,7 +102,11 @@ class FirebaseManager {
             "hazards": rec.hazards(),
             "gscope_data": realtimeDataDocNames,
             "image_id": imageId,
-            "last_loc": lastLocation
+            "last_loc": lastLocation,
+            "building": ["building_id": buildingId,
+                         "building_floor": buildingFloor,
+                         "hazard_location_x": buildingHazardLocation[0],
+                         "hazard_location_y": buildingHazardLocation[1]]
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -238,7 +246,6 @@ class FirebaseManager {
     ///
     /// This version of the function keeps track of number of records loaded on `multiLoader`.
     ///
-    ///
     static func loadRealtimeData(loader: RealtimeWalkingDataLoader,
                                  docNames: [String],
                                  multiLoader: MultiWalkingLoader) {
@@ -277,7 +284,6 @@ class FirebaseManager {
     /// Retrieves all records of all users.
     /// Used by "View records from all trips", not to be used in production
     static func getAllRecords(loader: MultiWalkingLoader) {
-//        loader.reset()
         loader.start()
         // All records
         db.collection("users").document(Utilities.deviceId())
@@ -314,8 +320,46 @@ class FirebaseManager {
             }
     }
     
+    /// Retrieves building locations and images from Firestore.
+    static func loadBuildings(loader: BuildingsLoader) {
+        loader.clear()
+        loader.loading = true
+        
+        let userLocation: [Double] = MetaWearManager.locationManager.getLocation()
+        let userLatitude = userLocation[0]
+        let userLongitude = userLocation[1]
+        let queryRadius: Double = 0.003 // in degrees; approx 550 meters (~2000 ft) near equator
+        
+        db.collection("buildings")
+            .whereField("longitude", isGreaterThanOrEqualTo: userLongitude - queryRadius)
+            .whereField("longitude", isLessThanOrEqualTo: userLongitude + queryRadius)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                }
+                else {
+                    for document in querySnapshot!.documents {
+                        let id = document.documentID
+                        let name = document.get("name") as? String ?? ""
+                        let address = document.get("address") as? String ?? ""
+                        let latitude = document.get("latitude") as? Double ?? 0
+                        let longitude = document.get("longitude") as? Double ?? 0
+                        let floorPlans = document.get("floor_plans") as? [String: String] ?? [:]
+                        
+                        if latitude > userLatitude - queryRadius && latitude < userLatitude + queryRadius {
+                            loader.append(id: id, name: name, address: address,
+                                          latitude: latitude, longitude: longitude, floorPlans: floorPlans)
+                        }
+                    }
+                    loader.sortByDistance(from: .init(latitude: userLatitude,
+                                                      longitude: userLongitude))
+                    loader.loading = false
+                }
+            }
+    }
+    
     /// Uploads image to Firebase Storage under `hazard_reports`.
-    static func uploadImage(uuid: String, image: UIImage) {
+    static func uploadHazardImage(uuid: String, image: UIImage) {
         let ref = storage.reference().child("hazard_reports/\(Utilities.deviceId())/\(uuid).jpg")
         let imageData = image.jpegData(compressionQuality: 0.7)
         let metadata = StorageMetadata()
@@ -331,7 +375,7 @@ class FirebaseManager {
     }
     
     /// Retrieves image from Firebase Storage (`hazard_reports`) using `uuid`.
-    static func loadImage(uuid: String, loader: ImageLoader) {
+    static func loadHazardImage(uuid: String, loader: ImageLoader) {
         loader.loading = true
         let ref = storage.reference(withPath: "hazard_reports/\(Utilities.deviceId())/\(uuid).jpg")
         ref.getData(maxSize: 5 * 1024 * 1024) { data, error in
@@ -346,4 +390,23 @@ class FirebaseManager {
             }
         }
     }
+    
+    /// Retrieves image from Firebase Storage (`building_floor_plans`) using building ID and image name.
+    static func loadFloorPlanImage(buildingId: String, image: String, loader: ImageLoader) {
+        loader.loading = true
+        let ref = storage.reference(withPath: "building_floor_plans/\(buildingId)/\(image)")
+        ref.getData(maxSize: 5 * 1024 * 1024) { data, error in
+            if let error = error {
+                loader.failed = true
+                loader.loading = false
+                print(error)
+            }
+            else {
+                loader.image = UIImage(data: data!) ?? loader.image
+                loader.loading = false
+            }
+        }
+    }
+    
+
 }

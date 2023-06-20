@@ -15,7 +15,7 @@ struct HazardImageView: View {
     init(imageId: String) {
         self.imageId = imageId
         // load image
-        FirebaseManager.loadImage(uuid: imageId, loader: imageLoader)
+        FirebaseManager.loadHazardImage(uuid: imageId, loader: imageLoader)
     }
     
     var body: some View {
@@ -47,7 +47,7 @@ struct HazardImageView: View {
                 // Photo Picker
                 .sheet(isPresented: $showPhotoPicker) {
                     ImagePickerView() { image in
-                        FirebaseManager.uploadImage(uuid: imageId, image: image)
+                        FirebaseManager.uploadHazardImage(uuid: imageId, image: image)
                         imageLoader.image = image
                         Toast.showToast("Success!")
                     }.presentationDetents([.large])

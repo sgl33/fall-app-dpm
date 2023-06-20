@@ -1,70 +1,7 @@
 import SwiftUI
 import PhotosUI
 
-/// Popup view that asks users if they experienced fall risk.
-///
-/// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
-///
-struct Survey1: View {
-    
-    @Binding var showPopup1: Bool
-    @State var showPopup2: Bool = false
-    @Binding var tabSelection: Int
-    
-    /// Intensity for each hazards. Default value = 0. Size must match that of `hazards`.
-    @State private var intensity: [Int] = [0, 0, 0, 0, 0, 0];
-    
-    
-    var body: some View {
-        VStack {
-            // Header
-            Text("Recording Complete!")
-                .fontWeight(.bold)
-                .font(.system(size: 24))
-                .padding(.bottom, -6)
-            Text("Did you experience fall risk?")
-                .font(.system(size: 20))
-            
-            // Report Hazard
-            Button(action: {
-                showPopup2 = true
-            }) {
-                IconButtonInner(iconName: "exclamationmark.triangle", buttonText: "Yes, report")
-            }.buttonStyle(IconButtonStyle(backgroundColor: .yellow,
-                                         foregroundColor: .black))
-            
-            // Don't report
-            Button(action: sendReport) {
-                IconButtonInner(iconName: "xmark", buttonText: "No, close")
-            }.buttonStyle(IconButtonStyle(backgroundColor: Color(red: 0.2, green: 0.2, blue: 0.2),
-                                         foregroundColor: .white))
-            
-            // Bottom
-            Text("Your response will be recorded. Thank you!")
-                .font(.system(size: 10))
-                .padding(.top, 0)
-        }
-        .sheet(isPresented: $showPopup2) {
-            Survey2(showPopup1: $showPopup1, showPopup2: $showPopup2,
-                    hazards: AppConstants.hazards, hazardIcons: AppConstants.hazardIcons,
-                    tabSelection: $tabSelection)
-                .presentationDetents([.large])
-        }
-        
-    }
-    
-    /// Sends hazard report (with no hazards) to Firebase and closes the popup.
-    func sendReport() {
-        // Firebase
-        MetaWearManager.sendHazardReport(hazards: AppConstants.hazards,
-                                         intensity: intensity,
-                                         imageId: "")
-        showPopup1 = false;
-        tabSelection = 2; // switch to HistoryView
-        Toast.showToast("Submitted. Thank you!")
-    }
-}
+
 
 /// Popup view that asks users the details about the fall risk if they responded "yes"
 /// to the first view.
@@ -72,9 +9,8 @@ struct Survey1: View {
 /// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 9, 2023
 ///
-struct Survey2: View {
-    @Binding var showPopup1: Bool
-    @Binding var showPopup2: Bool
+struct SurveyHazardForm: View {
+    @Binding var showSurvey: Bool
  
     /// Types of hazards to be shown
     var hazards: [String]
@@ -94,6 +30,10 @@ struct Survey2: View {
     /// Tab selection number on `ContentView`
     @Binding var tabSelection: Int
     
+    var buildingId: String
+    var buildingFloor: String
+    var buildingHazardLocation: [Double]
+    
     var body: some View {
         VStack {
             // Back button (at the top)
@@ -111,20 +51,10 @@ struct Survey2: View {
             // Scroll view
             ScrollView(.vertical, showsIndicators: false)
             {
-                Spacer()
-                    .frame(height: 32)
-                
-                // Header
-                Text("Report Fall Risk")
-                    .fontWeight(.bold)
-                    .font(.system(size: 28))
-                    .padding(.top, 16)
-                    .padding(.bottom, 0)
                 HStack {
-                    Spacer().frame(width: 36)
-                    
                     Text("Please report all hazards you experienced and their intensities:")
-                        .font(.system(size: 20))
+                        .font(.system(size: 16))
+                        .padding(.top, 24)
                         .padding(.bottom, 20)
                         .multilineTextAlignment(.center)
                     
@@ -174,17 +104,17 @@ struct Survey2: View {
             }, message: {
                 Text("You have not selected any hazards to report. Please press \"Cancel\" if you have none to report.")
             })
+            .navigationTitle(Text("Report Fall Risk"))
         }
         // Photo Picker
         .sheet(isPresented: $showPhotoPicker) {
             ImagePickerView() { image in
                 hazardImageId = UUID().uuidString
-                FirebaseManager.uploadImage(uuid: hazardImageId,
+                FirebaseManager.uploadHazardImage(uuid: hazardImageId,
                                              image: image)
                 showPhotoPicker = false
             }.presentationDetents([.large])
         }
-        .interactiveDismissDisabled()
     }
                       
     
@@ -199,28 +129,16 @@ struct Survey2: View {
         WalkingDetectionManager.enableDetection(true)
         MetaWearManager.sendHazardReport(hazards: hazards,
                                          intensity: intensity,
-                                         imageId: hazardImageId)
-        showPopup1 = false;
-        showPopup2 = false;
+                                         imageId: hazardImageId,
+                                         buildingId: buildingId,
+                                         buildingFloor: buildingFloor,
+                                         buildingHazardLocation: buildingHazardLocation)
+        showSurvey = false;
         Toast.showToast("Submitted. Thank you!")
         tabSelection = 2; // switch to HistoryView
         
     }
-    
-//    func sendHazardReport(ignoreWarning: Bool) {
-//        if ignoreWarning {
-//            MetaWearManager.sendHazardReport(hazards: hazards,
-//                                             intensity: intensity)
-//            showPopup1 = false;
-//            showPopup2 = false;
-//            Toast.showToast("Submitted. Thank you!")
-//            tabSelection = 2;
-//        }
-//        else {
-//            sendHazardReport()
-//        }
-//    }
-    
+
     /// Returns true if user did not select any hazard to report, false otherwise.
     func noHazardSelected() -> Bool {
         for i in intensity {
@@ -240,3 +158,67 @@ struct Survey2: View {
 }
 
 
+/// Popup view that asks users if they experienced fall risk.
+///
+/// ### Author & Version
+/// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
+///
+//struct Survey1: View {
+//
+//    @Binding var showPopup1: Bool
+//    @State var showPopup2: Bool = false
+//    @Binding var tabSelection: Int
+//
+//    /// Intensity for each hazards. Default value = 0. Size must match that of `hazards`.
+//    @State private var intensity: [Int] = [0, 0, 0, 0, 0, 0];
+//
+//
+//    var body: some View {
+//        VStack {
+//            // Header
+//            Text("Recording Complete!")
+//                .fontWeight(.bold)
+//                .font(.system(size: 24))
+//                .padding(.bottom, -6)
+//            Text("Did you experience fall risk?")
+//                .font(.system(size: 20))
+//
+//            // Report Hazard
+//            Button(action: {
+//                showPopup2 = true
+//            }) {
+//                IconButtonInner(iconName: "exclamationmark.triangle", buttonText: "Yes, report")
+//            }.buttonStyle(IconButtonStyle(backgroundColor: .yellow,
+//                                         foregroundColor: .black))
+//
+//            // Don't report
+//            Button(action: sendReport) {
+//                IconButtonInner(iconName: "xmark", buttonText: "No, close")
+//            }.buttonStyle(IconButtonStyle(backgroundColor: Color(red: 0.2, green: 0.2, blue: 0.2),
+//                                         foregroundColor: .white))
+//
+//            // Bottom
+//            Text("Your response will be recorded. Thank you!")
+//                .font(.system(size: 10))
+//                .padding(.top, 0)
+//        }
+//        .sheet(isPresented: $showPopup2) {
+//            SurveyHazardForm(showPopup1: $showPopup1, showPopup2: $showPopup2,
+//                    hazards: AppConstants.hazards, hazardIcons: AppConstants.hazardIcons,
+//                    tabSelection: $tabSelection)
+//                .presentationDetents([.large])
+//        }
+//
+//    }
+//
+//    /// Sends hazard report (with no hazards) to Firebase and closes the popup.
+//    func sendReport() {
+//        // Firebase
+//        MetaWearManager.sendHazardReport(hazards: AppConstants.hazards,
+//                                         intensity: intensity,
+//                                         imageId: "")
+//        showPopup1 = false;
+//        tabSelection = 2; // switch to HistoryView
+//        Toast.showToast("Submitted. Thank you!")
+//    }
+//}

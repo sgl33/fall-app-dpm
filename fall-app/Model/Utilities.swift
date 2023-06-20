@@ -1,6 +1,8 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
+import MapKit
 
 /// Contains useful general functions for the app
 ///
@@ -22,4 +24,12 @@ extension Date {
     var startOfDay: Date {
         return Calendar.current.startOfDay(for: self)
     }
+}
+
+extension CLLocationCoordinate2D {
+    /// Returns the distance between two coordinates in meters.
+    func distance(to: CLLocationCoordinate2D) -> CLLocationDistance {
+        MKMapPoint(self).distance(to: MKMapPoint(to))
+    }
+
 }

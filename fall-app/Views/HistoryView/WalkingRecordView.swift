@@ -18,7 +18,7 @@ struct WalkingRecordView: View {
 
         ZStack {
             VStack {
-                MapView(realtimeData.data.getEncodedPolyline(),
+                MapPolylineView(realtimeData.data.getEncodedPolyline(),
                         hazardEncountered: generalData.hazardEncountered(),
                         hazardLocation: realtimeData.data.getFinalLocation())
                 
@@ -91,7 +91,7 @@ struct WalkingRecordView: View {
                             let uuid = UUID().uuidString
                             generalData.image_id = uuid
                             FirebaseManager.editHazardReport(rec: generalData)
-                            FirebaseManager.uploadImage(uuid: uuid, image: image)
+                            FirebaseManager.uploadHazardImage(uuid: uuid, image: image)
                             showSubmittedAlert = true
                         }) {
                                 IconButtonInner(iconName: "camera.fill", buttonText: "Add Photo")

@@ -18,6 +18,8 @@ struct SettingsView: View {
     
     @AppStorage("receiveErrorNotifications")
     var receiveErrorNotifications: Bool = true
+    
+    @State var test: String = ""
 
     var body: some View {
         NavigationView {
@@ -51,15 +53,17 @@ struct SettingsView: View {
                 }
                 
                 // App Info
-                Section(header: Text("App Info")) {
+                let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                Section(header: Text("App Info"),
+                        footer: Text("Version " + (appVersion ?? "?"))) {
                     NavigationLink("About SafeSteps") {
                         WebView(url: URL(string: "https://google.com"))
                     }
                     NavigationLink("Help & Support") {
                         WebView(url: URL(string: "https://google.com"))
                     }
-                    NavigationLink("Legal") {
-                        WebView(url: URL(string: "https://google.com"))
+                    NavigationLink("Privacy Policy") {
+                        WebView(url: URL(string: "http://\(AppConstants.serverAddress)/\(AppConstants.serverPath)/privacy-policy.html"))
                     }
                 }
                 
@@ -70,10 +74,32 @@ struct SettingsView: View {
                         exit(0)
                     }
                 }
+                
+                // Test
+                Section(header: Text("For Testing")) {
+                    Button("Send Request") {
+                        testServerCall()
+                    }
+                    Text(test)
+                }
             } // form
-            
+            .navigationTitle(Text("Settings"))
         }
     } // NavigationView
+    
+    
+    func testServerCall() {
+        let url = URL(string: "\(AppConstants.getUrl())/calculate/15")!
+
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+            guard let data = data else { return }
+            test = String(data: data, encoding: .utf8)!
+            print(test)
+        }
+
+        task.resume()
+
+    }
 }
 
 struct SettingsView_Previews: PreviewProvider {

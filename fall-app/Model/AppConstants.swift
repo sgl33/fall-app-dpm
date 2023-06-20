@@ -19,4 +19,18 @@ class AppConstants {
     
     /// Values of hazard intensities. Size must match that of `optionTexts`.
     static let optionValues: [Int] = [0, 1, 2, 3]
+    
+    static let serverProtocol: String = "http"
+    static let serverAddress: String = "35.193.174.156"
+    static let serverPort: Int = 3000
+    static let serverPath: String = "safesteps"
+    
+    /// Get the URL used to send a request to the server.
+    ///
+    /// ### Usage ###
+    /// `"\(AppConstants.getUrl())/calculate/15"`
+    ///
+    static func getUrl() -> String {
+        return "\(serverProtocol)://\(serverAddress):\(serverPort)/\(serverPath)"
+    }
 }

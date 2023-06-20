@@ -1,0 +1,103 @@
+//
+//  SurveyFloorPlanView.swift
+//  fall-app
+//
+//  Created by Seung-Gu Lee on 6/20/23.
+//
+
+import SwiftUI
+
+struct SurveyFloorPlanView: View {
+    
+    @Binding var showSurvey: Bool
+    var building: Building
+    @Binding var tabSelection: Int
+    @State var selectedFloor: String = ""
+    
+    @State var tappedLocation: [Double] = [-1, -1]
+    
+    @ObservedObject var imageLoader: ImageLoader = ImageLoader()
+    
+    
+    var body: some View {
+        
+        VStack {
+            Spacer()
+            
+            // Image
+            if imageLoader.loading {
+                Text("Loading image...")
+                    .frame(height: 450)
+            }
+            else if imageLoader.failed {
+                Text("Failed to load image.\nPlease try again later.")
+                    .multilineTextAlignment(.center)
+            }
+            else {
+                GeometryReader { metrics in
+                    ZStack {
+                        Image(uiImage: imageLoader.image)
+                            .resizable()
+                            .scaledToFit()
+                            .onTapGesture { location in
+                                tappedLocation[0] = location.x / metrics.size.width
+                                tappedLocation[1] = location.y / metrics.size.width * imageLoader.image.size.width / imageLoader.image.size.height
+                            }
+                        
+                        let heightPercentage = metrics.size.width * imageLoader.image.size.height / imageLoader.image.size.width / metrics.size.height
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .imageScale(.small)
+                            .foregroundColor(.red)
+                            .offset(x: (tappedLocation[0] - 0.5) * metrics.size.width,
+                                    y: (tappedLocation[1] - 0.5) * heightPercentage * metrics.size.height)
+                        
+                    } // ZStack
+                } // GeometryReader
+            }
+            
+            // Info
+            Text("Please mark the hazard location by tapping the floor plan above.")
+                .multilineTextAlignment(.center)
+            
+            // Floor Picker
+            Picker("Floor", selection: $selectedFloor) {
+                ForEach(building.floorPlans.sorted(by: <), id: \.key) { floor, plan in
+                    Text("\(floor) floor").tag(floor)
+                }
+            }
+            .pickerStyle(.wheel)
+            .frame(height: 200)
+            .onChange(of: selectedFloor) { newValue in
+                FirebaseManager.loadFloorPlanImage(buildingId: building.id,
+                                                   image: building.floorPlans[newValue] ?? "",
+                                                   loader: imageLoader)
+                tappedLocation = [-1, -1]
+            }
+            
+            if tappedLocation[0] >= 0 && tappedLocation[1] >= 0 {
+                NavigationLink(destination: SurveyHazardForm(showSurvey: $showSurvey,
+                                                             hazards: AppConstants.hazards, hazardIcons: AppConstants.hazardIcons,
+                                                             tabSelection: $tabSelection,
+                                                             buildingId: building.id,
+                                                             buildingFloor: selectedFloor,
+                                                             buildingHazardLocation: tappedLocation)) {
+                    IconButtonInner(iconName: "mountain.2.fill", buttonText: "Continue")
+                }.buttonStyle(IconButtonStyle(backgroundColor: .yellow,
+                                             foregroundColor: .black))
+            }
+            
+            Spacer()
+        } // VStack
+        .navigationTitle(Text(building.name))
+        .onAppear {
+            let randomFloor = building.floorPlans.sorted(by: <)[0]
+            selectedFloor = randomFloor.key
+            
+            FirebaseManager.loadFloorPlanImage(buildingId: building.id,
+                                               image: building.floorPlans[selectedFloor] ?? "",
+                                               loader: imageLoader)
+        }
+        
+        
+    }
+}

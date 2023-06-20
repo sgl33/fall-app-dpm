@@ -20,7 +20,7 @@ struct MultiRecordsView: View {
             let polylines = multiDataLoader.getEncodedPolylines()
             let hazardEncountered = multiDataLoader.hazardEncountered()
             let finalLocation = multiDataLoader.getFinalLocation()
-            MapView(polylines,
+            MapPolylineView(polylines,
                     hazardEncountered: hazardEncountered,
                     hazardLocation: finalLocation)
             

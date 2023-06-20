@@ -7,29 +7,11 @@ import SwiftUI
 ///
 struct MainView: View
 {
-    /// Whether walking is recording or not.
-    /// Gets data from`MetaWearManager.connected()` every 1 second.
-    @State var isRecording: Bool = false
-    
-    /// Used to determine sensor connection status.
-    @ObservedObject var cso = ConnectionStatusObject()
-    
-    @State var showSurvey1: Bool = false
-    @State var showSurvey2: Bool = false
-    @State var showCancelPopup: Bool = false
-    
     /// Tab selection on `ContentView`.
     @Binding var tabSelection: Int;
     
-    
-    @State var connectionComplete: Bool = false
-    
-    
-    // used for rotating animation
-    @State var animationBool: Bool = false
-    
-    // refresh every second
-    @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State var showSurvey: Bool = false // SurveyBuildingsView
+
     
     var body: some View {
         VStack {
@@ -40,9 +22,9 @@ struct MainView: View
             MainView_Logos()
             
             // Hello
-//            let name = UserDefaults.standard.string(forKey: "userName") ?? "welcome"
-//            let firstName = name.components(separatedBy: " ")[0]
-//            Text("Hello, \(firstName)!")
+            //            let name = UserDefaults.standard.string(forKey: "userName") ?? "welcome"
+            //            let firstName = name.components(separatedBy: " ")[0]
+            //            Text("Hello, \(firstName)!")
             
             Spacer()
             
@@ -68,152 +50,173 @@ struct MainView: View
             Spacer()
                 .frame(maxHeight: 160)
             
-            StatusItem(active: $cso.conn,
-                       activeText: "Sensor Connected",
-                       inactiveText: "Sensor Disconnected")
+            // Interactible
+            MainView_Interact(showSurvey: $showSurvey,
+                              tabSelection: $tabSelection)
             
-            // Interact
-            VStack {
-                Spacer()
-                    .frame(height: 12)
-                
-                // walking indicator
-                HStack {
-                    let circleSize: CGFloat = 16
-                    let circleLineWidth: CGFloat = 3
-                    
-                    ZStack {
-                        let wheelColor = Utilities.isDarkMode() ? Color(white: 0.3) : Color(white: 0.7)
-                        Circle()
-                            .stroke(wheelColor, lineWidth: circleLineWidth)
-                            .frame(width: circleSize, height: circleSize)
-                            .zIndex(-999)
-                        
-                        if isRecording && cso.conn {
-                            Circle() // animation
-                                .trim(from: 0, to: 0.25)
-                                .stroke(.cyan, lineWidth: circleLineWidth)
-                                .frame(width: circleSize, height: circleSize)
-                                .rotationEffect(Angle(degrees: animationBool ? 360 : 0))
-                                .animation(Animation.linear(duration: 1.5).repeatForever(autoreverses: false))
-                                .onAppear {
-                                    animationBool = true
-                                }
-                                .onChange(of: isRecording) { _ in
-                                    animationBool = false
-                                    animationBool = true
-                                }
-                        }
-                        else if !cso.conn { // disconnected
-                            Image("xmark_red")
-                                .resizable()
-                                .frame(width: circleSize + (circleLineWidth * 2),
-                                       height: circleSize + (circleLineWidth * 2))
-                        }
-                        
-                    }
-                    .frame(width: circleSize, height: circleSize)
-                    
-                    let statusText = isRecording ? (cso.conn ? "Recording" : "Suspended") : "Not Recording"
-                    Text(statusText)
-                        .padding(.leading, 4)
-                        .font(.system(size: 16, weight: .semibold))
-                }
-                
-                // text or button
-                if isRecording { // recording
-                    
-                    if !cso.conn { // sensor disconnected
-                        Text("Sensor disconnected, recording suspended.")
-                            .font(.system(size: 14))
-                            .frame(maxWidth: 330)
-                            .multilineTextAlignment(.center)
-                    }
-                    
-                    // end, report hazard
-                    Button(action: {
-                        showSurvey2 = true
-                        MetaWearManager().stopRecording()
-                        WalkingDetectionManager.enableDetection(false)
-                        isRecording = false
-                        animationBool = false
-                        WalkingDetectionManager.reset()
-                    }) {
-                        IconButtonInner(iconName: "exclamationmark.triangle", buttonText: "Report Hazard")
-                    }
-                    .buttonStyle(IconButtonStyle(backgroundColor: .yellow,
-                                                 foregroundColor: .black))
-                    
-                    // end, no hazard
-                    Button(action: {
-                        MetaWearManager().stopRecording()
-                        isRecording = false
-                        animationBool = false
-                        MetaWearManager.sendHazardReport(hazards: AppConstants.hazards,
-                                                         intensity: AppConstants.defaultHazardIntensity,
-                                                         imageId: "")
-                        Toast.showToast("Submitted. Thank you!")
-                        tabSelection = 2;
-                    }) {
-                        IconButtonInner(iconName: "stop.circle.fill", buttonText: "End Session (no hazard)")
-                    }
-                    .buttonStyle(IconButtonStyle(backgroundColor: Color(white: 0.4),
-                                                 foregroundColor: .white))
-                    
-                    // cancel
-                    Button(action: {
-                        showCancelPopup = true
-                    }) {
-                        HStack {
-                            Image(systemName: "xmark")
-                                .imageScale(.small)
-                            Text("Cancel Session")
-                                .font(.system(size: 14))
-                        }
-                        .padding(.top, 2)
-                    }
-                }
-                else if !cso.conn { // sensor disconnected & not recording
-                    Text("Please connect the sensor to enable walking detection.")
-                        .font(.system(size: 14))
-                        .frame(maxWidth: 330)
-                        .multilineTextAlignment(.center)
-                }
-                else if !isRecording { // not recording
-                    Text("Start walking to automatically start recording.\nFeel free to leave the app.")
-                        .font(.system(size: 14))
-                        .frame(maxWidth: 330)
-                        .multilineTextAlignment(.center)
-                }
-                
-                Spacer()
-                    .frame(height: 12)
+            // Sheet - SurveyBuildingsView
+            .sheet(isPresented: $showSurvey) {
+                SurveyBuildingsView(showSurvey: $showSurvey,
+                                    tabSelection: $tabSelection)
+                .presentationDetents([.large])
+                .interactiveDismissDisabled()
             }
-            .frame(width: 350)
-            .background(Utilities.isDarkMode() ? Color(white: 0.1) : Color(white: 0.9))
-            .cornerRadius(12)
-            .padding(.bottom, 4).padding(.top, -2)
+            
+            
+            
+            
+        }
+    }
+    
+}
+
+struct MainView_Interact: View {
+    
+    // used for rotating animation
+    @State var animationBool: Bool = false
+    
+    /// Whether walking is recording or not.
+    /// Gets data from`MetaWearManager.connected()` every 1 second.
+    @State var isRecording: Bool = false
+    
+    /// Used to determine sensor connection status.
+    @ObservedObject var cso = ConnectionStatusObject()
+    
+    @Binding var showSurvey: Bool
+    @State var showCancelPopup: Bool = false
+    @Binding var tabSelection: Int
+    
+    // refresh every second
+    @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    var body: some View {
+        StatusItem(active: $cso.conn,
+                   activeText: "Sensor Connected",
+                   inactiveText: "Sensor Disconnected")
+        
+        // Interact
+        VStack {
+            Spacer()
+                .frame(height: 12)
+            
+            // walking indicator
+            HStack {
+                let circleSize: CGFloat = 16
+                let circleLineWidth: CGFloat = 3
+                
+                ZStack {
+                    let wheelColor = Utilities.isDarkMode() ? Color(white: 0.3) : Color(white: 0.7)
+                    Circle()
+                        .stroke(wheelColor, lineWidth: circleLineWidth)
+                        .frame(width: circleSize, height: circleSize)
+                        .zIndex(-999)
+                    
+                    if isRecording && cso.conn {
+                        Circle() // animation
+                            .trim(from: 0, to: 0.25)
+                            .stroke(.cyan, lineWidth: circleLineWidth)
+                            .frame(width: circleSize, height: circleSize)
+                            .rotationEffect(Angle(degrees: animationBool ? 360 : 0))
+                            .animation(Animation.linear(duration: 1.5).repeatForever(autoreverses: false))
+                            .onAppear {
+                                animationBool = true
+                            }
+                            .onChange(of: isRecording) { _ in
+                                animationBool = false
+                                animationBool = true
+                            }
+                    }
+                    else if !cso.conn { // disconnected
+                        Image("xmark_red")
+                            .resizable()
+                            .frame(width: circleSize + (circleLineWidth * 2),
+                                   height: circleSize + (circleLineWidth * 2))
+                    }
+                    
+                }
+                .frame(width: circleSize, height: circleSize)
+                
+                let statusText = isRecording ? (cso.conn ? "Recording" : "Suspended") : "Not Recording"
+                Text(statusText)
+                    .padding(.leading, 4)
+                    .font(.system(size: 16, weight: .semibold))
+            } // HStack
+            
+            // text or button
+            if isRecording { // recording
+                
+                if !cso.conn { // sensor disconnected
+                    Text("Sensor disconnected, recording suspended.")
+                        .font(.system(size: 14))
+                        .frame(maxWidth: 330)
+                        .multilineTextAlignment(.center)
+                }
+                
+                // end, report hazard
+                Button(action: {
+                    showSurvey = true
+                    MetaWearManager().stopRecording()
+                    WalkingDetectionManager.enableDetection(false)
+                    isRecording = false
+                    animationBool = false
+                    WalkingDetectionManager.reset()
+                }) {
+                    IconButtonInner(iconName: "exclamationmark.triangle", buttonText: "Report Hazard")
+                }
+                .buttonStyle(IconButtonStyle(backgroundColor: .yellow,
+                                             foregroundColor: .black))
+                
+                // end, no hazard
+                Button(action: {
+                    MetaWearManager().stopRecording()
+                    isRecording = false
+                    animationBool = false
+                    MetaWearManager.sendHazardReport(hazards: AppConstants.hazards,
+                                                     intensity: AppConstants.defaultHazardIntensity,
+                                                     imageId: "")
+                    Toast.showToast("Submitted. Thank you!")
+                    tabSelection = 2;
+                }) {
+                    IconButtonInner(iconName: "stop.circle.fill", buttonText: "End Session (no hazard)")
+                }
+                .buttonStyle(IconButtonStyle(backgroundColor: Color(white: 0.4),
+                                             foregroundColor: .white))
+                
+                // cancel
+                Button(action: {
+                    showCancelPopup = true
+                }) {
+                    HStack {
+                        Image(systemName: "xmark")
+                            .imageScale(.small)
+                        Text("Cancel Session")
+                            .font(.system(size: 14))
+                    }
+                    .padding(.top, 2)
+                }
+            }
+            else if !cso.conn { // sensor disconnected & not recording
+                Text("Please connect the sensor to enable walking detection.")
+                    .font(.system(size: 14))
+                    .frame(maxWidth: 330)
+                    .multilineTextAlignment(.center)
+            }
+            else if !isRecording { // not recording
+                Text("Start walking to automatically start recording.\nFeel free to leave the app.")
+                    .font(.system(size: 14))
+                    .frame(maxWidth: 330)
+                    .multilineTextAlignment(.center)
+            }
             
             Spacer()
-                .frame(maxHeight: 42)
+                .frame(height: 12)
         } // VStack
-        
-        // Survey sheet (1)
-        .sheet(isPresented: $showSurvey1) {
-            Survey1(showPopup1: $showSurvey1, tabSelection: $tabSelection)
-                .presentationDetents([.fraction(0.38)])
-        }
-        // Survey sheet (2)
-        .sheet(isPresented: $showSurvey2) {
-            Survey2(showPopup1: $showSurvey1, showPopup2: $showSurvey2,
-                    hazards: AppConstants.hazards, hazardIcons: AppConstants.hazardIcons,
-                    tabSelection: $tabSelection)
-                .presentationDetents([.large])
-        }
+        .frame(width: 350)
+        .background(Utilities.isDarkMode() ? Color(white: 0.1) : Color(white: 0.9))
+        .cornerRadius(12)
+        .padding(.bottom, 4).padding(.top, -2)
         .onAppear {
             MetaWearManager.connected(cso)
-            connectionComplete = true
-            
             WalkingDetectionManager.initialize()
             NotificationManager.requestPermissions()
             MetaWearManager.locationManager.requestPermissions()
@@ -247,8 +250,12 @@ struct MainView: View
             Text("Are you sure you want to cancel the ongoing walking session?")
         })
         
-    }
+        Spacer()
+            .frame(maxHeight: 42)
+    } // body
 }
+
+
 
 /// Logos used in `MainView`
 struct MainView_Logos: View {
@@ -299,6 +306,8 @@ struct MainView_Logos: View {
         }
     }
 }
+
+
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {

@@ -1,0 +1,213 @@
+import SwiftUI
+import MapKit
+import UIKit
+import SkeletonUI
+
+struct SurveyBuildingsView: View {
+    
+    @ObservedObject var buildings: BuildingsLoader
+    
+    var deviceCoordinate: CLLocationCoordinate2D
+    @State private var region: MKCoordinateRegion
+    
+    @Binding var showSurvey: Bool
+    @Binding var tabSelection: Int
+    
+    // Constructor
+    init(showSurvey: Binding<Bool>, tabSelection: Binding<Int>) {
+        buildings = BuildingsLoader()
+        let deviceLocation = MetaWearManager.locationManager.getLocation()
+        deviceCoordinate = CLLocationCoordinate2D(latitude: deviceLocation[0],
+                                           longitude: deviceLocation[1])
+        region = MKCoordinateRegion(center: deviceCoordinate,
+                                    span: MKCoordinateSpan(latitudeDelta: 0.003,
+                                                           longitudeDelta: 0.003))
+        self._showSurvey = showSurvey
+        self._tabSelection = tabSelection
+        
+        FirebaseManager.connect()
+        FirebaseManager.loadBuildings(loader: buildings)
+    }
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                VStack {
+                    // Map
+                    Map(coordinateRegion: $region,
+                        showsUserLocation: true,
+                        annotationItems: buildings.getBuildingMarkers()) { bldg in
+                        MapAnnotation(coordinate: bldg.coordinate) {
+                            PlaceAnnotationView(title: bldg.name)
+                        }
+                    }
+                    
+                    VStack {
+                        
+                        Text("Please select the building you're currently in.")
+                            .font(.system(size: 16))
+                            .padding(.top, 12)
+                            .padding(.bottom, 8)
+                        
+                        // List of nearby buildings
+                        ScrollView {
+                            if buildings.loading { // skeleton UI
+                                ForEach(1..<4) { index in
+                                    VStack(alignment: .leading) {
+                                        VStack(alignment: .leading) {
+                                            Text("Loading...")
+                                                .skeleton(with: true,
+                                                          size: CGSize(width: 180, height: 16))
+                                            Text("Loading...")
+                                                .skeleton(with: true,
+                                                          size: CGSize(width: 120, height: 14))
+                                        }
+                                        .frame(width: 320)
+                                        .padding([.horizontal], 20)
+                                    }
+                                    .frame(width: 360, height: 56)
+                                }
+                            }
+                            else {
+                                ForEach(buildings.buildings) { building in
+                                    NavigationLink(destination: SurveyFloorPlanView(showSurvey: $showSurvey, building: building, tabSelection: $tabSelection)) {
+                                        BuildingItem(id: building.id,
+                                                     name: building.name,
+                                                     address: building.address,
+                                                     distance: building.getDistanceString(from: deviceCoordinate))
+                                    }
+                                }
+                                if buildings.buildings.isEmpty {
+                                    Text("No nearby buildings found.")
+                                }
+                            }
+                        }
+                        
+                        // I'm outdoors
+                        NavigationLink(destination: SurveyHazardForm(showSurvey: $showSurvey,
+                                                                     hazards: AppConstants.hazards, hazardIcons: AppConstants.hazardIcons,
+                                                                     tabSelection: $tabSelection,
+                                                                     buildingId: "",
+                                                                     buildingFloor: "",
+                                                                     buildingHazardLocation: [0.0, 0.0])) {
+                            IconButtonInner(iconName: "mountain.2.fill", buttonText: "I'm outdoors")
+                        }.buttonStyle(IconButtonStyle(backgroundColor: .yellow,
+                                                     foregroundColor: .black))
+                        
+                        // Building is not listed
+                        Button(action: {
+                            
+                        }) {
+                            Text("Building is not listed")
+                                .font(.system(size: 15))
+                        }
+                        .padding(.top, 4)
+                        .padding(.bottom, 24)
+                    }
+                    .frame(height: 360)
+                } // VStack
+
+                
+                // loading
+                if buildings.loading {
+                    Text("Loading...")
+                }
+            }
+//            .onAppear {
+//                FirebaseManager.connect()
+//                FirebaseManager.loadBuildings(loader: buildings)
+//            }
+            .navigationBarHidden(true)
+            
+        }
+    }
+    
+    
+    
+    /// View for each building
+    struct BuildingItem: View {
+        let id: String
+        let name: String
+        let address: String
+        let distance: String
+        @State var selected: Bool = false
+        
+        var body: some View {
+            ZStack {
+                // Text
+                VStack(alignment: .leading) {
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(name)
+                            .font(.system(size: 16, weight: .bold))
+                        Text(distance)
+                            .font(.system(size: 13))
+                            .offset(y: -1)
+                    }
+                    .frame(width: 320, alignment: .leading)
+                    
+                    Text(address)
+                        .font(.system(size: 13, weight: .light))
+                        .frame(width: 320, alignment: .leading)
+                        .opacity(0.7)
+                }
+                .frame(width: 320)
+                .padding([.horizontal], 20)
+                .padding([.vertical], 12)
+                .foregroundColor(Utilities.isDarkMode() ? .white : .black)
+
+                // > symbol
+                Image(systemName: "greaterthan")
+                    .resizable()
+                    .frame(width: 6, height: 12)
+                    .foregroundColor(Color(white: 0.5))
+                    .offset(x: 156)
+            }
+            .frame(width: 360, height: 56)
+            .background(Utilities.isDarkMode() ? Color(white: 0.1) : Color(white: 0.9))
+            .cornerRadius(12)
+            .padding([.horizontal], 16)
+        }
+    }
+    
+    /// Marker used inside `MapAnnotation`.
+    struct PlaceAnnotationView: View {
+        let title: String
+        
+        var body: some View {
+            VStack(spacing: 0) {
+                Text(title)
+                    .font(.system(size: 14))
+                    .foregroundColor(.white)
+                    .padding(5)
+                    .background(Color(.black))
+                    .cornerRadius(10)
+                    .opacity(0.9)
+//
+//                ZStack {
+//                    Image(systemName: "circle.fill")
+//                        .imageScale(.large)
+//                        .foregroundColor(.white)
+//                        .offset(x: 0, y: 2)
+//
+//                    Image(systemName: "building.2.crop.circle.fill")
+//                        .font(.title)
+//                        .foregroundColor(.red)
+//                }
+//
+//                Image(systemName: "arrowtriangle.down.fill")
+//                    .font(.caption)
+//                    .foregroundColor(.red)
+//                    .offset(x: 0, y: -5)
+            }
+//            .offset(y: -24)
+        }
+    }
+
+    /// Struct for buildings
+    struct BuildingMarker: Identifiable {
+        let id = UUID()
+        var name: String
+        var coordinate: CLLocationCoordinate2D
+    }
+}
+
