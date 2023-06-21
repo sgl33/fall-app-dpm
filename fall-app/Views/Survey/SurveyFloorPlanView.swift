@@ -20,44 +20,52 @@ struct SurveyFloorPlanView: View {
     
     
     var body: some View {
-        
         VStack {
-            Spacer()
             
             // Image
             if imageLoader.loading {
-                Text("Loading image...")
+                Text("Loading floor plan...")
                     .frame(height: 450)
             }
             else if imageLoader.failed {
-                Text("Failed to load image.\nPlease try again later.")
+                Text("Could not load floor plan.")
                     .multilineTextAlignment(.center)
             }
             else {
-                GeometryReader { metrics in
-                    ZStack {
-                        Image(uiImage: imageLoader.image)
-                            .resizable()
-                            .scaledToFit()
-                            .onTapGesture { location in
-                                tappedLocation[0] = location.x / metrics.size.width
-                                tappedLocation[1] = location.y / metrics.size.width * imageLoader.image.size.width / imageLoader.image.size.height
-                            }
-                        
-                        let heightPercentage = metrics.size.width * imageLoader.image.size.height / imageLoader.image.size.width / metrics.size.height
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .imageScale(.small)
-                            .foregroundColor(.red)
-                            .offset(x: (tappedLocation[0] - 0.5) * metrics.size.width,
-                                    y: (tappedLocation[1] - 0.5) * heightPercentage * metrics.size.height)
-                        
-                    } // ZStack
-                } // GeometryReader
+                if imageLoader.image.size.width > 0 {
+                    GeometryReader { metrics in
+                        ZStack {
+                            Image(uiImage: imageLoader.image)
+                                .resizable()
+                                .frame(width: metrics.size.width,
+                                       height: metrics.size.width / imageLoader.image.size.width * imageLoader.image.size.height)
+                                .onTapGesture { location in
+                                    tappedLocation[0] = location.x / metrics.size.width
+                                    tappedLocation[1] = location.y / metrics.size.width * imageLoader.image.size.width / imageLoader.image.size.height
+                                }
+                            
+                            // Tap marker
+                            let heightPercentage = metrics.size.width * imageLoader.image.size.height / imageLoader.image.size.width / metrics.size.height
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .imageScale(.small)
+                                .foregroundColor(.red)
+                                .offset(x: (tappedLocation[0] - 0.5) * metrics.size.width,
+                                        y: (tappedLocation[1] - 0.5) * heightPercentage * metrics.size.height)
+                            
+                        } // ZStack
+                        .frame(width: metrics.size.width,
+                               height: metrics.size.width / imageLoader.image.size.width * imageLoader.image.size.height)
+                    } // GeometryReader
+                }
+                
+                
             }
             
             // Info
-            Text("Please mark the hazard location by tapping the floor plan above.")
-                .multilineTextAlignment(.center)
+            if tappedLocation[0] < 0 && tappedLocation[1] < 0 {
+                Text("Please mark the hazard location by tapping the floor plan above.")
+                    .multilineTextAlignment(.center)
+            }
             
             // Floor Picker
             Picker("Floor", selection: $selectedFloor) {
@@ -66,7 +74,7 @@ struct SurveyFloorPlanView: View {
                 }
             }
             .pickerStyle(.wheel)
-            .frame(height: 200)
+            .frame(height: 100)
             .onChange(of: selectedFloor) { newValue in
                 FirebaseManager.loadFloorPlanImage(buildingId: building.id,
                                                    image: building.floorPlans[newValue] ?? "",
@@ -74,16 +82,33 @@ struct SurveyFloorPlanView: View {
                 tappedLocation = [-1, -1]
             }
             
+            
+            
             if tappedLocation[0] >= 0 && tappedLocation[1] >= 0 {
-                NavigationLink(destination: SurveyHazardForm(showSurvey: $showSurvey,
-                                                             hazards: AppConstants.hazards, hazardIcons: AppConstants.hazardIcons,
-                                                             tabSelection: $tabSelection,
-                                                             buildingId: building.id,
-                                                             buildingFloor: selectedFloor,
-                                                             buildingHazardLocation: tappedLocation)) {
-                    IconButtonInner(iconName: "mountain.2.fill", buttonText: "Continue")
-                }.buttonStyle(IconButtonStyle(backgroundColor: .yellow,
-                                             foregroundColor: .black))
+                HStack {
+                    // Reset
+                    Button(action: {
+                        tappedLocation = [-1, -1]
+                    }) {
+                        Image(systemName: "xmark.app.fill")
+                            .resizable()
+                            .frame(width: 32, height: 32)
+                            .foregroundColor(Color(white: 0.5))
+                            
+                            
+                    }
+                    
+                    NavigationLink(destination: SurveyHazardForm(showSurvey: $showSurvey,
+                                                                 hazards: AppConstants.hazards, hazardIcons: AppConstants.hazardIcons,
+                                                                 tabSelection: $tabSelection,
+                                                                 buildingId: building.id,
+                                                                 buildingFloor: selectedFloor,
+                                                                 buildingHazardLocation: tappedLocation)) {
+                        IconButtonInner(iconName: "arrow.right", buttonText: "Continue")
+                    }.buttonStyle(IconButtonStyle(backgroundColor: .yellow,
+                                                 foregroundColor: .black))
+                }
+                
             }
             
             Spacer()
@@ -96,7 +121,8 @@ struct SurveyFloorPlanView: View {
             FirebaseManager.loadFloorPlanImage(buildingId: building.id,
                                                image: building.floorPlans[selectedFloor] ?? "",
                                                loader: imageLoader)
-        }
+        } // VStack
+        
         
         
     }

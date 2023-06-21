@@ -52,13 +52,13 @@ struct SurveyHazardForm: View {
             ScrollView(.vertical, showsIndicators: false)
             {
                 HStack {
-                    Text("Please report all hazards you experienced and their intensities:")
+                    Text("Please report all hazards you experienced\nand their intensities:")
                         .font(.system(size: 16))
                         .padding(.top, 24)
                         .padding(.bottom, 20)
                         .multilineTextAlignment(.center)
                     
-                    Spacer().frame(width: 36)
+//                    Spacer().frame(width: 36)
                 }
                 
                 // Hazards form

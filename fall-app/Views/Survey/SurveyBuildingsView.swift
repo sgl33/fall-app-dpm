@@ -95,9 +95,8 @@ struct SurveyBuildingsView: View {
                                                      foregroundColor: .black))
                         
                         // Building is not listed
-                        Button(action: {
-                            
-                        }) {
+                        NavigationLink(destination: SurveyUnlistedBuilding(showSurvey: $showSurvey,
+                                                                           tabSelection: $tabSelection)) {
                             Text("Building is not listed")
                                 .font(.system(size: 15))
                         }
@@ -112,11 +111,7 @@ struct SurveyBuildingsView: View {
                 if buildings.loading {
                     Text("Loading...")
                 }
-            }
-//            .onAppear {
-//                FirebaseManager.connect()
-//                FirebaseManager.loadBuildings(loader: buildings)
-//            }
+            } 
             .navigationBarHidden(true)
             
         }

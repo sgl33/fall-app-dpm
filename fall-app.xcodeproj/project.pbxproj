@@ -11,6 +11,7 @@
 		FE4CB0C22A41005A000B9988 /* SurveyBuildingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C12A41005A000B9988 /* SurveyBuildingsView.swift */; };
 		FE4CB0C42A4101F0000B9988 /* BuildingsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C32A4101F0000B9988 /* BuildingsLoader.swift */; };
 		FE4CB0C62A421B6B000B9988 /* SurveyFloorPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */; };
+		FE4CB0C92A435AAC000B9988 /* SurveyUnlistedBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C82A435AAC000B9988 /* SurveyUnlistedBuilding.swift */; };
 		FE5B712929E0B049002D92F3 /* IconButtonInner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B712829E0B049002D92F3 /* IconButtonInner.swift */; };
 		FE5B712B29E0B085002D92F3 /* IconButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B712A29E0B085002D92F3 /* IconButtonStyle.swift */; };
 		FE5B712D29E0B61D002D92F3 /* SurveyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */; };
@@ -143,6 +144,7 @@
 		FE4CB0C12A41005A000B9988 /* SurveyBuildingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyBuildingsView.swift; sourceTree = "<group>"; };
 		FE4CB0C32A4101F0000B9988 /* BuildingsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsLoader.swift; sourceTree = "<group>"; };
 		FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyFloorPlanView.swift; sourceTree = "<group>"; };
+		FE4CB0C82A435AAC000B9988 /* SurveyUnlistedBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyUnlistedBuilding.swift; sourceTree = "<group>"; };
 		FE5B712829E0B049002D92F3 /* IconButtonInner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonInner.swift; sourceTree = "<group>"; };
 		FE5B712A29E0B085002D92F3 /* IconButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonStyle.swift; sourceTree = "<group>"; };
 		FE5B712C29E0B61D002D92F3 /* SurveyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyTextField.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				FE5B713229E202F3002D92F3 /* Toast.swift */,
 				FE5ED2552A38D30B00C9E3D7 /* WebView.swift */,
 				FE5B714829E89417002D92F3 /* DummyView.swift */,
+				FE5ED2492A33C0F300C9E3D7 /* ImagePickerView.swift */,
 			);
 			path = "UI Elements";
 			sourceTree = "<group>";
@@ -409,9 +412,9 @@
 				FE4CB0C72A421B6F000B9988 /* Unused */,
 				FE4CB0C12A41005A000B9988 /* SurveyBuildingsView.swift */,
 				FEEBA5CF29DF8C9A00C0015B /* SurveyHazardForm.swift */,
-				FE5B712E29E0BAEA002D92F3 /* SurveyDropdown.swift */,
-				FE5ED2492A33C0F300C9E3D7 /* ImagePickerView.swift */,
 				FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */,
+				FE5B712E29E0BAEA002D92F3 /* SurveyDropdown.swift */,
+				FE4CB0C82A435AAC000B9988 /* SurveyUnlistedBuilding.swift */,
 			);
 			path = Survey;
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				FEE155F92A1831C200398DCD /* RecordingButton.swift in Sources */,
 				FE620E9F2A0C1FC90073B8F0 /* RealtimeWalkingData.swift in Sources */,
 				FECE8F122A29185C00BA6B73 /* EditHazardReportView.swift in Sources */,
+				FE4CB0C92A435AAC000B9988 /* SurveyUnlistedBuilding.swift in Sources */,
 				FE5ED2512A37A3B500C9E3D7 /* OnboardingView.swift in Sources */,
 				FE5B718429E9F2AD002D92F3 /* FirebaseManager.swift in Sources */,
 				FE5B718829E9FD21002D92F3 /* GeneralWalkingData.swift in Sources */,
