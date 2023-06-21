@@ -70,10 +70,10 @@ struct GeneralWalkingData {
     /// Retrieves the timestamp as a sorting- and human-friendly string.
     ///
     /// ### Format
-    /// `yyyyMMdd-HHmmss`
+    /// `yyyyMMdd-HHmmss` (similar to ISO 8601)
     /// Example: `20230115-233405
     ///
-    func timestampToDateInt() -> String {
+    func timestampToDateIso() -> String {
         let date = Date(timeIntervalSince1970: timestamp)
         let dateFormatter = DateFormatter()
         

@@ -3,11 +3,18 @@ import MapKit
 import UIKit
 import SkeletonUI
 
+/// View that shows nearby buildings and allows user to select one they're in.
+///
+/// ### Author & Version
+/// Seung-Gu Lee (seunggu@umich.edu), last modifiedJun 21, 2023
+///
 struct SurveyBuildingsView: View {
     
     @ObservedObject var buildings: BuildingsLoader
     
     var deviceCoordinate: CLLocationCoordinate2D
+    
+    /// Area to be showed in map, configured in `init`
     @State private var region: MKCoordinateRegion
     
     @Binding var showSurvey: Bool
@@ -43,7 +50,7 @@ struct SurveyBuildingsView: View {
                     }
                     
                     VStack {
-                        
+                        // Info
                         Text("Please select the building you're currently in.")
                             .font(.system(size: 16))
                             .padding(.top, 12)
@@ -177,7 +184,7 @@ struct SurveyBuildingsView: View {
                     .background(Color(.black))
                     .cornerRadius(10)
                     .opacity(0.9)
-//
+                
 //                ZStack {
 //                    Image(systemName: "circle.fill")
 //                        .imageScale(.large)

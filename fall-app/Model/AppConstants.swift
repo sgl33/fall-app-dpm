@@ -3,7 +3,7 @@ import Foundation
 /// Class that stores global variables of the app as static variables, used in multiple files.
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified May 31, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 21 2023
 ///
 class AppConstants {
     /// Types of hazards to be shown
@@ -20,6 +20,7 @@ class AppConstants {
     /// Values of hazard intensities. Size must match that of `optionTexts`.
     static let optionValues: [Int] = [0, 1, 2, 3]
     
+    /// Node.js server
     static let serverProtocol: String = "http"
     static let serverAddress: String = "35.193.174.156"
     static let serverPort: Int = 3000

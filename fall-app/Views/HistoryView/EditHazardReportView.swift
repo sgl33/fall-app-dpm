@@ -1,23 +1,27 @@
-//
-//  EditHazardReportView.swift
-//  fall-app
-//
-//  Created by Seung-Gu Lee on 6/1/23.
-//
-
 import SwiftUI
 
+/// View to edit existing hazard reports.
+///
+/// ### Author & Version
+/// Seung-Gu Lee (seunggu@umich.edu), last modifiedJun 21, 2023
+///
 struct EditHazardReportView: View {
+    
     var generalData: GeneralWalkingData
+    
+    /// Call `self.presentationMode.wrappedValue.dismiss()` to close this view.
     @Environment(\.presentationMode) var presentationMode
+    
+    /// Refresh parent view (`WalkingRecordView`)
     @Binding var toggleToRefresh: Bool
-    @State var intensity: [Int] = AppConstants.defaultHazardIntensity
+    
+    @State var intensity: [Int]
+    
     @State var showSubmittedAlert: Bool = false
     
     /// Constructor
     init(generalData: GeneralWalkingData,
          toggleToRefresh: Binding<Bool>) {
-//        self._generalData = State<GeneralWalkingData>(initialValue: generalData)
         self.generalData = generalData
         self._toggleToRefresh = toggleToRefresh
         

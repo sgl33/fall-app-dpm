@@ -10,7 +10,15 @@ import UIKit
 ///   // handle image (UIImage)
 /// }
 /// ```
-///
+/// Example:
+/// ```
+/// var myImage: UIImage
+/// ImagePickerView() { image in
+///     myImage = image
+/// }
+/// ```
+/// See `SurveyHazardForm` and `HazardImageView` for examples.
+/// 
 /// ### Author & Version
 /// From Stack Overflow (https://stackoverflow.com/q/75230875/) , retrieved Jun 9, 2023
 /// Modified by Seung-Gu Lee

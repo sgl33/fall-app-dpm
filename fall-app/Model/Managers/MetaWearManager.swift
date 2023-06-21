@@ -12,7 +12,7 @@ import MetaWearCpp
 /// ```
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified Apr 15, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 21, 2023
 ///
 class MetaWearManager
 {
@@ -28,14 +28,16 @@ class MetaWearManager
     /// List of document names of realtime (gyroscope and location) data
     static var realtimeDataDocNames: [String] = []
     
+    /// Whether walking recording or not
     static var recording: Bool = false
+    
     
     /// Scans the board and updates the status on`cso`.
     static func scanBoard(cso: ConnectionStatusObject) {
         print("Scanning...")
         cso.setStatus(status: ConnectionStatus.scanning)
         
-        let signalThreshold = -70
+        let signalThreshold = -73
         MetaWearScanner.shared.startScan(allowDuplicates: true) { (d) in
             // Close sensor found?
             if d.rssi > signalThreshold {
@@ -69,15 +71,12 @@ class MetaWearManager
                             rateLimit: 60,
                                                                     rateLimitId: "sensorDisconnectAlert")
                         }
-                            
-                        
                     }
                 }
                 MetaWearManager.device = d
                 MetaWearManager.device.remember()
             }
         }
-//        MetaWearManager.locationManager.startRecording()
     }
     
     /// Flashes blue LED on board, to identify boards.
@@ -127,7 +126,6 @@ class MetaWearManager
     
     /// Starts recording the gyroscope and location data.
     /// Non-static function. Usage: `MetaWearManager().startRecording()`
-    ///
     func startRecording() {
         // Reset
         MetaWearManager.realtimeData.resetData()
@@ -144,11 +142,11 @@ class MetaWearManager
         
         // Record
         mbl_mw_datasignal_subscribe(signal, bridge(obj: self)) { (context, data) in
+            // Get and add data
             let gyroscope: MblMwCartesianFloat = data!.pointee.valueAs()
             let location = MetaWearManager.locationManager.getLocation()
             MetaWearManager.realtimeData.addData(RealtimeWalkingDataPoint(gyroscope: gyroscope,
                                                              location: location))
-//            print("gyroscope received: \(gyroscope.x)")
             
             // Split it by 2000 data points (40 sec)
             if MetaWearManager.realtimeData.size() > 2000 {
@@ -205,9 +203,9 @@ class MetaWearManager
         MetaWearManager.realtimeData.resetData()
     }
     
-    /// Stops recording the gyroscope and location data.
-    /// Called when user presses "Stop Recording".
-    /// Note that this does not upload any data to the database; `sendHazardReport` must be called separately.
+    /// Stops recording the gyroscope and location data. Called when user presses "Stop Recording".
+    ///
+    /// Note: This does not upload any data to the database; `sendHazardReport` must be called separately.
     ///
     /// Non-static function. Usage: `MetaWearManager().startRecording()`
     ///
@@ -220,7 +218,7 @@ class MetaWearManager
         MetaWearManager.recording = false
     }
     
-    /// Updates `bso` the battery percentage as string, e.g. `75%`.
+    /// Gets battery data from sensor and updates `bso`
     static func getBattery(bso: BatteryStatusObject) {
         if(MetaWearManager.connected()) {
             mbl_mw_settings_get_battery_state_data_signal(MetaWearManager.device.board).read().continueWith(.mainThread) {

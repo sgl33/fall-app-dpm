@@ -1,12 +1,10 @@
-//
-//  SurveyFloorPlanView.swift
-//  fall-app
-//
-//  Created by Seung-Gu Lee on 6/20/23.
-//
-
 import SwiftUI
 
+/// Popup view that shows the users the floor plan and allows users to select specific location on the floor plan
+///
+/// ### Author & Version
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 21, 2023
+///
 struct SurveyFloorPlanView: View {
     
     @Binding var showSurvey: Bool
@@ -35,6 +33,7 @@ struct SurveyFloorPlanView: View {
                 if imageLoader.image.size.width > 0 {
                     GeometryReader { metrics in
                         ZStack {
+                            // Image
                             Image(uiImage: imageLoader.image)
                                 .resizable()
                                 .frame(width: metrics.size.width,

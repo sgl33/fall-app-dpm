@@ -3,28 +3,6 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
 
-/// Connects to Firebase on app launch
-///
-/// ### Usage
-/// ```
-/// struct YourApp: App {
-///     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-///     // stuff...
-/// }
-/// ```
-///
-/// ### Author & Version
-/// Provided by Firebase, as of Apr. 14, 2023.
-/// Modified by Seung-Gu Lee, last modified Jun. 1, 2023
-///
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions:
-                        [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
-}
 
 /// Handles all Cloud Firestore-related actions.
 ///
@@ -93,7 +71,7 @@ class FirebaseManager {
                           buildingHazardLocation: [Double] // (x, y)
     ) {
         var ref: DocumentReference? = nil;
-        let docName: String = String(rec.timestampToDateInt());
+        let docName: String = String(rec.timestampToDateIso());
         
         db.collection("users").document(rec.user_id ?? "")
             .collection("records").document(docName).setData([
@@ -116,8 +94,9 @@ class FirebaseManager {
         }
     }
     
-    /// Edits an existing hazard report.
-    /// `rec` must have a valid `docName` field
+    /// Edits an existing hazard report from `rec`.
+    /// Note: `rec` must have a valid `docName` field
+    ///
     static func editHazardReport(rec: GeneralWalkingData) {
         var ref: DocumentReference? = nil;
         
@@ -169,8 +148,8 @@ class FirebaseManager {
     /// // ...
     /// FirestoreHandler.getRecords(arr: arr)
     /// ```
-    static func getRecords(arr: WalkingRecordsArr) {
-        arr.startFetching()
+    static func getRecords(loader: WalkingRecordsLoader) {
+        loader.startFetching()
         db.collection("users").document(Utilities.deviceId())
             .collection("records")
             .whereField("user_id", isEqualTo: UIDevice.current.identifierForVendor?.uuidString)
@@ -180,7 +159,8 @@ class FirebaseManager {
                     print("Error getting documents: \(err)")
                 }
                 else {
-                    for document in querySnapshot!.documents {
+                    for document in querySnapshot!.documents { // for each doc
+                        // Get data
                         let hazards = document.get("hazards") as? [String: Int];
                         let timestamp = document.get("timestamp") as? Double;
                         let realtimeDocNames = document.get("gscope_data") as? [String]
@@ -194,14 +174,15 @@ class FirebaseManager {
                             hazards_intensity.append(intensity);
                         }
                         
-                        arr.append(item: GeneralWalkingData(docName: document.documentID,
+                        // Add data
+                        loader.append(item: GeneralWalkingData(docName: document.documentID,
                             hazards_type: hazards_type,
                                                             hazards_intensity: hazards_intensity,
                                                             timestamp: timestamp ?? 0,
                                                             realtimeDocNames: realtimeDocNames ?? ["not_found"],
                                                             image_id: imageId ?? ""));
                     }
-                    arr.doneFetching()
+                    loader.doneFetching()
                 }
             }
     }
@@ -391,7 +372,7 @@ class FirebaseManager {
         }
     }
     
-    /// Retrieves image from Firebase Storage (`building_floor_plans`) using building ID and image name.
+    /// Retrieves image from Firebase Storage (`building_floor_plans`) using building ID and image filename.
     static func loadFloorPlanImage(buildingId: String, image: String, loader: ImageLoader) {
         loader.loading = true
         let ref = storage.reference(withPath: "building_floor_plans/\(buildingId)/\(image)")

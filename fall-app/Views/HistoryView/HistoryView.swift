@@ -8,7 +8,7 @@ import SkeletonUI
 ///
 struct HistoryView: View
 {
-    @StateObject var records = WalkingRecordsArr();
+    @StateObject var records = WalkingRecordsLoader();
     @State var toggleToRefresh: Bool = false
     
     var body: some View {
@@ -21,16 +21,16 @@ struct HistoryView: View
                     if records.isDoneFetching() { // done loading
                         // Content
                         VStack {
-                            /// TEST ONLY
-                            //                        NavigationLink(destination: MultiRecordsView()) {
-                            //                            HStack {
-                            //                                Text("View records from all trips")
-                            //                                Image(systemName: "arrow.right")
-                            //                                    .imageScale(.small)
-                            //                            }
-                            //                        }
-                            //                        Spacer()
-                            //                            .frame(height: 16)
+                            /// TEST ONLY - show all records on database
+//                        NavigationLink(destination: MultiRecordsView()) {
+//                            HStack {
+//                                Text("View records from all trips")
+//                                Image(systemName: "arrow.right")
+//                                    .imageScale(.small)
+//                            }
+//                        }
+//                        Spacer()
+//                            .frame(height: 16)
                             
                             let numRecs = records.generalDataArr.count;
                             Text(String(numRecs) + " record(s) found.")
@@ -43,8 +43,6 @@ struct HistoryView: View
                                     RecordItem(generalData: records.generalDataArr[numRecs - index - 1])
                                 }
                             }
-                            
-                            
                         }
                     }
                     else { // still loading
@@ -73,8 +71,6 @@ struct HistoryView: View
                         }
                     }
                 } // ScrollView
-//                .frame(width: metrics.size.width, alignment: .center)
-//                .frame(minWidth: 360)
                 .navigationTitle(Text("Walking History"))
                 .refreshable {
                     toggleToRefresh.toggle()
@@ -85,7 +81,6 @@ struct HistoryView: View
             .onAppear {
                 getRecords()
             }
-//            .frame(width: metrics.size.width)
             .padding([.horizontal], 0)
         } // GeometryReader
     }
@@ -94,7 +89,7 @@ struct HistoryView: View
     func getRecords() {
         records.clearArr()
         FirebaseManager.connect()
-        FirebaseManager.getRecords(arr: records)
+        FirebaseManager.getRecords(loader: records)
     }
     
     /// Returns a dictionary where key = date (Unix timestamp of start of day) and value = array of data from that date.

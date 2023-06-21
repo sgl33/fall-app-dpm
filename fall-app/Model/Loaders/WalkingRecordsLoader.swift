@@ -4,7 +4,7 @@ import Foundation
 ///
 /// Create a `@StateObject` of this type, and pass it by reference to the `FirestoreHandler`.
 ///
-class WalkingRecordsArr: ObservableObject {
+class WalkingRecordsLoader: ObservableObject {
     
     var generalDataArr: [GeneralWalkingData] = [];
     

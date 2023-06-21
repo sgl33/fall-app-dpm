@@ -18,10 +18,12 @@ struct WalkingRecordView: View {
 
         ZStack {
             VStack {
+                /// Map
                 MapPolylineView(realtimeData.data.getEncodedPolyline(),
                         hazardEncountered: generalData.hazardEncountered(),
                         hazardLocation: realtimeData.data.getFinalLocation())
                 
+                /// Info
                 VStack {
                     Spacer()
                         .frame(height: 16)
@@ -79,6 +81,7 @@ struct WalkingRecordView: View {
                     }
                     .frame(maxHeight: 160)
                     
+                    /// Hazard photo (button)
                     if generalData.image_id != "" {
                         NavigationLink(destination: HazardImageView(imageId: generalData.image_id)) {
                                 IconButtonInner(iconName: "photo", buttonText: "View Hazard Photo")

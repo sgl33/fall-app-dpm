@@ -127,12 +127,12 @@ struct DeviceView: View {
                         .foregroundColor(Utilities.isDarkMode() ? Color(white: 0.8) : Color(white: 0.2))
                         .padding(.top, 4)
                 }
-            }
+            } // VStack
             
             // Modal: scanning
             if(connectionStatus.showModal()) {
                 Spacer()
-                    .frame(width: .infinity, height: .infinity)
+                    .frame(width: .infinity, height: .infinity) // TODO FIX invalid frame dimension?
                     .background(Color(white: 0).opacity(0.65))
                 
                 VStack {
@@ -174,15 +174,16 @@ struct DeviceView: View {
                 .onDisappear {
                     MetaWearManager.getBattery(bso: bso)
                 }
-            }
-        }
+            } // if (scanning)
+        } // ZStack
 
-    }
+    } // body
     
     
 }
 
 // Preview
+/// Physical device required for it to actually function.
 struct DeviceView_Previews: PreviewProvider {
     static var previews: some View {
         DeviceView()

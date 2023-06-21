@@ -6,15 +6,15 @@ import SwiftUI
 /// ```
 /// RecordItem(generalData: ...)
 /// ```
+/// Used in `HistoryView`.
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified May 15, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 21 2023
 ///
 struct RecordItem: View {
     
     var generalData: GeneralWalkingData
 
-    
     var body: some View {
         NavigationLink(destination: WalkingRecordView(generalData: generalData)) {
             HStack {
@@ -47,7 +47,7 @@ struct RecordItem: View {
                         .foregroundColor(Color(white: 0.5))
                 }
                 .frame(width: 340)
-                .background(darkMode() ? Color(white: 0.1) : Color(white: 0.9))
+                .background(Utilities.isDarkMode() ? Color(white: 0.1) : Color(white: 0.9))
                 .cornerRadius(12)
                 .padding(.bottom, 8)
                 
@@ -56,13 +56,8 @@ struct RecordItem: View {
             }
             
         }
-        .foregroundColor(darkMode() ? .white : .black)
+        .foregroundColor(Utilities.isDarkMode() ? .white : .black)
         
         
-    }
-    
-    /// Detects if dark mode is enabled or not.
-    func darkMode() -> Bool {
-        return UITraitCollection.current.userInterfaceStyle == .dark
     }
 }

@@ -3,8 +3,6 @@ import MapKit
 
 /// Object used to load multiple walking sessions at once.
 ///
-/// ### Usage
-///
 /// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified May 22, 2023
 ///
@@ -33,12 +31,15 @@ class MultiWalkingLoader: ObservableObject {
         }
     }
     
+    
     func reset() {
         realtimeDataLoaded = 0
         isLoading = false
         realtimeLoader = []
     }
     
+    /// Gets encoded polyline of multiple records
+    /// For more information about encoded polylines, see https://developers.google.com/maps/documentation/utilities/polylinealgorithm
     func getEncodedPolylines() -> [String] {
         var arr: [String] = []
         var i: Int = 0

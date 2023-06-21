@@ -3,6 +3,9 @@ import CoreLocation
 
 /// An interface for location data. Handles all location-related actions.
 ///
+/// Note: In this project, an instance of this class is stored in the `MetaWearManager` class.
+/// To call any functions here, use `MetaWearManager.locationManager`
+///
 /// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
 ///

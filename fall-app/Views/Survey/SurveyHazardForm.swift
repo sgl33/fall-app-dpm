@@ -3,11 +3,10 @@ import PhotosUI
 
 
 
-/// Popup view that asks users the details about the fall risk if they responded "yes"
-/// to the first view.
+/// Popup view that asks users the details about the fall risk after user selected building & floor.
 ///
 /// ### Author & Version
-/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 9, 2023
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 21, 2023
 ///
 struct SurveyHazardForm: View {
     @Binding var showSurvey: Bool
@@ -36,18 +35,6 @@ struct SurveyHazardForm: View {
     
     var body: some View {
         VStack {
-            // Back button (at the top)
-//            HStack {
-//                Button(action: { // back
-//                    showPopup2 = false;
-//                    sendHazardReport(ignoreWarning: true)
-//                }) {
-//                    Spacer().frame(width: 16)
-//                    Text("Cancel")
-//                    Spacer()
-//                }
-//            }.padding(.top, 14)
-            
             // Scroll view
             ScrollView(.vertical, showsIndicators: false)
             {
@@ -57,8 +44,6 @@ struct SurveyHazardForm: View {
                         .padding(.top, 24)
                         .padding(.bottom, 20)
                         .multilineTextAlignment(.center)
-                    
-//                    Spacer().frame(width: 36)
                 }
                 
                 // Hazards form
@@ -158,6 +143,7 @@ struct SurveyHazardForm: View {
 }
 
 
+/// OBSOLETE
 /// Popup view that asks users if they experienced fall risk.
 ///
 /// ### Author & Version

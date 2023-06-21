@@ -1,12 +1,10 @@
-//
-//  HazardImageView.swift
-//  fall-app
-//
-//  Created by Seung-Gu Lee on 6/12/23.
-//
-
 import SwiftUI
 
+/// View to see hazard images and retake them if needed.
+///
+/// ### Author & Version
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 12,  2023
+///
 struct HazardImageView: View {
     var imageId: String
     @ObservedObject var imageLoader: ImageLoader = ImageLoader()

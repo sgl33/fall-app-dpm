@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Shows multiple walking records on a map.
-/// Shown when pressing "View records from all trips"
+/// Shown when pressing "View records from all trips" FOR TESTING ONLY.
 ///
 /// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified May 22, 2023

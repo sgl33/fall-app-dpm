@@ -20,7 +20,10 @@ class Utilities {
     }
 }
 
+
 extension Date {
+    /// Returns 00:00:00 of today as a `Date` object
+    /// Usage: `Date().startOfDay`
     var startOfDay: Date {
         return Calendar.current.startOfDay(for: self)
     }

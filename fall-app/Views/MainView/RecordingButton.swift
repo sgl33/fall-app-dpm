@@ -1,9 +1,9 @@
 import SwiftUI
 
+/// OBSOLETE: no longer used.
 /// The "Start Walking" / "Stop Walking" button
-/// OBSOLETE!! no longer used.
 ///
-/// /// ### Author & Version
+/// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified May 31, 2023
 ///
 struct RecordingButton: View

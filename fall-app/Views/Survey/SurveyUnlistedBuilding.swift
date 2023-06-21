@@ -1,12 +1,10 @@
-//
-//  SurveyUnlistedBuilding.swift
-//  fall-app
-//
-//  Created by Seung-Gu Lee on 6/21/23.
-//
-
 import SwiftUI
 
+/// Popup view that asks users details about a building if user selected  "Building is unlisted"
+///
+/// ### Author & Version
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 21, 2023
+///
 struct SurveyUnlistedBuilding: View {
     
     @Binding var showSurvey: Bool

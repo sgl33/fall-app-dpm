@@ -1,24 +1,29 @@
-//
-//  SettingsView.swift
-//  fall-app
-//
-//  Created by Seung-Gu Lee on 5/31/23.
-//
-
 import SwiftUI
 import UIKit
 
+/// View to modify settings of the application.
+///
+/// ### Author & Version
+/// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 21, 2023
+///
 struct SettingsView: View {
     
+    /// Minimum time required for walking detection to trigger.
+    /// For example, if this is 45, users must walk for at least 45 seconds continuously for recording to begin.
+    /// Same thing for automatically ending the recording.
     @AppStorage("walkingDetectionSensitivity")
     var walkingDetectionSensitivity: Int = 45
     
+    /// Receive walking detection notifications
+    /// Used in`MetaWearManager`.
     @AppStorage("receiveWalkingDetectionNotifications")
     var receiveWalkingDetectionNotifications: Bool = true
     
+    /// Receive error notifications such as "sensor unexpectedly disconnected".
     @AppStorage("receiveErrorNotifications")
     var receiveErrorNotifications: Bool = true
     
+    /// Some variable for testing purposes.
     @State var test: String = ""
 
     var body: some View {
@@ -87,7 +92,7 @@ struct SettingsView: View {
         }
     } // NavigationView
     
-    
+    /// Test server call
     func testServerCall() {
         let url = URL(string: "\(AppConstants.getUrl())/calculate/15")!
 
