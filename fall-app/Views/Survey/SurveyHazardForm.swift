@@ -1,8 +1,6 @@
 import SwiftUI
 import PhotosUI
 
-
-
 /// Popup view that asks users the details about the fall risk after user selected building & floor.
 ///
 /// ### Author & Version
@@ -26,12 +24,16 @@ struct SurveyHazardForm: View {
     /// Show "no hazard selected" alert?
     @State var showAlert: Bool = false;
     
+    /// Show "no photo uploaded" alert?
+    @State var showAlert2: Bool = false;
+    
     /// Tab selection number on `ContentView`
     @Binding var tabSelection: Int
     
     var buildingId: String
     var buildingFloor: String
-    var buildingHazardLocation: [Double]
+    var buildingRemarks: String = ""
+    var buildingHazardLocation: String
     
     var body: some View {
         VStack {
@@ -55,6 +57,12 @@ struct SurveyHazardForm: View {
                                     value: $intensity[index])
                 }
                 
+                // Disclaimer text
+                Text("To help us identify and analyze the fall risk,\nplease take a photo of the hazard.")
+                    .font(.system(size: 14))
+                    .padding(.top, 12)
+                    .multilineTextAlignment(.center)
+                
                 // Take Photo
                 Button(action: {
                     showPhotoPicker = true
@@ -72,22 +80,39 @@ struct SurveyHazardForm: View {
                 // Disclaimer text
                 Text("This form is not monitored. If you need medical assistance,\nplease call 911 or your local healthcare provider.")
                     .font(.system(size: 10))
-                    .padding(.top, 12)
+                    .padding(.top, 8)
                     .multilineTextAlignment(.center)
+                
+                // Submit Button
+                Button(action: {
+                    sendHazardReport(mustSelect: true)
+                }) {
+                    IconButtonInner(iconName: "paperplane.fill", buttonText: "Submit")
+                }.buttonStyle(IconButtonStyle(backgroundColor: .yellow, foregroundColor: .black))
+                .padding(.top, 4)
+                .padding(.bottom, 16)
             }
-            
-            // Submit Button
-            Button(action: sendHazardReport) {
-                IconButtonInner(iconName: "paperplane.fill", buttonText: "Submit")
-            }.buttonStyle(IconButtonStyle(backgroundColor: .yellow, foregroundColor: .black))
-            .padding(.top, 4)
-            .padding(.bottom, 16)
             
             // Alert
             .alert("No Hazard Selected", isPresented: $showAlert, actions: {
-                Button("Close",  role: .cancel, action: { showAlert = false; })
+                Button("Yes, submit",  role: .destructive, action: {
+                    sendHazardReport(mustSelect: false,
+                                     mustUploadPhoto: false)
+                    showAlert = false;
+                })
+                Button("No, cancel",  role: .cancel, action: { showAlert = false; })
             }, message: {
-                Text("You have not selected any hazards to report. Please press \"Cancel\" if you have none to report.")
+                Text("You have not selected any hazards to report. Are you sure you want to report no hazard?")
+            })
+            .alert("No Photo Uploaded", isPresented: $showAlert2, actions: {
+                Button("Yes, submit",  role: .destructive, action: {
+                    sendHazardReport(mustSelect: false,
+                                     mustUploadPhoto: false)
+                    showAlert2 = false;
+                })
+                Button("No, cancel",  role: .cancel, action: { showAlert2 = false; })
+            }, message: {
+                Text("You have not uploaded a photo of the hazard. Photos help us identify and analyze the fall risk. Are you sure you want to submit a report without a photo?")
             })
             .navigationTitle(Text("Report Fall Risk"))
         }
@@ -104,12 +129,17 @@ struct SurveyHazardForm: View {
                       
     
     /// Sends hazard report to Firebase and closes the survey.
-    func sendHazardReport() {
+    func sendHazardReport(mustSelect: Bool = true,
+                          mustUploadPhoto: Bool = true) {
         // Hazard not selected?
-//        if(noHazardSelected()) {
-//            showAlert = true;
-//            return;
-//        }
+        if noHazardSelected() && mustSelect {
+            showAlert = true;
+            return;
+        }
+        if hazardImageId == "" && mustUploadPhoto {
+            showAlert2 = true;
+            return;
+        }
         
         WalkingDetectionManager.enableDetection(true)
         MetaWearManager.sendHazardReport(hazards: hazards,
@@ -117,6 +147,7 @@ struct SurveyHazardForm: View {
                                          imageId: hazardImageId,
                                          buildingId: buildingId,
                                          buildingFloor: buildingFloor,
+                                         buildingRemarks: buildingRemarks,
                                          buildingHazardLocation: buildingHazardLocation)
         showSurvey = false;
         Toast.showToast("Submitted. Thank you!")

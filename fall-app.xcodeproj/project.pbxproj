@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		746D402A6CCF760677C71C88 /* Pods_fall_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08330BF678E50607484AD5FE /* Pods_fall_app.framework */; };
+		FE24889B2A4C92EA003CD386 /* SurveyBuildingInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE24889A2A4C92EA003CD386 /* SurveyBuildingInfoView.swift */; };
 		FE4CB0C22A41005A000B9988 /* SurveyBuildingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C12A41005A000B9988 /* SurveyBuildingsView.swift */; };
 		FE4CB0C42A4101F0000B9988 /* BuildingsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C32A4101F0000B9988 /* BuildingsLoader.swift */; };
 		FE4CB0C62A421B6B000B9988 /* SurveyFloorPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */; };
@@ -140,6 +141,7 @@
 		08330BF678E50607484AD5FE /* Pods_fall_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fall_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		397F8D1E91AF2093EB506942 /* Pods-fall-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fall-app.debug.xcconfig"; path = "Target Support Files/Pods-fall-app/Pods-fall-app.debug.xcconfig"; sourceTree = "<group>"; };
 		C77252FD3EFC01778CE4B886 /* Pods-fall-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fall-app.release.xcconfig"; path = "Target Support Files/Pods-fall-app/Pods-fall-app.release.xcconfig"; sourceTree = "<group>"; };
+		FE24889A2A4C92EA003CD386 /* SurveyBuildingInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyBuildingInfoView.swift; sourceTree = "<group>"; };
 		FE4CB0C12A41005A000B9988 /* SurveyBuildingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyBuildingsView.swift; sourceTree = "<group>"; };
 		FE4CB0C32A4101F0000B9988 /* BuildingsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsLoader.swift; sourceTree = "<group>"; };
 		FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyFloorPlanView.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */,
 				FE5B712E29E0BAEA002D92F3 /* SurveyDropdown.swift */,
 				FE4CB0C82A435AAC000B9988 /* SurveyUnlistedBuilding.swift */,
+				FE24889A2A4C92EA003CD386 /* SurveyBuildingInfoView.swift */,
 			);
 			path = Survey;
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				FE620E922A0995FA0073B8F0 /* MetaWearManager.swift in Sources */,
 				FE5B713329E202F3002D92F3 /* Toast.swift in Sources */,
 				FE5B713529E7384F002D92F3 /* SurveyMultiCheckbox.swift in Sources */,
+				FE24889B2A4C92EA003CD386 /* SurveyBuildingInfoView.swift in Sources */,
 				FE5B712D29E0B61D002D92F3 /* SurveyTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1019,7 +1023,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = umich.dpm.safesteps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1062,7 +1066,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = umich.dpm.safesteps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

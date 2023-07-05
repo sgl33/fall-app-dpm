@@ -20,7 +20,8 @@ struct EditHazardReportView: View {
     @State var showSubmittedAlert: Bool = false
     
     /// Constructor
-    init(generalData: GeneralWalkingData,
+    init(generalData:
+         GeneralWalkingData,
          toggleToRefresh: Binding<Bool>) {
         self.generalData = generalData
         self._toggleToRefresh = toggleToRefresh

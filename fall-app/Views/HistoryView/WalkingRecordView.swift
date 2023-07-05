@@ -13,6 +13,7 @@ struct WalkingRecordView: View {
     @State var toggleToRefresh: Bool = false
     
     @State var showSubmittedAlert: Bool = false
+    @State var showPhotoPicker: Bool = false
     
     var body: some View {
 
@@ -90,12 +91,8 @@ struct WalkingRecordView: View {
                         .padding(.bottom, 8)
                     }
                     else {
-                        NavigationLink(destination: ImagePickerView() { image in
-                            let uuid = UUID().uuidString
-                            generalData.image_id = uuid
-                            FirebaseManager.editHazardReport(rec: generalData)
-                            FirebaseManager.uploadHazardImage(uuid: uuid, image: image)
-                            showSubmittedAlert = true
+                        Button(action: {
+                            showPhotoPicker = true
                         }) {
                                 IconButtonInner(iconName: "camera.fill", buttonText: "Add Photo")
                         }
@@ -119,13 +116,22 @@ struct WalkingRecordView: View {
             }, message: {
                 Text("Hazard reported updated! Please note that it may take a few minutes for changes to be reflected on the app.")
             })
+            .sheet(isPresented: $showPhotoPicker) {
+                ImagePickerView() { image in
+                    let uuid = UUID().uuidString
+                    generalData.image_id = uuid
+                    FirebaseManager.editHazardReport(rec: generalData)
+                    FirebaseManager.uploadHazardImage(uuid: uuid, image: image)
+                    showSubmittedAlert = true
+                }.presentationDetents([.large])
+            }
             
             if realtimeData.isLoading {
                 Text("Loading...")
             }
-        }
-        
-    }
+        } // ZStack
+        .navigationBarTitleDisplayMode(.inline)
+    } // body
 }
 
 

@@ -77,7 +77,7 @@ struct SurveyBuildingsView: View {
                             }
                             else {
                                 ForEach(buildings.buildings) { building in
-                                    NavigationLink(destination: SurveyFloorPlanView(showSurvey: $showSurvey, building: building, tabSelection: $tabSelection)) {
+                                    NavigationLink(destination: SurveyBuildingInfoView(showSurvey: $showSurvey, tabSelection: $tabSelection, buildingId: building.id, buildingName: building.name, buildingFloors: building.floors)) {
                                         BuildingItem(id: building.id,
                                                      name: building.name,
                                                      address: building.address,
@@ -94,9 +94,9 @@ struct SurveyBuildingsView: View {
                         NavigationLink(destination: SurveyHazardForm(showSurvey: $showSurvey,
                                                                      hazards: AppConstants.hazards, hazardIcons: AppConstants.hazardIcons,
                                                                      tabSelection: $tabSelection,
-                                                                     buildingId: "",
+                                                                     buildingId: "OUTDOORS",
                                                                      buildingFloor: "",
-                                                                     buildingHazardLocation: [0.0, 0.0])) {
+                                                                     buildingHazardLocation: "")) {
                             IconButtonInner(iconName: "mountain.2.fill", buttonText: "I'm outdoors")
                         }.buttonStyle(IconButtonStyle(backgroundColor: .yellow,
                                                      foregroundColor: .black))

@@ -53,6 +53,49 @@ struct GeneralWalkingData {
         return dateFormatter.string(from: date)
     }
     
+    /// Retrieves the timestamp as a user-friendly string, relative to current date.
+    /// (Example: `Today, 1:30 PM`, `Yesterday, 2:53 PM`, `2 days ago, 11:05 AM`)
+    ///
+    func timestampToStringRelative() -> String {
+        // Get time
+        let tsDate = Date(timeIntervalSince1970: timestamp)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        let time = dateFormatter.string(from: tsDate)
+        
+        // Get relative date
+        let todayStart = Date().startOfDay.timeIntervalSince1970
+        let tsStart = tsDate.startOfDay.timeIntervalSince1970
+        let daysAgo = (Int(todayStart) - Int(tsStart)) / 86400
+        
+        if daysAgo == 0 {
+            return "Today, \(time)"
+        }
+        else if daysAgo == 1 {
+            return "Yesterday, \(time)"
+        }
+        else if daysAgo < 7 {
+            dateFormatter.dateFormat = "EEEE"
+            let dayOfWeek = dateFormatter.string(from: tsDate)
+            return "\(dayOfWeek), \(time)"
+        }
+        else {
+            dateFormatter.dateFormat = "yyyy"
+            let tsYear = dateFormatter.string(from: tsDate)
+            let todayYear = dateFormatter.string(from: Date())
+            if tsYear == todayYear {
+                dateFormatter.dateFormat = "MMM d (E)"
+                let date = dateFormatter.string(from: tsDate)
+                return "\(date), \(time)"
+            }
+            else {
+                dateFormatter.dateFormat = "MMM d, yyyy"
+                let date = dateFormatter.string(from: tsDate)
+                return "\(date), \(time)"
+            }
+        }
+    }
+    
     /// Retrieves the timestamp as a user-friendly string of date.
     ///
     /// ### Format
@@ -116,13 +159,31 @@ struct GeneralWalkingData {
         }
     }
     
+    
+    func countHazards() -> Int {
+        var index: Int = 0;
+        var count: Int = 0;
+        
+        for intensity in hazards_intensity {
+            if(intensity > 0) {
+                count += 1;
+            }
+            index += 1;
+        }
+        return count
+    }
+    
     /// Returns true if a hazard has been encountered, false otherwise.
     func hazardEncountered() -> Bool {
-        return hazards_intensity.reduce(0, +) != 0
+        return countHazards() != 0
     }
     
     /// Creates and returns a WalkingRecord object given two arrays.
     static func toRecord(type: [String], intensity: [Int]) -> GeneralWalkingData {
         return GeneralWalkingData(hazards_type: type, hazards_intensity: intensity);
+    }
+    
+    func photoAvailable() -> Bool {
+        return image_id != ""
     }
 }

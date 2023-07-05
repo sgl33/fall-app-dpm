@@ -13,7 +13,8 @@ struct Building: Identifiable {
     var address: String
     var latitude: Double
     var longitude: Double
-    var floorPlans: [String: String] // (floor name, floor plan image filename)
+    var floorPlans: [String: String] // OBSOLETE (floor name, floor plan image filename)
+    var floors: [String]
     
     /// Gets distance of building in feet, rounded down to nearest integer
     func getDistanceFeet(from: CLLocationCoordinate2D) -> Int {

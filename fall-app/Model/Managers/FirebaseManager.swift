@@ -66,9 +66,12 @@ class FirebaseManager {
                           realtimeDataDocNames: [String],
                           imageId: String,
                           lastLocation: [String:Double],
+                          startLocation: [String:Double],
+                          startTime: Double,
                           buildingId: String,
                           buildingFloor: String,
-                          buildingHazardLocation: [Double] // (x, y)
+                          buildingRemarks: String = "",
+                          buildingHazardLocation: String = ""
     ) {
         var ref: DocumentReference? = nil;
         let docName: String = String(rec.timestampToDateIso());
@@ -81,10 +84,13 @@ class FirebaseManager {
             "gscope_data": realtimeDataDocNames,
             "image_id": imageId,
             "last_loc": lastLocation,
+            "start_loc": startLocation,
+            "start_time": startTime,
             "building": ["building_id": buildingId,
                          "building_floor": buildingFloor,
-                         "hazard_location_x": buildingHazardLocation[0],
-                         "hazard_location_y": buildingHazardLocation[1]]
+                         "hazard_location": buildingHazardLocation,
+                         "hazard_remarks": buildingRemarks],
+            "walking_detection_sensitivity": UserDefaults.standard.integer(forKey: "walkingDetectionSensitivity")
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -326,10 +332,12 @@ class FirebaseManager {
                         let latitude = document.get("latitude") as? Double ?? 0
                         let longitude = document.get("longitude") as? Double ?? 0
                         let floorPlans = document.get("floor_plans") as? [String: String] ?? [:]
+                        let floors = document.get("floors") as? [String] ?? []
                         
                         if latitude > userLatitude - queryRadius && latitude < userLatitude + queryRadius {
                             loader.append(id: id, name: name, address: address,
-                                          latitude: latitude, longitude: longitude, floorPlans: floorPlans)
+                                          latitude: latitude, longitude: longitude,
+                                          floorPlans: floorPlans, floors: floors)
                         }
                     }
                     loader.sortByDistance(from: .init(latitude: userLatitude,

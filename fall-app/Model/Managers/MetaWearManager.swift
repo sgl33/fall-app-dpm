@@ -4,13 +4,6 @@ import MetaWearCpp
 
 /// Handles all MetaWear API-related actions.
 ///
-/// ### Usage
-/// Most functions are static functions. Functions are static unless otherwise indicated.
-/// ```
-/// FirestoreHandler.scanBoard() // static
-/// FirestoreHandler().startRecording() // non-static
-/// ```
-///
 /// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 21, 2023
 ///
@@ -18,6 +11,9 @@ class MetaWearManager
 {
     /// MetaWear device variable
     static var device: MetaWear!
+    
+    static var startLocation: [Double] = []
+    static var startTime: Double = 0
     
     /// RealtimeWalkingData object
     static var realtimeData: RealtimeWalkingData = RealtimeWalkingData()
@@ -140,6 +136,9 @@ class MetaWearManager
         mbl_mw_gyro_bmi160_set_odr(board, MBL_MW_GYRO_BOSCH_ODR_50Hz);
         mbl_mw_gyro_bmi160_write_config(board);
         
+        MetaWearManager.startLocation = MetaWearManager.locationManager.getLocation()
+        MetaWearManager.startTime = Date().timeIntervalSince1970
+        
         // Record
         mbl_mw_datasignal_subscribe(signal, bridge(obj: self)) { (context, data) in
             // Get and add data
@@ -168,7 +167,8 @@ class MetaWearManager
                                  imageId: String,
                                  buildingId: String = "",
                                  buildingFloor: String = "",
-                                 buildingHazardLocation: [Double] = [0.0, 0.0]) {
+                                 buildingRemarks: String = "",
+                                 buildingHazardLocation: String = "") {
         // Upload remaining realtime data
         let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
         let documentUuid = UUID().uuidString
@@ -180,6 +180,9 @@ class MetaWearManager
         let lastLocationDict: [String: Double] = ["latitude": lastLocation[0],
                                                   "longitude": lastLocation[1],
                                                   "altitude": lastLocation[2]]
+        let startLocationDict: [String: Double] = ["latitude": startLocation[0],
+                                                  "longitude": startLocation[1],
+                                                  "altitude": startLocation[2]]
         MetaWearManager.realtimeData.resetData()
         
         // Upload general data
@@ -188,8 +191,11 @@ class MetaWearManager
                                   realtimeDataDocNames: MetaWearManager.realtimeDataDocNames,
                                   imageId: imageId,
                                   lastLocation: lastLocationDict,
+                                  startLocation: startLocationDict,
+                                  startTime: startTime,
                                   buildingId: buildingId,
                                   buildingFloor: buildingFloor,
+                                  buildingRemarks: buildingRemarks,
                                   buildingHazardLocation: buildingHazardLocation)
     }
     

@@ -683,8 +683,8 @@
             filePath = "fall-app/Views/HistoryView/EditHazardReportView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "init(generalData:toggleToRefresh:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -693,22 +693,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "5226DFA3-E3BC-43B0-A2C6-2A22C834801A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "fall-app/Views/HistoryView/EditHazardReportView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "init(generalData:toggleToRefresh:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "117E9FD6-B676-421B-BDB2-E8AFE2F80873"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -724,6 +708,22 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "117E9FD6-B676-421B-BDB2-E8AFE2F80873"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "fall-app/Views/HistoryView/EditHazardReportView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "init(generalData:toggleToRefresh:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             uuid = "38B381A7-C7AD-4242-B618-A7998FCAFF9E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -731,8 +731,8 @@
             filePath = "fall-app/Views/HistoryView/EditHazardReportView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>

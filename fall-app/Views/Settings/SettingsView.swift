@@ -63,12 +63,15 @@ struct SettingsView: View {
                         footer: Text("Version " + (appVersion ?? "?"))) {
                     NavigationLink("About SafeSteps") {
                         WebView(url: URL(string: "https://google.com"))
+                            .navigationBarTitleDisplayMode(.inline)
                     }
                     NavigationLink("Help & Support") {
-                        WebView(url: URL(string: "https://google.com"))
+                        WebView(url: URL(string: "http://\(AppConstants.serverAddress)/\(AppConstants.serverPath)/guide.html"))
+                            .navigationBarTitleDisplayMode(.inline)
                     }
                     NavigationLink("Privacy Policy") {
                         WebView(url: URL(string: "http://\(AppConstants.serverAddress)/\(AppConstants.serverPath)/privacy-policy.html"))
+                            .navigationBarTitleDisplayMode(.inline)
                     }
                 }
                 
@@ -81,12 +84,12 @@ struct SettingsView: View {
                 }
                 
                 // Test
-                Section(header: Text("For Testing")) {
-                    Button("Send Request") {
-                        testServerCall()
-                    }
-                    Text(test)
-                }
+//                Section(header: Text("For Testing")) {
+//                    Button("Send Request") {
+//                        testServerCall()
+//                    }
+//                    Text(test)
+//                }
             } // form
             .navigationTitle(Text("Settings"))
         }
