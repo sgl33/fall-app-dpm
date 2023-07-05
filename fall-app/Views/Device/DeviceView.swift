@@ -41,9 +41,9 @@ struct DeviceView: View {
                             .padding(.bottom, -4)
                             .foregroundColor(Color(white: 0))
                         
-                        Text(connectionStatus.connected() ? "Connected" : "Disconnected")
-                            .font(.system(size: 12))
-                            .foregroundColor(Color(white: 0.2))
+                        Text(connectionStatus.connected() ? "\(MetaWearManager.device.mac ?? "Connected")" : "Disconnected")
+                            .font(.system(size: 11))
+                            .foregroundColor(Color(white: 0.35))
                         
                         Spacer()
                             .frame(height: 8)

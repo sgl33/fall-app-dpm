@@ -25,6 +25,7 @@ struct SettingsView: View {
     
     /// Some variable for testing purposes.
     @State var test: String = ""
+    @State var testBool: Bool = false
 
     var body: some View {
         NavigationView {
@@ -62,7 +63,7 @@ struct SettingsView: View {
                 Section(header: Text("App Info"),
                         footer: Text("Version " + (appVersion ?? "?"))) {
                     NavigationLink("About SafeSteps") {
-                        WebView(url: URL(string: "https://google.com"))
+                        WebView(url: URL(string: "http://\(AppConstants.serverAddress)/\(AppConstants.serverPath)/safesteps.html"))
                             .navigationBarTitleDisplayMode(.inline)
                     }
                     NavigationLink("Help & Support") {
@@ -84,12 +85,14 @@ struct SettingsView: View {
                 }
                 
                 // Test
-//                Section(header: Text("For Testing")) {
-//                    Button("Send Request") {
-//                        testServerCall()
-//                    }
-//                    Text(test)
-//                }
+                Section(header: Text("For Testing")) {
+                    Button("Send Request") {
+                        testServerCall()
+                    }
+                    NavigationLink(destination: OnboardingView(userOnboarded: $testBool)) {
+                        Text("OnboardingView")
+                    }
+                }
             } // form
             .navigationTitle(Text("Settings"))
         }

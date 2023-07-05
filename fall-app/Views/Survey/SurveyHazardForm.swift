@@ -95,22 +95,22 @@ struct SurveyHazardForm: View {
             
             // Alert
             .alert("No Hazard Selected", isPresented: $showAlert, actions: {
-                Button("Yes, submit",  role: .destructive, action: {
+                Button("Submit",  role: .destructive, action: {
                     sendHazardReport(mustSelect: false,
                                      mustUploadPhoto: false)
                     showAlert = false;
                 })
-                Button("No, cancel",  role: .cancel, action: { showAlert = false; })
+                Button("Cancel",  role: .cancel, action: { showAlert = false; })
             }, message: {
                 Text("You have not selected any hazards to report. Are you sure you want to report no hazard?")
             })
             .alert("No Photo Uploaded", isPresented: $showAlert2, actions: {
-                Button("Yes, submit",  role: .destructive, action: {
+                Button("Submit",  role: .destructive, action: {
                     sendHazardReport(mustSelect: false,
                                      mustUploadPhoto: false)
                     showAlert2 = false;
                 })
-                Button("No, cancel",  role: .cancel, action: { showAlert2 = false; })
+                Button("Cancel",  role: .cancel, action: { showAlert2 = false; })
             }, message: {
                 Text("You have not uploaded a photo of the hazard. Photos help us identify and analyze the fall risk. Are you sure you want to submit a report without a photo?")
             })

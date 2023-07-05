@@ -62,15 +62,35 @@ struct OnboardingView: View {
                 // continue button
                 if !name.isEmpty && age > 14 {
                     VStack {
+                        
                         Button(action: { page += 1 }) {
+                            IconButtonInner(iconName: "arrow.right", buttonText: "Continue")
+                        }
+                        .buttonStyle(IconButtonStyle(backgroundColor: .yellow,
+                                                      foregroundColor: .black))
+                        .padding(.bottom, 12)
+                        
+                        VStack {
                             HStack {
-                                Text("Continue")
-                                Image(systemName: "arrow.right")
-                                    .imageScale(.medium)
+                                Text("By continuing, you agree to the")
+                                    .padding(.trailing, -5)
+                                Link(destination: URL(string: "http://\(AppConstants.serverAddress)/\(AppConstants.serverPath)/tnc.html")!) {
+                                    Text("Terms and Conditions")
+                                        .bold()
+                                }
+                            }
+                            HStack {
+                                Text("and the")
+                                    .padding(.trailing, -5)
+                                Link(destination: URL(string: "http://\(AppConstants.serverAddress)/\(AppConstants.serverPath)/privacy-policy.html")!) {
+                                    Text("Privacy Policy.")
+                                        .bold()
+                                }
                             }
                         }
-                        .padding(.top, 16)
-                        .padding(.bottom, 36)
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(white: 0.5))
+                        .padding(.bottom, 16)
                     }
                 }
             } // VStack
@@ -82,7 +102,17 @@ struct OnboardingView: View {
         }
         // page 3
         else if page == 2 {
-            
+            VStack {
+                WebView(url: URL(string: "http://\(AppConstants.serverAddress)/\(AppConstants.serverPath)/onboarding.html")!)
+                Button(action: {
+                    continueOnboarding()
+                }) {
+                    IconButtonInner(iconName: "checkmark", buttonText: "Finish")
+                }
+                .buttonStyle(IconButtonStyle(backgroundColor: .yellow, foregroundColor: .black))
+                .padding(.top, 4)
+                .padding(.bottom, 16)
+            }
         }
     }
     
@@ -240,25 +270,20 @@ struct OnboardingView: View {
                     
                     // continue button
                     if !q1.isEmpty && !q3.isEmpty && !q5.isEmpty && !q7.isEmpty {
-                        Text("This is the end of the questionnaire, thank you for participating!")
+                        Text("This is the end of the questionnaire, thank you for participating! Almost there!")
                             .multilineTextAlignment(.center)
                             .padding(.top, 8)
                             .padding(.bottom, -2)
-                        Text("By submitting, you agree to the terms and conditions and the privacy policy of this application.")
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: 11))
+                            .frame(maxWidth: 360)
                         
-                        VStack {
-                            Button(action: continueOnboarding) {
-                                HStack {
-                                    Text("Submit & Continue to App")
-                                    Image(systemName: "arrow.right")
-                                        .imageScale(.medium)
-                                }
-                            }
-                            .padding(.top, 16)
-                            .padding(.bottom, 36)
+                        Button(action: {
+                            page += 1
+                        }) {
+                            IconButtonInner(iconName: "arrow.right", buttonText: "Continue")
                         }
+                        .buttonStyle(IconButtonStyle(backgroundColor: .yellow, foregroundColor: .black))
+                        .padding(.top, 4)
+                        .padding(.bottom, 16)
                     }
                     else {
                         Text("Please respond to all questions above.")
