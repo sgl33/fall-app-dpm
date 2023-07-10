@@ -2,6 +2,7 @@ import Foundation
 import CoreMotion
 
 /// Handles all actions related to walking detection.
+/// All functions are static.
 ///
 /// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified May 31, 2023
@@ -20,7 +21,7 @@ class WalkingDetectionManager {
     
     /// Time of continuous motion required (lower bound) to turn walking detection on/off
     /// e.g. if 10, device must be walking for 10 seconds to start automatic recording (same thing other way around)
-    static var timeToTrigger: Int = 60; // seconds
+    static var timeToTrigger: Int = 45; // seconds
 
     /// Initializes manager
     /// Must be called at least once to start listening to walking.
@@ -31,7 +32,8 @@ class WalkingDetectionManager {
     /// Called in `MainView.swift`
     ///
     static func initialize() {
-        if initialized { // already initialized
+        // already initialized
+        if initialized {
             return
         }
         
@@ -47,11 +49,13 @@ class WalkingDetectionManager {
         }
     }
     
+    /// Resets timestamp data of the manager.
     static func reset() {
         lastWalkingDetected = Date().timeIntervalSince1970
         lastStationaryDetected = Date().timeIntervalSince1970
     }
     
+    /// Sets whether walking detection is enabled or not.
     static func enableDetection(_ enable: Bool) {
         enabled = enable
     }
@@ -64,22 +68,21 @@ class WalkingDetectionManager {
             return
         }
         
-        // Debug
+        // FOR DEBUGGING
         let confidence: [CMMotionActivityConfidence? : String] = [.high : "High",
                                                                  .medium : "Medium",
                                                                  .low : "Low"]
-        
-        timeToTrigger = UserDefaults.standard.integer(forKey: "walkingDetectionSensitivity")
-        
-        /// DEBUG
         print("Walking: " + String(motion?.walking ?? false))
         print("Stationary: " + String(motion?.stationary ?? false))
         print("Driving: " + String(motion?.automotive ?? false))
         print("Confidence: " + confidence[motion?.confidence]!)
         
+        // Retrieve detection sensitivity settings
+        timeToTrigger = UserDefaults.standard.integer(forKey: "walkingDetectionSensitivity")
+        
         // update timestamps
         if motion?.confidence == .high {
-            if motion?.walking != nil { // is walking
+            if motion?.walking != nil {
                 if motion?.walking == true {
                     lastWalkingDetected = Date().timeIntervalSince1970
                 }
@@ -87,9 +90,6 @@ class WalkingDetectionManager {
                     lastStationaryDetected = Date().timeIntervalSince1970
                 }
             }
-//            if motion?.stationary != nil && motion?.stationary == true { // is stationary
-//                lastStationaryDetected = Date().timeIntervalSince1970
-//            }
         }
         
         // update walking status?
@@ -122,7 +122,7 @@ class WalkingDetectionManager {
                         let body = "Walking detected, but the sensor isn't connected. "
                             + "Please connect to an IMU sensor on the app."
                         NotificationManager.sendNotificationNow(title: title,
-                                                                body: body, rateLimit: 180, rateLimitId: "cannotStartSessionSensorDisconnected")
+                                                                body: body, rateLimit: 300, rateLimitId: "cannotStartSessionSensorDisconnected")
                     }
                     print("Cannot start session: sensor disconnected")
                     return
@@ -135,7 +135,7 @@ class WalkingDetectionManager {
                             + "Please enable location services to record your walking sessions."
                         NotificationManager.sendNotificationNow(title: title,
                                                                 body: body,
-                                                                rateLimit: 180, rateLimitId: "cannotStartSessionLocationDisabled")
+                                                                rateLimit: 300, rateLimitId: "cannotStartSessionLocationDisabled")
                     }
                     
                     print("Cannot start session: location disabled")

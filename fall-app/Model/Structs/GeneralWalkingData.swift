@@ -159,7 +159,7 @@ struct GeneralWalkingData {
         }
     }
     
-    
+    /// Returns the number of types of hazards reported
     func countHazards() -> Int {
         var index: Int = 0;
         var count: Int = 0;

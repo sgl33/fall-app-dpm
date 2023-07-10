@@ -23,7 +23,7 @@ struct SettingsView: View {
     @AppStorage("receiveErrorNotifications")
     var receiveErrorNotifications: Bool = true
     
-    /// Some variable for testing purposes.
+    /// Some variables for testing purposes.
     @State var test: String = ""
     @State var testBool: Bool = false
 
@@ -85,14 +85,14 @@ struct SettingsView: View {
                 }
                 
                 // Test
-                Section(header: Text("For Testing")) {
-                    Button("Send Request") {
-                        testServerCall()
-                    }
-                    NavigationLink(destination: OnboardingView(userOnboarded: $testBool)) {
-                        Text("OnboardingView")
-                    }
-                }
+//                Section(header: Text("For Testing")) {
+//                    Button("Send Request") {
+//                        testServerCall()
+//                    }
+//                    NavigationLink(destination: OnboardingView(userOnboarded: $testBool)) {
+//                        Text("OnboardingView")
+//                    }
+//                }
             } // form
             .navigationTitle(Text("Settings"))
         }

@@ -19,9 +19,11 @@ struct SurveyBuildingsView: View {
     
     @Binding var showSurvey: Bool
     @Binding var tabSelection: Int
+    var singlePointReport: Bool // true if reporting without recording
     
     // Constructor
-    init(showSurvey: Binding<Bool>, tabSelection: Binding<Int>) {
+    init(showSurvey: Binding<Bool>, tabSelection: Binding<Int>,
+         singlePointReport: Bool = false) {
         buildings = BuildingsLoader()
         let deviceLocation = MetaWearManager.locationManager.getLocation()
         deviceCoordinate = CLLocationCoordinate2D(latitude: deviceLocation[0],
@@ -31,9 +33,8 @@ struct SurveyBuildingsView: View {
                                                            longitudeDelta: 0.003))
         self._showSurvey = showSurvey
         self._tabSelection = tabSelection
-        
+        self.singlePointReport = singlePointReport
         FirebaseManager.connect()
-        FirebaseManager.loadBuildings(loader: buildings)
     }
     
     var body: some View {
@@ -77,7 +78,13 @@ struct SurveyBuildingsView: View {
                             }
                             else {
                                 ForEach(buildings.buildings) { building in
-                                    NavigationLink(destination: SurveyBuildingInfoView(showSurvey: $showSurvey, tabSelection: $tabSelection, buildingId: building.id, buildingName: building.name, buildingFloors: building.floors)) {
+                                    NavigationLink(destination:
+                                                    SurveyBuildingInfoView(showSurvey: $showSurvey,
+                                                                           tabSelection: $tabSelection,
+                                                                           buildingId: building.id,
+                                                                           buildingName: building.name,
+                                                                           buildingFloors: building.floors,
+                                                                           singlePointReport: singlePointReport)) {
                                         BuildingItem(id: building.id,
                                                      name: building.name,
                                                      address: building.address,
@@ -96,21 +103,29 @@ struct SurveyBuildingsView: View {
                                                                      tabSelection: $tabSelection,
                                                                      buildingId: "OUTDOORS",
                                                                      buildingFloor: "",
-                                                                     buildingHazardLocation: "")) {
+                                                                     buildingHazardLocation: "",
+                                                                     singlePointReport: singlePointReport)) {
                             IconButtonInner(iconName: "mountain.2.fill", buttonText: "I'm outdoors")
                         }.buttonStyle(IconButtonStyle(backgroundColor: .yellow,
                                                      foregroundColor: .black))
                         
                         // Building is not listed
                         NavigationLink(destination: SurveyUnlistedBuilding(showSurvey: $showSurvey,
-                                                                           tabSelection: $tabSelection)) {
+                                                                           tabSelection: $tabSelection,
+                                                                          singlePointReport: singlePointReport)) {
                             Text("Building is not listed")
                                 .font(.system(size: 15))
                         }
                         .padding(.top, 4)
-                        .padding(.bottom, 24)
+                        .padding(.bottom, singlePointReport ? 12 : 24)
                     }
                     .frame(height: 360)
+                    
+                    if singlePointReport {
+                        Text("Drag the screen down to close this menu.")
+                            .foregroundColor(Color(white: 0.5))
+                            .font(.system(size: 12, weight: .light))
+                    }
                 } // VStack
 
                 
@@ -120,7 +135,10 @@ struct SurveyBuildingsView: View {
                 }
             } 
             .navigationBarHidden(true)
-            
+        }
+        .onAppear {
+            buildings.clear()
+            FirebaseManager.loadBuildings(loader: buildings)
         }
     }
     

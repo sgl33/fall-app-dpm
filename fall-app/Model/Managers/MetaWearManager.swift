@@ -12,28 +12,34 @@ class MetaWearManager
     /// MetaWear device variable
     static var device: MetaWear!
     
-    static var startLocation: [Double] = []
-    static var startTime: Double = 0
-    
-    /// RealtimeWalkingData object
-    static var realtimeData: RealtimeWalkingData = RealtimeWalkingData()
-    
     /// LocationManager object
     static var locationManager = LocationManager()
-    
-    /// List of document names of realtime (gyroscope and location) data
-    static var realtimeDataDocNames: [String] = []
     
     /// Whether walking recording or not
     static var recording: Bool = false
     
     
+    /// Start location of a session.
+    static var startLocation: [Double] = []
+    
+    /// Start time of a session.
+    static var startTime: Double = 0
+    
+    /// RealtimeWalkingData object
+    static var realtimeData: RealtimeWalkingData = RealtimeWalkingData()
+    
+    /// List of document names of realtime (gyroscope and location) data
+    static var realtimeDataDocNames: [String] = []
+
+    
     /// Scans the board and updates the status on`cso`.
     static func scanBoard(cso: ConnectionStatusObject) {
+        // Set status
         print("Scanning...")
         cso.setStatus(status: ConnectionStatus.scanning)
         
-        let signalThreshold = -73
+        // Scan
+        let signalThreshold = -75
         MetaWearScanner.shared.startScan(allowDuplicates: true) { (d) in
             // Close sensor found?
             if d.rssi > signalThreshold {
@@ -69,6 +75,7 @@ class MetaWearManager
                         }
                     }
                 }
+                // Set device on complete
                 MetaWearManager.device = d
                 MetaWearManager.device.remember()
             }
@@ -131,11 +138,13 @@ class MetaWearManager
         
         FirebaseManager.connect()
         
+        // Config
         let board = MetaWearManager.device.board
         let signal = mbl_mw_gyro_bmi160_get_rotation_data_signal(board)!
         mbl_mw_gyro_bmi160_set_odr(board, MBL_MW_GYRO_BOSCH_ODR_50Hz);
         mbl_mw_gyro_bmi160_write_config(board);
         
+        // Record start time and location
         MetaWearManager.startLocation = MetaWearManager.locationManager.getLocation()
         MetaWearManager.startTime = Date().timeIntervalSince1970
         
@@ -147,11 +156,11 @@ class MetaWearManager
             MetaWearManager.realtimeData.addData(RealtimeWalkingDataPoint(gyroscope: gyroscope,
                                                              location: location))
             
-            // Split it by 2000 data points (40 sec)
-            if MetaWearManager.realtimeData.size() > 2000 {
+            // Split it by 3000 data points (60 sec)
+            if MetaWearManager.realtimeData.size() > 3000 {
                 let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
                 let documentUuid = UUID().uuidString
-                FirebaseManager.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
+                FirebaseManager.addRealtimeData(realtimeData: copiedObj, docNameUuid: documentUuid)
                 MetaWearManager.realtimeDataDocNames.append(documentUuid)
                 MetaWearManager.realtimeData.resetData()
             }
@@ -168,49 +177,82 @@ class MetaWearManager
                                  buildingId: String = "",
                                  buildingFloor: String = "",
                                  buildingRemarks: String = "",
-                                 buildingHazardLocation: String = "") {
-        // Upload remaining realtime data
-        let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
-        let documentUuid = UUID().uuidString
-        FirebaseManager.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
-        MetaWearManager.realtimeDataDocNames.append(documentUuid)
+                                 buildingHazardLocation: String = "",
+                                 singlePointReport: Bool = false // report hazard without recording
+    ) {
+        // Single point report (reporting without recording)
+        if singlePointReport {
+            let currentLocation = locationManager.getLocation()
+            
+            // Upload realtime data with 1 data point
+            let documentUuid = UUID().uuidString
+            var rt = RealtimeWalkingData()
+            rt.addData(RealtimeWalkingDataPoint(gyroscope: MblMwCartesianFloat(x: 0, y: 0, z: 0), location: currentLocation))
+            FirebaseManager.addRealtimeData(realtimeData: rt, docNameUuid: documentUuid)
+            
+            // Upload
+            let currentLocationDict: [String: Double] = ["latitude": currentLocation[0],
+                                                         "longitude": currentLocation[1],
+                                                         "altitude": currentLocation[2]]
+            FirebaseManager.connect()
+            FirebaseManager.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
+                                      realtimeDataDocNames: [documentUuid],
+                                      imageId: imageId,
+                                      lastLocation: currentLocationDict,
+                                      startLocation: currentLocationDict,
+                                      startTime: Date().timeIntervalSince1970,
+                                      buildingId: buildingId,
+                                      buildingFloor: buildingFloor,
+                                      buildingRemarks: buildingRemarks,
+                                      buildingHazardLocation: buildingHazardLocation)
+        }
+        // Regular report
+        else {
+            // Upload remaining realtime data
+            let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
+            let documentUuid = UUID().uuidString
+            FirebaseManager.addRealtimeData(realtimeData: copiedObj, docNameUuid: documentUuid)
+            MetaWearManager.realtimeDataDocNames.append(documentUuid)
+            
+            // last location
+            let lastLocation = MetaWearManager.realtimeData.data.last?.location ?? [0, 0, 0]
+            let lastLocationDict: [String: Double] = ["latitude": lastLocation[0],
+                                                      "longitude": lastLocation[1],
+                                                      "altitude": lastLocation[2]]
+            let startLocationDict: [String: Double] = ["latitude": startLocation[0],
+                                                      "longitude": startLocation[1],
+                                                      "altitude": startLocation[2]]
+            MetaWearManager.realtimeData.resetData()
+            
+            // Upload general data
+            FirebaseManager.connect()
+            FirebaseManager.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
+                                      realtimeDataDocNames: MetaWearManager.realtimeDataDocNames,
+                                      imageId: imageId,
+                                      lastLocation: lastLocationDict,
+                                      startLocation: startLocationDict,
+                                      startTime: startTime,
+                                      buildingId: buildingId,
+                                      buildingFloor: buildingFloor,
+                                      buildingRemarks: buildingRemarks,
+                                      buildingHazardLocation: buildingHazardLocation)
+        }
         
-        // last location
-        let lastLocation = MetaWearManager.realtimeData.data.last?.location ?? [0, 0, 0]
-        let lastLocationDict: [String: Double] = ["latitude": lastLocation[0],
-                                                  "longitude": lastLocation[1],
-                                                  "altitude": lastLocation[2]]
-        let startLocationDict: [String: Double] = ["latitude": startLocation[0],
-                                                  "longitude": startLocation[1],
-                                                  "altitude": startLocation[2]]
-        MetaWearManager.realtimeData.resetData()
-        
-        // Upload general data
-        FirebaseManager.connect()
-        FirebaseManager.addRecord(rec: GeneralWalkingData.toRecord(type: hazards, intensity: intensity),
-                                  realtimeDataDocNames: MetaWearManager.realtimeDataDocNames,
-                                  imageId: imageId,
-                                  lastLocation: lastLocationDict,
-                                  startLocation: startLocationDict,
-                                  startTime: startTime,
-                                  buildingId: buildingId,
-                                  buildingFloor: buildingFloor,
-                                  buildingRemarks: buildingRemarks,
-                                  buildingHazardLocation: buildingHazardLocation)
     }
+    
+
     
     /// Cancels current walking recording session.
     static func cancelSession() {
         // Upload remaining realtime data
         let copiedObj = RealtimeWalkingData(copyFrom: MetaWearManager.realtimeData)
         let documentUuid = UUID().uuidString
-        FirebaseManager.addRealtimeData(gscope: copiedObj, docNameUuid: documentUuid)
+        FirebaseManager.addRealtimeData(realtimeData: copiedObj, docNameUuid: documentUuid)
         MetaWearManager.realtimeDataDocNames.append(documentUuid)
         MetaWearManager.realtimeData.resetData()
     }
     
     /// Stops recording the gyroscope and location data. Called when user presses "Stop Recording".
-    ///
     /// Note: This does not upload any data to the database; `sendHazardReport` must be called separately.
     ///
     /// Non-static function. Usage: `MetaWearManager().startRecording()`

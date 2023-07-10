@@ -8,7 +8,7 @@ import MapKit
 ///
 class MultiWalkingLoader: ObservableObject {
     
-    var realtimeLoader: [(GeneralWalkingData, RealtimeWalkingDataLoader)] = []
+    var loaders: [(GeneralWalkingData, RealtimeWalkingDataLoader)] = []
     
     /// Update this to refresh the screen
     @Published var isLoading: Bool = false
@@ -19,23 +19,23 @@ class MultiWalkingLoader: ObservableObject {
     }
     
     func addRecord(_ g: GeneralWalkingData, _ r: RealtimeWalkingDataLoader) {
-        realtimeLoader.append((g, r))
+        loaders.append((g, r))
     }
     
     /// Called when a realtime data of a single record is done loading.
     func onSingleRealtimeDataLoaded() {
         realtimeDataLoaded += 1
         // done loading
-        if(realtimeDataLoaded == realtimeLoader.count) {
+        if(realtimeDataLoaded == loaders.count) {
             isLoading = false
         }
     }
     
-    
+    /// Reset
     func reset() {
         realtimeDataLoaded = 0
         isLoading = false
-        realtimeLoader = []
+        loaders = []
     }
     
     /// Gets encoded polyline of multiple records
@@ -43,20 +43,21 @@ class MultiWalkingLoader: ObservableObject {
     func getEncodedPolylines() -> [String] {
         var arr: [String] = []
         var i: Int = 0
-        while i < realtimeLoader.count {
-            let polyline = realtimeLoader[i].1.data.getEncodedPolyline()
+        while i < loaders.count {
+            let polyline = loaders[i].1.data.getEncodedPolyline()
             arr.append(polyline)
             i += 1
         }
         return arr
     }
     
+    /// Get a boolean array correstponding to `loaders` whether each record has a hazard or not
     func hazardEncountered() -> [Bool] {
         var arr: [Bool] = []
         var i: Int = 0
-        while i < realtimeLoader.count {
-            let polyline = realtimeLoader[i].0.hazardEncountered()
-            arr.append(polyline)
+        while i < loaders.count {
+            let hazardEncountered = loaders[i].0.hazardEncountered()
+            arr.append(hazardEncountered)
             i += 1
         }
         return arr
@@ -65,8 +66,8 @@ class MultiWalkingLoader: ObservableObject {
     func getFinalLocation() -> [CLLocationCoordinate2D] {
         var arr: [CLLocationCoordinate2D] = []
         var i: Int = 0
-        while i < realtimeLoader.count {
-            let polyline = realtimeLoader[i].1.data.getFinalLocation()
+        while i < loaders.count {
+            let polyline = loaders[i].1.data.getFinalLocation()
             arr.append(polyline)
             i += 1
         }

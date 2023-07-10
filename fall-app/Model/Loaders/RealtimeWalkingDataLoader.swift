@@ -13,7 +13,7 @@ import Foundation
 /// ### Why?
 /// Firebase limits each document size to ~1 MiB, which can only hold around 3 minutes of
 /// realtime data. To bypass this, we split the realtime data into multiple documents of
-/// 2,000 data points (~40 seconds) each. This loader object helps us combine these splitted
+/// 3,000 data points (~60 seconds) each. This loader object helps us combine these splitted
 /// data back in one piece.
 ///
 /// ### Author & Version

@@ -14,9 +14,9 @@ class BuildingsLoader: ObservableObject {
     
     /// Adds new building to array.
     func append(id: String, name: String, address: String,
-                latitude: Double, longitude: Double, floorPlans: [String: String], floors: [String]) {
+                latitude: Double, longitude: Double, floors: [String]) {
         buildings.append(Building(id: id, name: name, address: address, latitude: latitude,
-                                  longitude: longitude, floorPlans: floorPlans, floors: floors))
+                                  longitude: longitude, floors: floors))
     }
     
     /// Returns array of building markers used in `SurveyBuildingView`.

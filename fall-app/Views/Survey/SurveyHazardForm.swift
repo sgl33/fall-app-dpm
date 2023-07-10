@@ -35,6 +35,8 @@ struct SurveyHazardForm: View {
     var buildingRemarks: String = ""
     var buildingHazardLocation: String
     
+    var singlePointReport: Bool = false
+    
     var body: some View {
         VStack {
             // Scroll view
@@ -148,11 +150,12 @@ struct SurveyHazardForm: View {
                                          buildingId: buildingId,
                                          buildingFloor: buildingFloor,
                                          buildingRemarks: buildingRemarks,
-                                         buildingHazardLocation: buildingHazardLocation)
+                                         buildingHazardLocation: buildingHazardLocation,
+                                         singlePointReport: singlePointReport)
+
         showSurvey = false;
         Toast.showToast("Submitted. Thank you!")
         tabSelection = 2; // switch to HistoryView
-        
     }
 
     /// Returns true if user did not select any hazard to report, false otherwise.

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		746D402A6CCF760677C71C88 /* Pods_fall_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08330BF678E50607484AD5FE /* Pods_fall_app.framework */; };
 		FE24889B2A4C92EA003CD386 /* SurveyBuildingInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE24889A2A4C92EA003CD386 /* SurveyBuildingInfoView.swift */; };
+		FE24889D2A5C9243003CD386 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE24889C2A5C9243003CD386 /* Extensions.swift */; };
 		FE4CB0C22A41005A000B9988 /* SurveyBuildingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C12A41005A000B9988 /* SurveyBuildingsView.swift */; };
 		FE4CB0C42A4101F0000B9988 /* BuildingsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C32A4101F0000B9988 /* BuildingsLoader.swift */; };
 		FE4CB0C62A421B6B000B9988 /* SurveyFloorPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */; };
@@ -142,6 +143,7 @@
 		397F8D1E91AF2093EB506942 /* Pods-fall-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fall-app.debug.xcconfig"; path = "Target Support Files/Pods-fall-app/Pods-fall-app.debug.xcconfig"; sourceTree = "<group>"; };
 		C77252FD3EFC01778CE4B886 /* Pods-fall-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fall-app.release.xcconfig"; path = "Target Support Files/Pods-fall-app/Pods-fall-app.release.xcconfig"; sourceTree = "<group>"; };
 		FE24889A2A4C92EA003CD386 /* SurveyBuildingInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyBuildingInfoView.swift; sourceTree = "<group>"; };
+		FE24889C2A5C9243003CD386 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FE4CB0C12A41005A000B9988 /* SurveyBuildingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyBuildingsView.swift; sourceTree = "<group>"; };
 		FE4CB0C32A4101F0000B9988 /* BuildingsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsLoader.swift; sourceTree = "<group>"; };
 		FE4CB0C52A421B6B000B9988 /* SurveyFloorPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyFloorPlanView.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				FE4CB0CE2A437785000B9988 /* Structs */,
 				FEE155FF2A1836F800398DCD /* Loaders */,
 				FE620EAD2A12DD5E0073B8F0 /* Utilities.swift */,
+				FE24889C2A5C9243003CD386 /* Extensions.swift */,
 				FEE155FE2A1836DF00398DCD /* README.md */,
 				FEE1564A2A27B44E00398DCD /* AppConstants.swift */,
 			);
@@ -808,6 +811,7 @@
 				FEE156132A1BE4A400398DCD /* MultiRecordsView.swift in Sources */,
 				FEEBA5A629DF5FD700C0015B /* fall_appApp.swift in Sources */,
 				FEE156032A18373D00398DCD /* BatteryStatusObject.swift in Sources */,
+				FE24889D2A5C9243003CD386 /* Extensions.swift in Sources */,
 				FE9761BD29EB938B00C1ADDE /* RecordItem.swift in Sources */,
 				FE5ED2562A38D30B00C9E3D7 /* WebView.swift in Sources */,
 				FE4CB0C42A4101F0000B9988 /* BuildingsLoader.swift in Sources */,

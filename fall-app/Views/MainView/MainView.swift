@@ -10,63 +10,76 @@ struct MainView: View
     /// Tab selection on `ContentView`.
     @Binding var tabSelection: Int;
     
+    /// Show survey popup?
     @State var showSurvey: Bool = false // SurveyBuildingsView
-
+    @State var showSurveySinglePoint: Bool = false // single point report
+    
+    /// Timer used to read users location every 3 minutes.
+    /// Prevents iPhone from suspending the app from background (hopefully)
+    @State var timer = Timer.publish(every: 180, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
-            Spacer()
-                .frame(height: 8)
-            
-            // Logos
-            MainView_Logos()
-            
-            // Hello
-            //            let name = UserDefaults.standard.string(forKey: "userName") ?? "welcome"
-            //            let firstName = name.components(separatedBy: " ")[0]
-            //            Text("Hello, \(firstName)!")
-            
-            Spacer()
-            
-            // Info text
+        NavigationView {
             VStack {
-                Text("SafeSteps")
-                    .font(.system(size: 32, weight: .bold))
-                Text("Report environmental slip, trip, and fall hazards and stay informed!")
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: 350)
+                Spacer()
+                    .frame(height: 8)
+                
+                // Logos
+                MainView_Logos()
+                
+                // Hello
+                //            let name = UserDefaults.standard.string(forKey: "userName") ?? "welcome"
+                //            let firstName = name.components(separatedBy: " ")[0]
+                //            Text("Hello, \(firstName)!")
+                
+                Spacer()
+                
+                // Info text
+                VStack {
+                    Text("SafeSteps")
+                        .font(.system(size: 32, weight: .bold))
+                    Text("Report environmental slip, trip, and fall hazards and stay informed!")
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: 350)
+                }
+                .offset(y: -8)
+                
+                // Graphic
+                GeometryReader { metrics in
+                    Image("main_graphic")
+                        .resizable()
+                        .frame(width: metrics.size.width, height: metrics.size.width  * 800 / 1280,
+                               alignment: .center)
+                        .offset(y: -16)
+                }
+                
+                Spacer()
+                    .frame(maxHeight: 160)
+                
+                // Interactible (code below)
+                MainView_Interact(showSurvey: $showSurvey,
+                                  showSurveySinglePoint: $showSurveySinglePoint,
+                                  tabSelection: $tabSelection)
+                
+                // Sheet - SurveyBuildingsView
+                .sheet(isPresented: $showSurvey) {
+                    SurveyBuildingsView(showSurvey: $showSurvey,
+                                        tabSelection: $tabSelection)
+                    .presentationDetents([.large])
+                    .interactiveDismissDisabled()
+                }
+                .sheet(isPresented: $showSurveySinglePoint) {
+                    SurveyBuildingsView(showSurvey: $showSurveySinglePoint,
+                                        tabSelection: $tabSelection,
+                                        singlePointReport: true)
+                    .presentationDetents([.large])
+                }
+            } // VStack
+            .onReceive(timer) { input in
+                let loc = MetaWearManager.locationManager.getLocation()
             }
-            .offset(y: -8)
-            
-            // Graphic
-            GeometryReader { metrics in
-                Image("main_graphic")
-                    .resizable()
-                    .frame(width: metrics.size.width, height: metrics.size.width  * 800 / 1280,
-                           alignment: .center)
-                    .offset(y: -16)
-            }
-            
-            Spacer()
-                .frame(maxHeight: 160)
-            
-            // Interactible
-            MainView_Interact(showSurvey: $showSurvey,
-                              tabSelection: $tabSelection)
-            
-            // Sheet - SurveyBuildingsView
-            .sheet(isPresented: $showSurvey) {
-                SurveyBuildingsView(showSurvey: $showSurvey,
-                                    tabSelection: $tabSelection)
-                .presentationDetents([.large])
-                .interactiveDismissDisabled()
-            }
-            
-            
-            
-            
         }
-    }
+    } // main
     
 }
 
@@ -83,6 +96,7 @@ struct MainView_Interact: View {
     @ObservedObject var cso = ConnectionStatusObject()
     
     @Binding var showSurvey: Bool
+    @Binding var showSurveySinglePoint: Bool
     @State var showCancelPopup: Bool = false
     @Binding var tabSelection: Int
     
@@ -146,7 +160,7 @@ struct MainView_Interact: View {
             if isRecording { // recording
                 
                 if !cso.conn { // sensor disconnected
-                    Text("Sensor disconnected, recording suspended.")
+                    Text("Please reconnect to the sensor.")
                         .font(.system(size: 14))
                         .frame(maxWidth: 330)
                         .multilineTextAlignment(.center)
@@ -200,12 +214,44 @@ struct MainView_Interact: View {
                     .font(.system(size: 14))
                     .frame(maxWidth: 330)
                     .multilineTextAlignment(.center)
+                
+                // Report Hazard (not recording)
+                Button(action: {
+                    showSurveySinglePoint = true
+                }) {
+                    HStack(alignment: .center) {
+                        Image(systemName: "exclamationmark.triangle")
+                            .resizable()
+                            .frame(width: 10, height: 10)
+                            .offset(y: -1)
+                        Text("Report Hazard")
+                            .font(.system(size: 13))
+                            .padding(.top, -2)
+                            .foregroundColor(.accentColor)
+                    }
+                }
             }
             else if !isRecording { // not recording
                 Text("Start walking to automatically start recording.\nFeel free to leave the app.")
                     .font(.system(size: 14))
                     .frame(maxWidth: 330)
                     .multilineTextAlignment(.center)
+                
+                // Report Hazard (not recording)
+                Button(action: {
+                    showSurveySinglePoint = true
+                }) {
+                    HStack(alignment: .center) {
+                        Image(systemName: "exclamationmark.triangle")
+                            .resizable()
+                            .frame(width: 10, height: 10)
+                            .offset(y: -1)
+                        Text("Report Hazard")
+                            .font(.system(size: 13))
+                            .padding(.top, -2)
+                            .foregroundColor(.accentColor)
+                    }
+                }
             }
             
             Spacer()
@@ -251,7 +297,7 @@ struct MainView_Interact: View {
         })
         
         Spacer()
-            .frame(maxHeight: 42)
+            .frame(maxHeight: 28)
     } // body
 }
 

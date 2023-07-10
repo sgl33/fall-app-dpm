@@ -18,7 +18,7 @@ class NotificationManager {
         return ok
     }
     
-    /// Sends notification of `title` and `body`.
+    /// Sends notification of `title` and `body` now.
     /// User must have given notification permissions for this to work.
     static func sendNotificationNow(title: String, body: String) {
         // content
@@ -49,6 +49,7 @@ class NotificationManager {
         let lastSent: Double = UserDefaults.standard.double(forKey: "__notificationRateLimit__id=\(rateLimitId)")
         let now = Date().timeIntervalSince1970
         
+        // Check rate limit
         if lastSent + rateLimit < now { // ok
             UserDefaults.standard.set(now, forKey: "__notificationRateLimit__id=\(rateLimitId)")
             sendNotificationNow(title: title, body: body)

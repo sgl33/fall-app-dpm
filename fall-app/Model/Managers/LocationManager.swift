@@ -10,6 +10,7 @@ import CoreLocation
 /// Seung-Gu Lee (seunggu@umich.edu), last modified May 10, 2023
 ///
 class LocationManager: NSObject, CLLocationManagerDelegate {
+    
     /// `CLLocationManager` object
     let clm = CLLocationManager()
     

@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-/// Object used to load an image.
+/// Object used to load an image asynchronously from Firebase.
 ///
 /// ### Author & Version
 /// Seung-Gu Lee (seunggu@umich.edu), last modified Jun 12, 2023

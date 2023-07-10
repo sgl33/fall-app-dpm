@@ -15,6 +15,7 @@ struct SurveyBuildingInfoView: View {
     @State var buildingFloors: [String]
     @State var hazardLocation: String = ""
     @State var hazardRemarks: String = ""
+    var singlePointReport: Bool
     
     var body: some View {
         VStack {
@@ -39,7 +40,8 @@ struct SurveyBuildingInfoView: View {
                                                              buildingId: buildingId,
                                                              buildingFloor: selectedFloor,
                                                              buildingRemarks: hazardRemarks,
-                                                             buildingHazardLocation: hazardLocation)) {
+                                                             buildingHazardLocation: hazardLocation,
+                                                             singlePointReport: singlePointReport)) {
                     IconButtonInner(iconName: "arrow.right", buttonText: "Continue")
                 }.buttonStyle(IconButtonStyle(backgroundColor: .yellow,
                                              foregroundColor: .black))

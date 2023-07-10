@@ -136,6 +136,9 @@ struct OnboardingView: View {
         UserDefaults.standard.setValue(45, forKey: "walkingDetectionSensitivity")
         UserDefaults.standard.setValue(name, forKey: "userName")
         
+        UserDefaults.standard.setValue(true, forKey: "receiveWalkingDetectionNotifications")
+        UserDefaults.standard.setValue(true, forKey: "receiveErrorNotifications")
+        
         // Permissions
         WalkingDetectionManager.initialize()
         NotificationManager.requestPermissions()
